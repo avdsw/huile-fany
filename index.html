@@ -204,7 +204,6 @@
     }
 
     .bottle::before {
-      /* col du bouchon */
       content: "";
       position: absolute;
       top: -16px;
@@ -217,7 +216,6 @@
     }
 
     .bottle::after {
-      /* reflet */
       content: "";
       position: absolute;
       top: 10%;
@@ -462,8 +460,8 @@
         </div>
 
         <div class="btn-row">
-          <!-- Remplace l'URL ci-dessous par ton lien de paiement Stripe / SumUp / PayPal -->
-          <a href="https://ton-lien-de-paiement-ici" class="btn btn-primary">
+          <!-- Pas de paiement en ligne pour l'instant : on renvoie vers le formulaire -->
+          <a href="#achat" class="btn btn-primary">
             Acheter maintenant
           </a>
           <a href="#achat" class="btn btn-secondary">
@@ -471,7 +469,7 @@
           </a>
         </div>
         <div class="small-note">
-          Paiement sécurisé via votre fournisseur de paiement (Stripe, SumUp, PayPal, …).
+          Pour commander, remplissez simplement le formulaire ci-dessous. Vous recevrez une réponse par e-mail.
         </div>
       </div>
 
@@ -557,13 +555,14 @@
         <div>
           <h2>Commander l'huile d'olive de Fany</h2>
           <p style="margin-bottom: 0.7rem;">
-            Vous pouvez acheter directement en ligne via le bouton “Acheter maintenant”
-            ou nous envoyer une demande pour :
+            Pour commander, remplissez le formulaire ci-contre. Vous recevrez un e-mail
+            de confirmation avec le montant total (produits + livraison) et les modalités
+            de paiement.
           </p>
           <ul style="margin-left: 1.1rem; margin-bottom: 0.9rem; font-size: 0.95rem;">
-            <li>– commandes groupées, paniers cadeaux, restaurants, épiceries fines ;</li>
-            <li>– expédition vers la Belgique, la France ou d’autres pays (à confirmer) ;</li>
-            <li>– tarifs professionnels pour volumes plus importants.</li>
+            <li>– commandes individuelles ou groupées ;</li>
+            <li>– paniers cadeaux, restaurants, épiceries fines ;</li>
+            <li>– expédition vers la Belgique, la France ou d’autres pays (à confirmer).</li>
           </ul>
           <p class="small-note">
             Les frais de livraison et délais vous seront confirmés par e-mail avant validation.
@@ -572,11 +571,7 @@
 
         <div class="card">
           <h3>Formulaire de contact</h3>
-          <!--
-            Ce formulaire n'envoie rien tant qu'il n'est pas relié à un service (Formspree, outil no-code, back-end…)
-            Tu peux remplacer l'action par le service que tu utiliseras.
-          -->
-          <form action="#" method="post">
+          <form onsubmit="sendOrderEmail(event)">
             <div>
               <label for="name">Nom et prénom</label>
               <input type="text" id="name" name="name" required />
@@ -597,7 +592,7 @@
               Envoyer ma demande
             </button>
             <div class="small-note" style="margin-top: 0.5rem;">
-              Nous vous répondrons avec le montant total (produits + livraison) et le lien de paiement sécurisé.
+              Un e-mail de commande sera préparé automatiquement à votre intention.
             </div>
           </form>
         </div>
@@ -612,7 +607,7 @@
         Tous droits réservés.
       </div>
       <div style="margin-top: 0.4rem;">
-        Pour toute question : <a href="mailto:contact@ton-domaine.com">contact@ton-domaine.com</a>
+        Pour toute question : <a href="mailto:arnaudvanderstraten@gmail.com">arnaudvanderstraten@gmail.com</a>
       </div>
     </div>
   </footer>
@@ -620,6 +615,30 @@
   <script>
     // Affichage de l'année automatique
     document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Envoi de la commande par e-mail via mailto:
+    function sendOrderEmail(e) {
+      e.preventDefault();
+
+      const name = document.getElementById("name").value;
+      const email = document.getElementById("email").value;
+      const quantity = document.getElementById("quantity").value || "non précisé";
+      const message = document.getElementById("message").value || "";
+
+      const subject = encodeURIComponent("Commande - huile d'olive de Fany");
+      const body = encodeURIComponent(
+        "Nom : " + name + "\n" +
+        "Email : " + email + "\n" +
+        "Quantité souhaitée : " + quantity + " bouteilles\n\n" +
+        "Message :\n" + message
+      );
+
+      const mailto = "mailto:arnaudvanderstraten@gmail.com"
+        + "?subject=" + subject
+        + "&body=" + body;
+
+      window.location.href = mailto;
+    }
   </script>
 </body>
 </html>
