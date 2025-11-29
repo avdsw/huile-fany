@@ -2,717 +2,658 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <title>Huile d’olive de Fany – Manziana (Italie)</title>
+  <title>Huile d’olive de Fany – Manziana, Italie</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta
-    name="description"
-    content="Huile d’olive extra vierge artisanale produite par Fany à Manziana, près de Rome : récolte manuelle, pressée à froid, idéale pour salades, légumes et cuisine méditerranéenne."
-  />
   <style>
     :root {
-      --olive: #4f6b3a;
-      --olive-dark: #314325;
-      --sand: #f4efdf;
-      --accent: #d9a441;
-      --text: #2e2a24;
-      --max-width: 1100px;
+      --green-dark: #071608;
+      --green-main: #203d1d;
+      --green-soft: #314e2e;
+      --cream: #f7f1e6;
+      --accent-gold: #f6b552;
+      --accent-olive: #afc96c;
+      --text-main: #182015;
+      --white: #ffffff;
+      --shadow-soft: 0 18px 45px rgba(0,0,0,0.35);
+      --radius-big: 32px;
+      --radius-med: 18px;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    * { box-sizing: border-box; }
 
     body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-        Roboto, sans-serif;
-      line-height: 1.6;
-      color: var(--text);
-      background: radial-gradient(circle at top, #f7f3e8 0, #e9e0c9 40%, #d4c7a9 100%);
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+        "Segoe UI", sans-serif;
+      color: var(--text-main);
+      background: var(--green-dark);
     }
 
-    header {
-      background: radial-gradient(circle at top left, #6c8f3d, #2f3f23);
-      color: white;
-      padding: 1.5rem 1.5rem 4rem;
+    /* --- Fond photo pleine page --- */
+    .page-bg {
+      position: fixed;
+      inset: 0;
+      background-image: url("https://images.pexels.com/photos/3892172/pexels-photo-3892172.jpeg?cs=srgb&dl=pexels-aliona-pasha-1687920-3892172.jpg&fm=jpg");
+      background-size: cover;
+      background-position: center;
+      filter: brightness(0.55) saturate(1.2);
+      z-index: -2;
     }
 
-    .top-bar {
-      max-width: var(--max-width);
-      margin: 0 auto 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 1rem;
+    .page-overlay {
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(circle at 0% 0%, rgba(255,255,255,0.12), transparent 55%),
+        radial-gradient(circle at 100% 100%, rgba(0,0,0,0.55), rgba(0,0,0,0.85));
+      z-index: -1;
     }
 
-    .logo {
-      font-weight: 700;
-      font-size: 1.15rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    nav a {
-      color: white;
-      text-decoration: none;
-      margin-left: 1rem;
-      font-size: 0.95rem;
-      border-bottom: 1px solid transparent;
-      padding-bottom: 0.15rem;
-    }
-
-    nav a:hover { border-color: white; }
-
-    .hero {
-      max-width: var(--max-width);
+    .page-shell {
+      max-width: 1120px;
       margin: 0 auto;
-      display: grid;
-      grid-template-columns: minmax(0, 2fr) minmax(0, 1.5fr);
-      gap: 2rem;
+      padding: 24px 20px 80px;
+      color: var(--cream);
+    }
+
+    /* --- Header --- */
+    header {
+      display: flex;
       align-items: center;
-    }
-
-    .hero-highlight {
-      display: inline-block;
-      background: rgba(244, 239, 223, 0.15);
+      justify-content: space-between;
+      padding: 10px 18px;
+      margin-bottom: 36px;
       border-radius: 999px;
-      padding: 0.25rem 0.75rem;
+      backdrop-filter: blur(16px);
+      background: linear-gradient(
+        120deg,
+        rgba(9,28,10,0.92),
+        rgba(39,70,35,0.92)
+      );
+      box-shadow: 0 12px 30px rgba(0,0,0,0.45);
+    }
+
+    .brand {
+      font-weight: 700;
+      letter-spacing: 0.09em;
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-pill {
+      padding: 6px 11px;
+      border-radius: 999px;
+      background: rgba(248,250,252,0.09);
+      font-size: 0.75rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    nav {
+      display: flex;
+      gap: 20px;
       font-size: 0.9rem;
-      margin-bottom: 0.7rem;
+    }
+    nav a {
+      color: var(--cream);
+      text-decoration: none;
+      opacity: 0.9;
+    }
+    nav a:hover {
+      opacity: 1;
+      text-decoration: underline;
     }
 
-    .hero h1 {
-      font-size: clamp(2.3rem, 3vw + 1rem, 3.1rem);
-      margin-bottom: 0.75rem;
+    /* --- Hero --- */
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+      gap: 26px;
+      align-items: stretch;
+      margin-bottom: 40px;
     }
 
-    .hero p { max-width: 32rem; margin-bottom: 0.8rem; }
+    .hero-text {
+      padding: 36px 34px 32px;
+      border-radius: var(--radius-big);
+      background: linear-gradient(140deg, rgba(19,46,19,0.96), rgba(49,88,48,0.96));
+      box-shadow: var(--shadow-soft);
+    }
 
-    .hero-list { list-style: none; margin-top: 0.6rem; }
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 5px 12px;
+      border-radius: 999px;
+      background: rgba(248,250,252,0.09);
+      font-size: 0.8rem;
+      margin-bottom: 14px;
+    }
+
+    .chip span.flag {
+      font-size: 1.05rem;
+    }
+
+    .hero-title {
+      font-size: clamp(2rem, 3.2vw, 2.7rem);
+      line-height: 1.1;
+      margin: 4px 0 16px;
+      font-weight: 800;
+    }
+
+    .hero-sub {
+      font-size: 1.0rem;
+      line-height: 1.6;
+      margin-bottom: 20px;
+      color: #e6f3dc;
+    }
+
+    .hero-list {
+      margin: 0 0 24px;
+      padding: 0;
+      list-style: none;
+    }
 
     .hero-list li {
       display: flex;
       align-items: flex-start;
-      gap: 0.45rem;
-      font-size: 0.95rem;
-      margin-bottom: 0.25rem;
+      gap: 8px;
+      margin-bottom: 6px;
+      font-size: 0.97rem;
     }
 
-    .hero-list .icon {
-      font-size: 1.1rem;
-      margin-top: 0.1rem;
+    .hero-list li span.icon {
+      font-size: 1.05rem;
+      margin-top: 1px;
     }
 
     .hero-actions {
-      margin-top: 1.2rem;
       display: flex;
       flex-wrap: wrap;
-      gap: 0.75rem;
+      gap: 12px;
     }
 
-    .btn {
+    .btn-main,
+    .btn-ghost {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      padding: 0.7rem 1.2rem;
+      gap: 8px;
+      padding: 12px 22px;
       border-radius: 999px;
       border: none;
-      cursor: pointer;
-      font-size: 0.95rem;
       font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
       text-decoration: none;
-      transition: transform 0.1s ease, box-shadow 0.1s ease, background 0.2s ease;
+      transition: transform 0.08s ease, box-shadow 0.08s ease, background 0.15s ease;
       white-space: nowrap;
     }
 
-    .btn-primary {
-      background: var(--accent);
-      color: #2f2615;
-      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    .btn-main {
+      background: linear-gradient(120deg, #f4c166, #f4a633);
+      color: #4b2f0d;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.45);
     }
-
-    .btn-primary:hover {
+    .btn-main:hover {
       transform: translateY(-1px);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
-      background: #e2b457;
+      box-shadow: 0 16px 36px rgba(0,0,0,0.5);
     }
 
-    .btn-outline {
-      border: 1px solid rgba(244, 239, 223, 0.9);
-      color: white;
+    .btn-ghost {
       background: transparent;
+      border: 1px solid rgba(235,243,221,0.5);
+      color: #ebf3dd;
+    }
+    .btn-ghost:hover {
+      background: rgba(235,243,221,0.07);
     }
 
-    .btn-outline:hover { background: rgba(244, 239, 223, 0.1); }
-
+    /* --- Hero image card --- */
     .hero-image-card {
-      background: rgba(0, 0, 0, 0.35);
-      border-radius: 1.5rem;
-      padding: 1rem;
-    }
-
-    .hero-image {
-      border-radius: 1.2rem;
-      overflow: hidden;
-      aspect-ratio: 4 / 3;
-      margin-bottom: 0.75rem;
-      background:
-        radial-gradient(circle at 20% 20%, #9cc878 0, #9cc878 6px, transparent 7px) repeat,
-        radial-gradient(circle at 40% 35%, #9cc878 0, #9cc878 6px, transparent 7px) repeat,
-        linear-gradient(to bottom, #f8f5e9 0, #b4cf85 35%, #49632b 100%);
-      background-size: 40px 40px, 50px 50px, 100% 100%;
-    }
-
-    .hero-caption { font-size: 0.9rem; opacity: 0.9; }
-
-    main {
-      max-width: var(--max-width);
-      margin: -2rem auto 4rem;
-      padding: 0 1.5rem;
       position: relative;
-      z-index: 1;
-    }
-
-    section { margin-top: 3rem; }
-
-    .card {
-      background: white;
-      border-radius: 1.5rem;
-      padding: 1.5rem;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-    }
-
-    h2.section-title {
-      font-size: 1.6rem;
-      margin-bottom: 1rem;
-      color: var(--olive-dark);
-    }
-
-    .intro-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1.7fr) minmax(0, 1.3fr);
-      gap: 1.6rem;
-      align-items: start;
-    }
-
-    .pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      padding: 0.15rem 0.6rem;
-      border-radius: 999px;
-      background: var(--sand);
-      font-size: 0.8rem;
-      margin-right: 0.3rem;
-      margin-top: 0.3rem;
-    }
-
-    .pill .icon { font-size: 0.95rem; }
-
-    .products-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-      gap: 1.5rem;
-      margin-top: 1.5rem;
-    }
-
-    .product-card {
-      background: #ffffff;
-      border-radius: 1.2rem;
-      padding: 1rem 1rem 1.2rem;
-      border: 1px solid #e6dcc5;
+      border-radius: var(--radius-big);
+      overflow: hidden;
+      background: radial-gradient(circle at 0 0, #345530, #152315);
+      box-shadow: var(--shadow-soft);
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
+      justify-content: flex-end;
     }
 
-    .product-tag {
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--olive-dark);
-      opacity: 0.85;
-      margin-bottom: 0.2rem;
+    .hero-img-wrap {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
     }
 
-    .product-title { font-weight: 600; margin-bottom: 0.3rem; }
+    .hero-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: scale(1.03);
+      filter: contrast(1.1) saturate(1.15);
+    }
 
-    .product-desc { font-size: 0.9rem; margin-bottom: 0.5rem; }
+    .hero-gradient {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 0 0, rgba(255,255,255,0.08), transparent 55%),
+        linear-gradient(to top, rgba(0,0,0,0.75), rgba(0,0,0,0.10));
+    }
 
-    .product-meta {
+    .hero-caption {
+      position: relative;
+      padding: 24px 26px 24px;
+      z-index: 1;
+      color: #f5f7ea;
+      font-size: 0.93rem;
+      line-height: 1.5;
+    }
+
+    .hero-caption-title {
+      font-weight: 600;
+      margin-bottom: 6px;
       display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      margin-top: 0.4rem;
-      font-size: 0.9rem;
+      align-items: center;
+      gap: 8px;
     }
 
-    .price { font-weight: 700; color: var(--olive-dark); }
-
-    .note {
-      font-size: 0.8rem;
-      opacity: 0.8;
-      text-align: right;
-      margin-left: 0.5rem;
-    }
-
-    .howto-list {
-      list-style: none;
-      margin-top: 0.5rem;
-    }
-
-    .howto-list li {
-      display: flex;
-      align-items: flex-start;
-      gap: 0.6rem;
-      margin-bottom: 0.6rem;
-      font-size: 0.95rem;
-    }
-
-    .howto-badge {
-      width: 1.4rem;
-      height: 1.4rem;
+    .hero-caption-badge {
+      font-size: 0.7rem;
+      padding: 2px 8px;
       border-radius: 999px;
-      background: var(--olive);
-      color: white;
+      border: 1px solid rgba(245,245,245,0.6);
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+    }
+
+    /* --- Sections --- */
+    section {
+      margin-bottom: 36px;
+    }
+
+    .card {
+      border-radius: var(--radius-big);
+      padding: 26px 26px 24px;
+      background: rgba(245,248,238,0.94);
+      color: var(--text-main);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .section-title {
+      font-size: 1.4rem;
+      margin: 0 0 12px;
+      color: #1c2a17;
+    }
+
+    .section-sub {
+      margin: 0 0 16px;
+      color: #4a5740;
+      font-size: 0.98rem;
+    }
+
+    .steps {
+      display: grid;
+      gap: 14px;
+      margin-top: 8px;
+    }
+
+    .step {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 8px 14px;
+      align-items: baseline;
+      font-size: 0.96rem;
+    }
+
+    .step-number {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 0.85rem;
-      flex-shrink: 0;
-    }
-
-    form label {
-      display: block;
-      font-weight: 600;
-      margin-top: 0.8rem;
-      margin-bottom: 0.15rem;
+      background: rgba(37,82,37,0.11);
+      color: #234020;
+      font-weight: 700;
       font-size: 0.9rem;
     }
 
-    form input,
-    form select,
-    form textarea {
-      width: 100%;
-      padding: 0.55rem 0.7rem;
-      border-radius: 0.6rem;
-      border: 1px solid #d1c5af;
+    .step-title {
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+
+    /* --- Formulaire commande --- */
+    .order-card {
+      margin-top: 22px;
+    }
+
+    form {
+      display: grid;
+      gap: 14px;
+      margin-top: 14px;
+    }
+
+    .field-group {
+      display: grid;
+      gap: 6px;
+      font-size: 0.9rem;
+    }
+
+    label {
+      font-weight: 600;
+      color: #253322;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    textarea {
+      padding: 9px 11px;
+      border-radius: 12px;
+      border: 1px solid rgba(148,163,184,0.7);
       font-size: 0.9rem;
       font-family: inherit;
+      background: #fdfbf6;
+    }
+
+    textarea {
+      min-height: 80px;
       resize: vertical;
-      background: #fcfaf4;
     }
 
-    form textarea { min-height: 120px; }
-
-    .form-row {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
-      gap: 1rem;
+    input:focus,
+    textarea:focus {
+      outline: 2px solid #4f7d45;
+      border-color: transparent;
     }
 
-    .form-help {
+    .small-hint {
       font-size: 0.8rem;
-      opacity: 0.8;
-      margin-top: 0.2rem;
+      color: #647163;
     }
 
-    .form-footer {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-      gap: 0.75rem;
-      margin-top: 1rem;
-    }
-
-    .form-note {
-      font-size: 0.75rem;
-      opacity: 0.75;
+    .submit-row {
+      margin-top: 8px;
     }
 
     footer {
-      background: #252e22;
-      color: #f4efdf;
-      padding: 1.6rem;
+      margin-top: 40px;
+      font-size: 0.78rem;
+      color: rgba(226,234,219,0.82);
       text-align: center;
-      font-size: 0.85rem;
     }
 
     footer a {
-      color: #f4efdf;
-      text-decoration: underline;
-      text-decoration-style: dotted;
+      color: rgba(248,250,252,0.9);
+      text-decoration: none;
     }
+    footer a:hover { text-decoration: underline; }
 
-    @media (max-width: 900px) {
-      .hero { grid-template-columns: 1fr; }
-      main { margin-top: -1.2rem; }
-      .intro-grid { grid-template-columns: 1fr; }
-      header { padding-bottom: 3rem; }
+    /* --- Responsive --- */
+    @media (max-width: 880px) {
+      header {
+        flex-direction: column;
+        gap: 10px;
+        align-items: flex-start;
+      }
+      .hero {
+        grid-template-columns: 1fr;
+      }
     }
 
     @media (max-width: 600px) {
-      .top-bar { flex-direction: column; align-items: flex-start; }
+      .page-shell {
+        padding: 16px 14px 60px;
+      }
+      .hero-text {
+        padding: 26px 22px 22px;
+      }
+      .hero-title {
+        font-size: 1.9rem;
+      }
+      .card {
+        padding: 22px 18px 20px;
+      }
       nav {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.5rem;
+        gap: 12px;
+        font-size: 0.85rem;
       }
-      nav a {
-        margin-left: 0;
-        margin-right: 0.8rem;
-      }
-      .card { padding: 1.2rem; }
     }
   </style>
 </head>
 <body>
-  <!-- ===== HERO ===== -->
-  <header>
-    <div class="top-bar">
-      <div class="logo">Huile d’olive de Fany</div>
+  <div class="page-bg"></div>
+  <div class="page-overlay"></div>
+
+  <div class="page-shell">
+    <header>
+      <div>
+        <div class="brand">HUILE D’OLIVE DE FANY</div>
+        <div class="brand-pill">
+          <span class="flag">🇮🇹</span>
+          Manziana, collines au nord de Rome
+        </div>
+      </div>
       <nav>
         <a href="#produits">Produits</a>
-        <a href="#commande">Commander</a>
+        <a href="#degustation">Dégustation</a>
+        <a href="#commander">Commander</a>
         <a href="#contact">Contact</a>
       </nav>
-    </div>
+    </header>
 
-    <div class="hero">
-      <div>
-        <div class="hero-highlight">
-          🇮🇹 Huile d’olive extra vierge – Manziana, collines au nord de Rome
-        </div>
-
-        <h1>
-          Huile d’olive extra vierge,<br />
-          nature, soleil et assiettes gourmandes
-        </h1>
-
-        <p>
-          Olives récoltées à la main dans un petit verger familial à Manziana,
-          pressées à froid dans un moulin local. Une huile verte et parfumée,
-          idéale pour les salades, légumes grillés, poissons et plats
-          méditerranéens du quotidien.
-        </p>
-
-        <ul class="hero-list">
-          <li>
-            <span class="icon">🌿</span>
-            <span>Oliviers familiaux, aucun mélange industriel.</span>
-          </li>
-          <li>
-            <span class="icon">🥗</span>
-            <span>Parfaite en cru sur tomates, mozzarella, roquette, houmous.</span>
-          </li>
-          <li>
-            <span class="icon">💚</span>
-            <span>Une cuisine simple, pleine de goût, inspirée du régime méditerranéen.</span>
-          </li>
-        </ul>
-
-        <div class="hero-actions">
-          <a href="#commande" class="btn btn-primary">
-            🫒 Commander l’huile de Fany
-          </a>
-          <a href="#produits" class="btn btn-outline">
-            Voir les formats
-          </a>
-        </div>
-
-        <p style="margin-top: 0.8rem; font-size: 0.85rem; opacity: 0.9;">
-          Production limitée chaque année. Quand la récolte est vendue, il faut
-          attendre la suivante.
-        </p>
-      </div>
-
-      <div class="hero-image-card">
-        <div class="hero-image"></div>
-        <div class="hero-caption">
-          Un verger d’oliviers sous le soleil italien, une huile verte versée
-          sur une salade croquante ou un poisson grillé… L’huile de Fany met
-          la nature de Manziana directement dans votre assiette.
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <!-- ===== CONTENU ===== -->
-  <main>
-    <!-- INTRO -->
-    <section id="a-propos">
-      <div class="card intro-grid">
-        <div>
-          <h2 class="section-title">L’histoire de l’huile de Fany</h2>
-          <p>
-            À Manziana, sur les hauteurs au nord de Rome, Fany entretient un
-            petit verger d’oliviers familiaux. Chaque automne, la récolte se
-            fait à la main, puis les olives sont pressées à froid dans un
-            moulin local, à quelques kilomètres de la parcelle.
+    <main>
+      <!-- HERO -->
+      <section class="hero" id="haut">
+        <div class="hero-text">
+          <div class="chip">
+            <span>🌿</span> Récolte familiale – huile d’olive extra vierge
+          </div>
+          <h1 class="hero-title">
+            Huile d’olive extra vierge,<br />
+            récolte familiale de Manziana
+          </h1>
+          <p class="hero-sub">
+            Fany produit une huile d’olive extra vierge artisanale dans la campagne
+            de Manziana, en Italie. Récolte manuelle, olives pressées à froid
+            dans un petit moulin local, arômes d’herbes fraîches, d’artichaut et
+            d’amande. Une huile généreuse, riche en bons gras et en oméga-3.
           </p>
-          <p>
-            L’huile n’est pas standardisée : elle suit la météo de l’année, la
-            maturité des olives et le soin apporté à chaque étape. Vous recevez
-            une huile vivante, tracée, sans assemblage industriel.
+
+          <ul class="hero-list">
+            <li>
+              <span class="icon">🫒</span>
+              <span>Oliviers familiaux, récolte à la main &amp; traçabilité de la parcelle.</span>
+            </li>
+            <li>
+              <span class="icon">❄️</span>
+              <span>Pressée à froid pour préserver les arômes &amp; les antioxydants naturels.</span>
+            </li>
+            <li>
+              <span class="icon">🥗</span>
+              <span>Parfaite pour salades croquantes, légumes grillés, poissons et cuisine méditerranéenne.</span>
+            </li>
+            <li>
+              <span class="icon">💚</span>
+              <span>Profil nutritionnel riche en bons gras insaturés &amp; oméga-3, allié du cœur.</span>
+            </li>
+          </ul>
+
+          <div class="hero-actions">
+            <a href="#commander" class="btn-main">
+              📝 Commander l’huile
+            </a>
+            <a href="#produits" class="btn-ghost">
+              Voir les formats disponibles
+            </a>
+          </div>
+        </div>
+
+        <aside class="hero-image-card">
+          <div class="hero-img-wrap">
+            <img
+              src="https://images.pexels.com/photos/1047312/pexels-photo-1047312.jpeg?cs=srgb&dl=pexels-juliasakelli-1047312.jpg&fm=jpg"
+              alt="Branches d’olivier avec olives vertes"
+            />
+          </div>
+          <div class="hero-gradient"></div>
+          <div class="hero-caption">
+            <div class="hero-caption-title">
+              🌿 Oliviers dans la campagne italienne
+              <span class="hero-caption-badge">Récolte familiale</span>
+            </div>
+            Collines d’oliviers baignées de soleil, olives cueillies à la main,
+            huile verte versée sur une salade de tomates, de roquette ou sur un
+            poisson grillé… L’huile de Fany apporte à la fois <strong>le goût de
+            l’Italie</strong> et les bienfaits de la cuisine méditerranéenne dans
+            votre assiette.
+          </div>
+        </aside>
+      </section>
+
+      <!-- PRODUITS -->
+      <section id="produits">
+        <div class="card">
+          <h2 class="section-title">Les formats disponibles</h2>
+          <p class="section-sub">
+            Huile d’olive extra vierge de Fany, en quantité limitée chaque année.
+            Bouteilles en verre foncé pour une meilleure conservation. Prix
+            indicatifs – la disponibilité et les prix exacts sont confirmés par
+            e-mail.
           </p>
+
+          <ul class="hero-list">
+            <li><span class="icon">🧴</span><span>Bouteille 0,5&nbsp;L – idéale pour découvrir l’huile ou pour offrir.</span></li>
+            <li><span class="icon">🧴</span><span>Bouteille 0,75&nbsp;L – le format « cuisine du quotidien ».</span></li>
+            <li><span class="icon">🧴</span><span>Bouteille 1&nbsp;L – pour les grands amateurs d’huile d’olive.</span></li>
+            <li><span class="icon">📦</span><span>Carton de 6 bouteilles – parfait pour faire un stock ou partager avec des amis.</span></li>
+          </ul>
         </div>
-        <div>
-          <p><strong>Ce qui caractérise cette huile :</strong></p>
-          <div>
-            <span class="pill">
-              <span class="icon">✅</span> Extra vierge, pressée à froid
-            </span>
-            <span class="pill">
-              <span class="icon">🫒</span> Olives récoltées à la main
-            </span>
-            <span class="pill">
-              <span class="icon">📍</span> Une seule origine : Manziana
-            </span>
-            <span class="pill">
-              <span class="icon">🥗</span> Sublime les salades et légumes
-            </span>
-            <span class="pill">
-              <span class="icon">👨‍👩‍👧</span> Production familiale, petits volumes
-            </span>
+      </section>
+
+      <!-- DEGUSTATION / USAGES -->
+      <section id="degustation">
+        <div class="card">
+          <h2 class="section-title">Comment la déguster ?</h2>
+          <p class="section-sub">
+            L’huile de Fany est assez parfumée pour être utilisée crue,
+            simplement versée en filet. Quelques idées :
+          </p>
+          <ul class="hero-list">
+            <li><span class="icon">🥗</span><span>Salades de tomates, burrata, roquette, basilic – un filet d’huile au moment de servir.</span></li>
+            <li><span class="icon">🍞</span><span>Sur du pain grillé avec un peu de fleur de sel et d’ail – l’apéro le plus simple du monde.</span></li>
+            <li><span class="icon">🐟</span><span>Sur un poisson au four ou grillé, juste après cuisson pour garder tous les arômes.</span></li>
+            <li><span class="icon">🥦</span><span>Sur des légumes rôtis ou vapeur : courgettes, aubergines, brocolis, fenouil…</span></li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- COMMANDER -->
+      <section id="commander">
+        <div class="card">
+          <h2 class="section-title">Comment commander l’huile de Fany&nbsp;?</h2>
+          <p class="section-sub">
+            Les stocks sont limités : les commandes se font directement auprès de nous.
+          </p>
+
+          <div class="steps">
+            <div class="step">
+              <div class="step-number">1</div>
+              <div>
+                <div class="step-title">Choisissez vos formats</div>
+                <div>0,5&nbsp;L, 0,75&nbsp;L, 1&nbsp;L et/ou un carton de 6.</div>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-number">2</div>
+              <div>
+                <div class="step-title">Remplissez le formulaire ci-dessous</div>
+                <div>Indiquez les quantités souhaitées et, si besoin, vos contraintes (cadeaux, date limite, etc.).</div>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-number">3</div>
+              <div>
+                <div class="step-title">Vous recevez un e-mail de confirmation</div>
+                <div>Avec disponibilité, prix exacts, modalités de paiement (virement, cash…) et organisation de la remise (en Belgique).</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- FORMULAIRE -->
+          <div class="order-card" id="contact">
+            <h3 class="section-title" style="font-size:1.25rem;margin-top:10px;">
+              Passer commande
+            </h3>
+            <p class="section-sub">
+              Remplissez ce formulaire. Un e-mail pré-rempli s’ouvrira avec le
+              récapitulatif de votre demande. Vous pourrez vérifier puis cliquer
+              sur « Envoyer ».
+            </p>
+
+            <form
+              action="mailto:arnaudvanderstraten@gmail.com"
+              method="GET"
+              enctype="text/plain"
+            >
+              <div class="field-group">
+                <label for="nom">Nom &amp; prénom</label>
+                <input id="nom" name="Nom" type="text" required />
+              </div>
+
+              <div class="field-group">
+                <label for="email">Adresse e-mail</label>
+                <input id="email" name="Email" type="email" required />
+              </div>
+
+              <div class="field-group">
+                <label for="formats">Formats &amp; quantités souhaités</label>
+                <textarea
+                  id="formats"
+                  name="Formats et quantités"
+                  placeholder="Ex.: 3 x 0,75 L pour nous, 2 x 0,5 L en cadeau, 1 carton de 6 bouteilles…"
+                  required
+                ></textarea>
+              </div>
+
+              <div class="field-group">
+                <label for="message">Remarques / contraintes</label>
+                <textarea
+                  id="message"
+                  name="Remarques"
+                  placeholder="Ex.: À récupérer à Bruxelles, avant fin novembre, huile pour cadeaux de Noël, etc."
+                ></textarea>
+              </div>
+
+              <p class="small-hint">
+                En cliquant sur « Préparer mon e-mail », votre logiciel de
+                messagerie s’ouvrira avec un e-mail déjà rempli. Il ne vous
+                restera plus qu’à vérifier et envoyer.
+              </p>
+
+              <div class="submit-row">
+                <button type="submit" class="btn-main">
+                  ✉️ Préparer mon e-mail de commande
+                </button>
+              </div>
+            </form>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </main>
 
-    <!-- PRODUITS -->
-    <section id="produits">
-      <h2 class="section-title">Les formats disponibles</h2>
-      <div class="card">
-        <p>
-          L’huile de Fany est proposée en plusieurs formats de bouteilles.
-          Indiquez ce que vous souhaitez dans le formulaire, vous recevrez
-          ensuite un e-mail de confirmation avec les prix exacts et la
-          disponibilité.
-        </p>
-
-        <div class="products-grid">
-          <article class="product-card">
-            <div>
-              <div class="product-tag">Bouteille 0,5 L</div>
-              <div class="product-title">
-                Huile d’olive extra vierge – 0,5 L
-              </div>
-              <p class="product-desc">
-                Format découverte pour quelques semaines de salades, légumes
-                grillés, tomates, mozzarella, poissons…
-              </p>
-            </div>
-            <div class="product-meta">
-              <span class="price">Prix à préciser</span>
-              <span class="note">Campagne actuelle.</span>
-            </div>
-          </article>
-
-          <article class="product-card">
-            <div>
-              <div class="product-tag">Bouteille 0,75 L</div>
-              <div class="product-title">
-                Huile d’olive extra vierge – 0,75 L
-              </div>
-              <p class="product-desc">
-                Le format “famille” pour une cuisine régulière à l’huile
-                d’olive : salades, plats chauds, apéros.
-              </p>
-            </div>
-            <div class="product-meta">
-              <span class="price">Prix à préciser</span>
-              <span class="note">Format le plus polyvalent.</span>
-            </div>
-          </article>
-
-          <article class="product-card">
-            <div>
-              <div class="product-tag">Bouteille 1 L</div>
-              <div class="product-title">
-                Huile d’olive extra vierge – 1 L
-              </div>
-              <p class="product-desc">
-                Pour les grands amateurs et les familles qui cuisinent
-                beaucoup à l’huile d’olive ou pour partager avec des amis.
-              </p>
-            </div>
-            <div class="product-meta">
-              <span class="price">Prix à préciser</span>
-              <span class="note">Selon les stocks.</span>
-            </div>
-          </article>
-
-          <article class="product-card">
-            <div>
-              <div class="product-tag">Carton</div>
-              <div class="product-title">
-                Carton de 6 bouteilles (mix possible)
-              </div>
-              <p class="product-desc">
-                Intéressant pour grouper les commandes entre amis ou en
-                famille et optimiser le transport.
-              </p>
-            </div>
-            <div class="product-meta">
-              <span class="price">Sur demande</span>
-              <span class="note">Conditions à préciser par e-mail.</span>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- COMMENT COMMANDER -->
-    <section>
-      <div class="card">
-        <h2 class="section-title">Comment commander l’huile de Fany ?</h2>
-        <ul class="howto-list">
-          <li>
-            <span class="howto-badge">1</span>
-            <div>
-              <strong>Choisissez vos formats</strong><br />
-              Bouteilles de 0,5 L, 0,75 L, 1 L et/ou carton de 6.
-            </div>
-          </li>
-          <li>
-            <span class="howto-badge">2</span>
-            <div>
-              <strong>Remplissez le formulaire ci-dessous</strong><br />
-              Indiquez les quantités souhaitées et vos remarques.
-            </div>
-          </li>
-          <li>
-            <span class="howto-badge">3</span>
-            <div>
-              <strong>Vous recevez un e-mail de confirmation</strong><br />
-              Avec disponibilité, prix, modalités de paiement et remise
-              (Rebecq et environs).
-            </div>
-          </li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- FORMULAIRE DE COMMANDE -->
-    <section id="commande">
-      <div class="card">
-        <h2 class="section-title">Passer commande</h2>
-        <p>
-          Ce formulaire génère un e-mail pré-rempli vers Arnaud. Vérifiez le
-          contenu dans votre messagerie avant d’envoyer.
-        </p>
-
-        <form
-          action="mailto:arnaudvanderstraten@gmail.com"
-          method="post"
-          enctype="text/plain"
-        >
-          <div class="form-row">
-            <div>
-              <label for="name">Nom et prénom</label>
-              <input
-                type="text"
-                id="name"
-                name="Nom"
-                placeholder="Votre nom"
-                required
-              />
-            </div>
-            <div>
-              <label for="email">Adresse e-mail</label>
-              <input
-                type="email"
-                id="email"
-                name="Email"
-                placeholder="vous@example.com"
-                required
-              />
-            </div>
-          </div>
-
-          <div class="form-row">
-            <div>
-              <label for="phone">Téléphone</label>
-              <input
-                type="tel"
-                id="phone"
-                name="Téléphone"
-                placeholder="+32..."
-              />
-              <div class="form-help">
-                Utile pour vous joindre rapidement si besoin.
-              </div>
-            </div>
-            <div>
-              <label for="pickup">Remise souhaitée</label>
-              <select id="pickup" name="Remise souhaitée" required>
-                <option value="">Sélectionnez une option</option>
-                <option value="Remise en Belgique (Rebecq / environs)">
-                  Remise en Belgique (Rebecq et environs)
-                </option>
-                <option value="À organiser ensemble">
-                  À organiser ensemble
-                </option>
-              </select>
-            </div>
-          </div>
-
-          <label for="order-details">Formats et quantités souhaités</label>
-          <textarea
-            id="order-details"
-            name="Commande"
-            placeholder="Exemple :
-– 3 bouteilles de 0,75 L
-– 2 bouteilles de 0,5 L
-– 1 carton de 6 x 0,75 L pour partager avec des amis"
-            required
-          ></textarea>
-
-          <label for="message">Message complémentaire (optionnel)</label>
-          <textarea
-            id="message"
-            name="Message"
-            placeholder="Précisions sur les dates, les cadeaux, les remarques…"
-          ></textarea>
-
-          <div class="form-footer">
-            <button type="submit" class="btn btn-primary">
-              📧 Envoyer une demande de commande
-            </button>
-            <div class="form-note">
-              Votre logiciel de messagerie doit être configuré sur l’ordinateur
-              pour que le bouton fonctionne.
-            </div>
-          </div>
-        </form>
-      </div>
-    </section>
-
-    <!-- CONTACT -->
-    <section id="contact">
-      <div class="card">
-        <h2 class="section-title">Contact</h2>
-        <p>
-          Pour toute question sur l’huile de Fany, les formats, les prix ou
-          la logistique&nbsp;:
-        </p>
-        <p style="margin-top: 0.5rem;">
-          E-mail :
-          <a href="mailto:arnaudvanderstraten@gmail.com">
-            arnaudvanderstraten@gmail.com
-          </a>
-        </p>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    &copy; <span id="year"></span> Huile d’olive de Fany – Manziana (Italie).
-    Site statique hébergé sur GitHub Pages.
-  </footer>
-
-  <script>
-    document.getElementById("year").textContent =
-      new Date().getFullYear();
-  </script>
+    <footer>
+      Huile d’olive de Fany – récolte familiale à Manziana (Italie).<br />
+      Site artisanal hébergé sur GitHub Pages.
+    </footer>
+  </div>
 </body>
 </html>
