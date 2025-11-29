@@ -1,185 +1,677 @@
-<section id="commander">
-  <div class="card">
-    <h2 class="section-title">Composer votre commande & calculer le total</h2>
-    <p class="section-sub">
-      Choisissez le nombre de bouteilles souhaité, indiquez si vous préférez une
-      livraison ou un retrait à Ixelles, et le montant total à payer sera calculé
-      automatiquement. Ensuite, vous pourrez cliquer sur le bouton pour payer via Revolut.
-    </p>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Huile d’olive de Fany – Manziana, Italie</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --green-dark: #071608;
+      --green-main: #203d1d;
+      --green-soft: #314e2e;
+      --cream: #f7f1e6;
+      --accent-gold: #f6b552;
+      --accent-olive: #afc96c;
+      --text-main: #182015;
+      --white: #ffffff;
+      --shadow-soft: 0 18px 45px rgba(0,0,0,0.35);
+      --radius-big: 32px;
+      --radius-med: 18px;
+    }
 
-    <p class="section-sub" style="font-weight:600;">
-      📍 Zone de livraison : uniquement <strong>Uccle</strong>, <strong>Ixelles</strong>
-      et un rayon d’environ <strong>3&nbsp;km</strong> autour.  
-      En dehors de cette zone, la commande se fait en
-      <strong>retrait à Ixelles sur rendez-vous (contact par e-mail)</strong>.
-    </p>
+    * { box-sizing: border-box; }
 
-    <!-- Lignes de produits -->
-    <div style="margin-top:18px; display:grid; gap:10px;">
-      <!-- Bouteille 250 ml -->
-      <div
-        class="product-line"
-        data-price="8"
-        style="display:flex; flex-wrap:wrap; align-items:center; gap:10px; justify-content:space-between; border-bottom:1px solid #e2dfd4; padding-bottom:8px;"
-      >
-        <div>
-          <strong>Bouteille 250&nbsp;ml</strong>
-          <div style="font-size:0.9rem; color:#555;">
-            Idéale pour découvrir l’huile ou pour offrir.  
-            <span class="unit-price-250"><strong>8&nbsp;€</strong> / bouteille</span>
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+        "Segoe UI", sans-serif;
+      color: var(--text-main);
+      background: var(--green-dark);
+    }
+
+    /* --- Fond photo pleine page --- */
+    .page-bg {
+      position: fixed;
+      inset: 0;
+      background-image: url("https://images.pexels.com/photos/3892172/pexels-photo-3892172.jpeg?cs=srgb&dl=pexels-aliona-pasha-1687920-3892172.jpg&fm=jpg");
+      background-size: cover;
+      background-position: center;
+      filter: brightness(0.55) saturate(1.2);
+      z-index: -2;
+    }
+
+    .page-overlay {
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(circle at 0% 0%, rgba(255,255,255,0.12), transparent 55%),
+        radial-gradient(circle at 100% 100%, rgba(0,0,0,0.55), rgba(0,0,0,0.85));
+      z-index: -1;
+    }
+
+    .page-shell {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 24px 20px 80px;
+      color: var(--cream);
+    }
+
+    /* --- Header --- */
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 18px;
+      margin-bottom: 36px;
+      border-radius: 999px;
+      backdrop-filter: blur(16px);
+      background: linear-gradient(
+        120deg,
+        rgba(9,28,10,0.92),
+        rgba(39,70,35,0.92)
+      );
+      box-shadow: 0 12px 30px rgba(0,0,0,0.45);
+    }
+
+    .brand {
+      font-weight: 700;
+      letter-spacing: 0.09em;
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-pill {
+      padding: 6px 11px;
+      border-radius: 999px;
+      background: rgba(248,250,252,0.09);
+      font-size: 0.75rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    nav {
+      display: flex;
+      gap: 20px;
+      font-size: 0.9rem;
+    }
+    nav a {
+      color: var(--cream);
+      text-decoration: none;
+      opacity: 0.9;
+    }
+    nav a:hover {
+      opacity: 1;
+      text-decoration: underline;
+    }
+
+    /* --- Hero --- */
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+      gap: 26px;
+      align-items: stretch;
+      margin-bottom: 40px;
+    }
+
+    .hero-text {
+      padding: 36px 34px 32px;
+      border-radius: var(--radius-big);
+      background: linear-gradient(140deg, rgba(19,46,19,0.96), rgba(49,88,48,0.96));
+      box-shadow: var(--shadow-soft);
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 5px 12px;
+      border-radius: 999px;
+      background: rgba(248,250,252,0.09);
+      font-size: 0.8rem;
+      margin-bottom: 14px;
+    }
+
+    .chip span.flag {
+      font-size: 1.05rem;
+    }
+
+    .hero-title {
+      font-size: clamp(2rem, 3.2vw, 2.7rem);
+      line-height: 1.1;
+      margin: 4px 0 16px;
+      font-weight: 800;
+    }
+
+    .hero-sub {
+      font-size: 1.0rem;
+      line-height: 1.6;
+      margin-bottom: 20px;
+      color: #e6f3dc;
+    }
+
+    .hero-list {
+      margin: 0 0 24px;
+      padding: 0;
+      list-style: none;
+    }
+
+    .hero-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      margin-bottom: 6px;
+      font-size: 0.97rem;
+    }
+
+    .hero-list li span.icon {
+      font-size: 1.05rem;
+      margin-top: 1px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .btn-main,
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 22px;
+      border-radius: 999px;
+      border: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform 0.08s ease, box-shadow 0.08s ease, background 0.15s ease;
+      white-space: nowrap;
+    }
+
+    .btn-main {
+      background: linear-gradient(120deg, #f4c166, #f4a633);
+      color: #4b2f0d;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.45);
+    }
+    .btn-main:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 16px 36px rgba(0,0,0,0.5);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      border: 1px solid rgba(235,243,221,0.5);
+      color: #ebf3dd;
+    }
+    .btn-ghost:hover {
+      background: rgba(235,243,221,0.07);
+    }
+
+    /* --- Hero image card --- */
+    .hero-image-card {
+      position: relative;
+      border-radius: var(--radius-big);
+      overflow: hidden;
+      background: radial-gradient(circle at 0 0, #345530, #152315);
+      box-shadow: var(--shadow-soft);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+
+    .hero-img-wrap {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+    }
+
+    .hero-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: scale(1.03);
+      filter: contrast(1.1) saturate(1.15);
+    }
+
+    .hero-gradient {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 0 0, rgba(255,255,255,0.08), transparent 55%),
+        linear-gradient(to top, rgba(0,0,0,0.75), rgba(0,0,0,0.10));
+    }
+
+    .hero-caption {
+      position: relative;
+      padding: 24px 26px 24px;
+      z-index: 1;
+      color: #f5f7ea;
+      font-size: 0.93rem;
+      line-height: 1.5;
+    }
+
+    .hero-caption-title {
+      font-weight: 600;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .hero-caption-badge {
+      font-size: 0.7rem;
+      padding: 2px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(245,245,245,0.6);
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+    }
+
+    /* --- Sections --- */
+    section {
+      margin-bottom: 36px;
+    }
+
+    .card {
+      border-radius: var(--radius-big);
+      padding: 26px 26px 24px;
+      background: rgba(245,248,238,0.94);
+      color: var(--text-main);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .section-title {
+      font-size: 1.4rem;
+      margin: 0 0 12px;
+      color: #1c2a17;
+    }
+
+    .section-sub {
+      margin: 0 0 16px;
+      color: #4a5740;
+      font-size: 0.98rem;
+    }
+
+    footer {
+      margin-top: 40px;
+      font-size: 0.78rem;
+      color: rgba(226,234,219,0.82);
+      text-align: center;
+    }
+
+    footer a {
+      color: rgba(248,250,252,0.9);
+      text-decoration: none;
+    }
+    footer a:hover { text-decoration: underline; }
+
+    @media (max-width: 880px) {
+      header {
+        flex-direction: column;
+        gap: 10px;
+        align-items: flex-start;
+      }
+      .hero {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .page-shell {
+        padding: 16px 14px 60px;
+      }
+      .hero-text {
+        padding: 26px 22px 22px;
+      }
+      .hero-title {
+        font-size: 1.9rem;
+      }
+      .card {
+        padding: 22px 18px 20px;
+      }
+      nav {
+        gap: 12px;
+        font-size: 0.85rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-bg"></div>
+  <div class="page-overlay"></div>
+
+  <div class="page-shell">
+    <header>
+      <div>
+        <div class="brand">HUILE D’OLIVE DE FANY</div>
+        <div class="brand-pill">
+          <span class="flag">🇮🇹</span>
+          Manziana, collines au nord de Rome
+        </div>
+      </div>
+      <nav>
+        <a href="#apropos">À propos</a>
+        <a href="#degustation">Dégustation</a>
+        <a href="#commander">Commander</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <main>
+      <!-- HERO -->
+      <section class="hero" id="haut">
+        <div class="hero-text">
+          <div class="chip">
+            <span>🌿</span> Récolte familiale – huile d’olive extra vierge
+          </div>
+          <h1 class="hero-title">
+            Huile d’olive extra vierge,<br />
+            récolte familiale de Manziana
+          </h1>
+          <p class="hero-sub">
+            Fany produit une huile d’olive extra vierge artisanale dans la campagne
+            de Manziana, en Italie. Récolte manuelle, olives pressées à froid
+            dans un petit moulin local, arômes d’herbes fraîches, d’artichaut et
+            d’amande. Une huile généreuse, riche en bons gras et en oméga-3.
+          </p>
+
+          <ul class="hero-list">
+            <li>
+              <span class="icon">🫒</span>
+              <span>Oliviers familiaux, récolte à la main &amp; traçabilité de la parcelle.</span>
+            </li>
+            <li>
+              <span class="icon">❄️</span>
+              <span>Pressée à froid pour préserver les arômes &amp; les antioxydants naturels.</span>
+            </li>
+            <li>
+              <span class="icon">🥗</span>
+              <span>Parfaite pour salades croquantes, légumes grillés, poissons et cuisine méditerranéenne.</span>
+            </li>
+            <li>
+              <span class="icon">💚</span>
+              <span>Profil nutritionnel riche en bons gras insaturés &amp; oméga-3, allié du cœur.</span>
+            </li>
+          </ul>
+
+          <div class="hero-actions">
+            <a href="#commander" class="btn-main">
+              📝 Commander l’huile
+            </a>
+            <a href="#apropos" class="btn-ghost">
+              Découvrir l’histoire de l’huile
+            </a>
           </div>
         </div>
-        <div>
-          <label for="qty-250" style="font-size:0.9rem; font-weight:600;">Quantité</label>
-          <input
-            id="qty-250"
-            type="number"
-            min="0"
-            value="0"
-            style="width:80px; padding:6px 8px; border-radius:10px; border:1px solid #c9c1ad;"
-          />
-        </div>
-      </div>
 
-      <!-- Bouteille 750 ml -->
-      <div
-        class="product-line"
-        data-price="15"
-        style="display:flex; flex-wrap:wrap; align-items:center; gap:10px; justify-content:space-between; border-bottom:1px solid #e2dfd4; padding-bottom:8px;"
-      >
-        <div>
-          <strong>Bouteille 750&nbsp;ml</strong>
-          <div style="font-size:0.9rem; color:#555;">
-            Format “famille” pour la cuisine du quotidien.  
-            <span class="unit-price-750"><strong>15&nbsp;€</strong> / bouteille</span>
+        <aside class="hero-image-card">
+          <div class="hero-img-wrap">
+            <img
+              src="https://images.pexels.com/photos/1047312/pexels-photo-1047312.jpeg?cs=srgb&dl=pexels-juliasakelli-1047312.jpg&fm=jpg"
+              alt="Branches d’olivier avec olives vertes"
+            />
+          </div>
+          <div class="hero-gradient"></div>
+          <div class="hero-caption">
+            <div class="hero-caption-title">
+              🌿 Oliviers dans la campagne italienne
+              <span class="hero-caption-badge">Récolte familiale</span>
+            </div>
+            Collines d’oliviers baignées de soleil, olives cueillies à la main,
+            huile verte versée sur une salade de tomates, de roquette ou sur un
+            poisson grillé… L’huile de Fany apporte à la fois <strong>le goût de
+            l’Italie</strong> et les bienfaits de la cuisine méditerranéenne dans
+            votre assiette.
+          </div>
+        </aside>
+      </section>
+
+      <!-- A PROPOS -->
+      <section id="apropos">
+        <div class="card">
+          <h2 class="section-title">Une petite production pleine de soleil</h2>
+          <p class="section-sub">
+            À Manziana, au nord de Rome, Fany entretient un petit verger familial d’oliviers.
+            Chaque automne, la récolte se fait à la main, puis les olives sont pressées à froid
+            dans un moulin local. L’huile n’est pas standardisée : elle suit la météo de l’année
+            et le rythme des arbres. Résultat : une huile vivante, parfumée, à la personnalité unique.
+          </p>
+        </div>
+      </section>
+
+      <!-- DEGUSTATION -->
+      <section id="degustation">
+        <div class="card">
+          <h2 class="section-title">Idées pour la déguster</h2>
+          <p class="section-sub">
+            L’huile de Fany est à son meilleur lorsqu’elle est utilisée crue ou ajoutée en fin de cuisson.
+            Quelques idées pour la mettre en valeur :
+          </p>
+          <ul class="hero-list">
+            <li><span class="icon">🥗</span><span>Salades de tomates, burrata, roquette, basilic – un filet juste avant de servir.</span></li>
+            <li><span class="icon">🍞</span><span>Sur du pain grillé avec un peu de fleur de sel et d’ail – l’apéro le plus simple du monde.</span></li>
+            <li><span class="icon">🐟</span><span>Sur un poisson au four ou grillé, à la sortie du four pour garder les arômes.</span></li>
+            <li><span class="icon">🥦</span><span>Sur des légumes rôtis ou vapeur : courgettes, aubergines, brocolis, fenouil…</span></li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- COMMANDER : FORMULAIRE + CALCUL + REVOLUT -->
+      <section id="commander">
+        <div class="card">
+          <h2 class="section-title">Composer votre commande & payer en ligne</h2>
+          <p class="section-sub">
+            Choisissez le nombre de bouteilles souhaité, indiquez si vous préférez une
+            livraison ou un retrait à Ixelles. Le <strong>montant total</strong> est calculé
+            automatiquement, puis envoyé vers Revolut lorsque vous cliquez sur le bouton
+            de paiement.
+          </p>
+
+          <p class="section-sub" style="font-weight:600; background:#f3efe5; padding:10px 12px; border-radius:14px;">
+            📍 <strong>Zone de livraison :</strong> uniquement <strong>Uccle</strong>, <strong>Ixelles</strong>
+            et un rayon d’environ <strong>3&nbsp;km</strong> autour.  
+            En dehors de cette zone, la commande se fait en
+            <strong>retrait à Ixelles sur rendez-vous</strong>
+            (contact par e-mail :
+            <a href="mailto:arnaudvanderstraten@gmail.com">arnaudvanderstraten@gmail.com</a>).
+          </p>
+
+          <!-- Choix des bouteilles -->
+          <div style="margin-top:18px; display:grid; gap:10px;">
+            <!-- Bouteille 250 ml -->
+            <div
+              class="product-line"
+              data-price="8"
+              style="display:flex; flex-wrap:wrap; align-items:center; gap:10px; justify-content:space-between; border-bottom:1px solid #e2dfd4; padding-bottom:8px;"
+            >
+              <div>
+                <strong>Bouteille 250&nbsp;ml</strong>
+                <div style="font-size:0.9rem; color:#555;">
+                  Idéale pour découvrir l’huile ou pour offrir.  
+                  <span><strong><span id="price-250-label">8</span>&nbsp;€</strong> / bouteille</span>
+                </div>
+              </div>
+              <div>
+                <label for="qty-250" style="font-size:0.9rem; font-weight:600;">Quantité</label>
+                <input
+                  id="qty-250"
+                  type="number"
+                  min="0"
+                  value="0"
+                  style="width:80px; padding:6px 8px; border-radius:10px; border:1px solid #c9c1ad;"
+                />
+              </div>
+            </div>
+
+            <!-- Bouteille 750 ml -->
+            <div
+              class="product-line"
+              data-price="15"
+              style="display:flex; flex-wrap:wrap; align-items:center; gap:10px; justify-content:space-between; border-bottom:1px solid #e2dfd4; padding-bottom:8px;"
+            >
+              <div>
+                <strong>Bouteille 750&nbsp;ml</strong>
+                <div style="font-size:0.9rem; color:#555;">
+                  Format “famille” pour la cuisine du quotidien.  
+                  <span><strong><span id="price-750-label">15</span>&nbsp;€</strong> / bouteille</span>
+                </div>
+              </div>
+              <div>
+                <label for="qty-750" style="font-size:0.9rem; font-weight:600;">Quantité</label>
+                <input
+                  id="qty-750"
+                  type="number"
+                  min="0"
+                  value="0"
+                  style="width:80px; padding:6px 8px; border-radius:10px; border:1px solid #c9c1ad;"
+                />
+              </div>
+            </div>
+          </div>
+
+          <!-- Livraison / retrait -->
+          <div style="margin-top:18px;">
+            <h3 style="margin:0 0 8px; font-size:1.05rem; color:#1c2a17;">
+              Livraison ou retrait
+            </h3>
+            <p class="section-sub" style="margin-bottom:10px;">
+              Merci de choisir l’option qui vous convient :
+            </p>
+
+            <div style="display:grid; gap:6px; font-size:0.95rem;">
+              <label style="display:flex; align-items:flex-start; gap:8px; cursor:pointer;">
+                <input
+                  type="radio"
+                  name="delivery-option"
+                  id="option-livraison"
+                  value="livraison"
+                  style="margin-top:3px;"
+                />
+                <span>
+                  <strong>Livraison à domicile (+ 5&nbsp;€)</strong><br />
+                  Disponible uniquement sur Uccle, Ixelles et dans un rayon de ~3&nbsp;km.
+                </span>
+              </label>
+
+              <label style="display:flex; align-items:flex-start; gap:8px; cursor:pointer;">
+                <input
+                  type="radio"
+                  name="delivery-option"
+                  id="option-retrait"
+                  value="retrait"
+                  style="margin-top:3px;"
+                />
+                <span>
+                  <strong>Retrait à Ixelles (gratuit)</strong><br />
+                  Sur rendez-vous, en prenant contact par e-mail :
+                  <a href="mailto:arnaudvanderstraten@gmail.com">arnaudvanderstraten@gmail.com</a>
+                </span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Récapitulatif -->
+          <div
+            style="margin-top:20px; padding:14px 16px; border-radius:16px; background:#f3efe5; font-size:0.95rem;"
+          >
+            <h3 style="margin:0 0 10px; font-size:1.05rem; color:#1c2a17;">
+              Récapitulatif de votre commande
+            </h3>
+            <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
+              <span>Sous-total bouteilles</span>
+              <span><strong><span id="summary-subtotal">0,00</span>&nbsp;€</strong></span>
+            </div>
+            <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
+              <span>Frais de livraison</span>
+              <span><strong><span id="summary-delivery">0,00</span>&nbsp;€</strong></span>
+            </div>
+            <div style="border-top:1px solid #d0c7b7; margin:8px 0;"></div>
+            <div style="display:flex; justify-content:space-between; font-size:1.05rem;">
+              <span>Total à payer</span>
+              <span><strong><span id="summary-total">0,00</span>&nbsp;€</strong></span>
+            </div>
+            <p
+              style="margin-top:8px; font-size:0.8rem; color:#666; line-height:1.4;"
+            >
+              Le montant total ci-dessus sera envoyé à Revolut lorsque vous cliquerez
+              sur le bouton de paiement. Vous pourrez ensuite simplement valider le paiement.
+            </p>
+          </div>
+
+          <!-- Bouton de paiement Revolut -->
+          <div style="margin-top:18px; display:flex; flex-wrap:wrap; gap:12px; align-items:center;">
+            <button
+              id="pay-button"
+              type="button"
+              class="btn-main"
+              style="border:none; cursor:pointer;"
+            >
+              💳 Payer via Revolut
+            </button>
+            <p style="font-size:0.85rem; color:#555; max-width:420px; margin:0;">
+              Vous serez redirigé·e vers une page Revolut sécurisée avec le montant
+              total déjà pré-rempli. Il ne vous restera plus qu’à confirmer.
+            </p>
           </div>
         </div>
-        <div>
-          <label for="qty-750" style="font-size:0.9rem; font-weight:600;">Quantité</label>
-          <input
-            id="qty-750"
-            type="number"
-            min="0"
-            value="0"
-            style="width:80px; padding:6px 8px; border-radius:10px; border:1px solid #c9c1ad;"
-          />
+      </section>
+
+      <!-- CONTACT -->
+      <section id="contact">
+        <div class="card">
+          <h2 class="section-title">Contact</h2>
+          <p class="section-sub">
+            Pour toute question sur l’huile de Fany, les formats, la disponibilité ou
+            l’organisation de la remise :
+          </p>
+          <p class="section-sub" style="margin-top:4px;">
+            📧 E-mail :
+            <a href="mailto:arnaudvanderstraten@gmail.com">
+              arnaudvanderstraten@gmail.com
+            </a>
+          </p>
         </div>
-      </div>
-    </div>
+      </section>
+    </main>
 
-    <!-- Livraison / retrait -->
-    <div style="margin-top:18px;">
-      <h3 style="margin:0 0 8px; font-size:1.05rem; color:#1c2a17;">
-        Livraison ou retrait
-      </h3>
-      <p class="section-sub" style="margin-bottom:10px;">
-        Merci de choisir l’option qui vous convient :
-      </p>
-
-      <div style="display:grid; gap:6px; font-size:0.95rem;">
-        <label style="display:flex; align-items:flex-start; gap:8px; cursor:pointer;">
-          <input
-            type="radio"
-            name="delivery-option"
-            id="option-livraison"
-            value="livraison"
-            style="margin-top:3px;"
-          />
-          <span>
-            <strong>Livraison à domicile (+ 5&nbsp;€)</strong><br />
-            Disponible uniquement sur Uccle, Ixelles et dans un rayon de ~3&nbsp;km.
-          </span>
-        </label>
-
-        <label style="display:flex; align-items:flex-start; gap:8px; cursor:pointer;">
-          <input
-            type="radio"
-            name="delivery-option"
-            id="option-retrait"
-            value="retrait"
-            style="margin-top:3px;"
-          />
-          <span>
-            <strong>Retrait à Ixelles (gratuit)</strong><br />
-            Sur rendez-vous, en prenant contact par e-mail :
-            <a href="mailto:arnaudvanderstraten@gmail.com">arnaudvanderstraten@gmail.com</a>
-          </span>
-        </label>
-      </div>
-    </div>
-
-    <!-- Récapitulatif -->
-    <div
-      style="margin-top:20px; padding:14px 16px; border-radius:16px; background:#f3efe5; font-size:0.95rem;"
-    >
-      <h3 style="margin:0 0 10px; font-size:1.05rem; color:#1c2a17;">
-        Récapitulatif
-      </h3>
-      <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
-        <span>Sous-total bouteilles</span>
-        <span><strong><span id="summary-subtotal">0,00</span>&nbsp;€</strong></span>
-      </div>
-      <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
-        <span>Frais de livraison</span>
-        <span><strong><span id="summary-delivery">0,00</span>&nbsp;€</strong></span>
-      </div>
-      <div style="border-top:1px solid #d0c7b7; margin:8px 0;"></div>
-      <div style="display:flex; justify-content:space-between; font-size:1.05rem;">
-        <span>Total à payer</span>
-        <span><strong><span id="summary-total">0,00</span>&nbsp;€</strong></span>
-      </div>
-      <p
-        style="margin-top:8px; font-size:0.8rem; color:#666; line-height:1.4;"
-      >
-        Les prix indiqués peuvent être ajustés selon la campagne d’huile en cours.
-        Le montant total affiché est celui que vous devrez encoder lors du paiement
-        via Revolut.
-      </p>
-    </div>
-
-    <!-- Bouton de paiement Revolut -->
-    <div style="margin-top:18px; display:flex; flex-wrap:wrap; gap:12px; align-items:center;">
-      <button
-        id="pay-button"
-        type="button"
-        class="btn-main"
-        style="border:none; cursor:pointer;"
-      >
-        💳 Payer via Revolut
-      </button>
-      <p style="font-size:0.85rem; color:#555; max-width:420px; margin:0;">
-        En cliquant sur le bouton, vous serez redirigé vers Revolut.  
-        Merci d’<strong>encoder le montant total indiqué</strong> dans le récapitulatif.
-      </p>
-    </div>
+    <footer>
+      Huile d’olive de Fany – récolte familiale à Manziana (Italie).<br />
+      Site artisanal hébergé sur GitHub Pages.
+    </footer>
   </div>
 
-  <!-- Script de calcul du total -->
+  <!-- SCRIPT CALCUL + REVOLUT -->
   <script>
     (function () {
+      // ---- CONFIG À ADAPTER ----
+      const PRICE_250 = 8;  // prix bouteille 250 ml
+      const PRICE_750 = 15; // prix bouteille 750 ml
+      const DELIVERY_FEE = 5; // frais de livraison en €
+      const REVOLUT_USERNAME = "VOTREPSEUDO"; // ⚠️ à remplacer par ton pseudo Revolut.me
+      const REVOLUT_NOTE = "huile_fany";
+
+      // ---- ÉLÉMENTS DU FORMULAIRE ----
       const qty250Input = document.getElementById("qty-250");
       const qty750Input = document.getElementById("qty-750");
-      const deliveryRadios = document.querySelectorAll(
-        'input[name="delivery-option"]'
-      );
+      const deliveryRadios = document.querySelectorAll('input[name="delivery-option"]');
 
       const subtotalSpan = document.getElementById("summary-subtotal");
       const deliverySpan = document.getElementById("summary-delivery");
       const totalSpan = document.getElementById("summary-total");
       const payButton = document.getElementById("pay-button");
 
-      // ⚠️ IMPORTANT : remplace ce lien par ton lien Revolut.me
-      const REVOLUT_LINK = "https://revolut.me/TONPSEUDO";
+      // mettre les prix dans le DOM (au cas où tu modifies les constantes)
+      document.getElementById("price-250-label").textContent = PRICE_250.toString();
+      document.getElementById("price-750-label").textContent = PRICE_750.toString();
 
       let lastTotal = 0;
-
-      function getPriceFromLine(inputEl) {
-        // On lit le prix dans l'attribut data-price du parent .product-line
-        const line = inputEl.closest(".product-line");
-        if (!line) return 0;
-        const price = parseFloat(line.dataset.price);
-        return isNaN(price) ? 0 : price;
-      }
 
       function getSelectedDeliveryOption() {
         let value = null;
@@ -197,16 +689,13 @@
         const qty250 = parseInt(qty250Input.value, 10) || 0;
         const qty750 = parseInt(qty750Input.value, 10) || 0;
 
-        const price250 = getPriceFromLine(qty250Input);
-        const price750 = getPriceFromLine(qty750Input);
-
-        let subtotal = qty250 * price250 + qty750 * price750;
+        let subtotal = qty250 * PRICE_250 + qty750 * PRICE_750;
 
         const deliveryOption = getSelectedDeliveryOption();
         let delivery = 0;
 
         if (deliveryOption === "livraison" && subtotal > 0) {
-          delivery = 5; // 5 € de frais de livraison
+          delivery = DELIVERY_FEE;
         }
 
         const total = subtotal + delivery;
@@ -240,22 +729,42 @@
 
         if (!deliveryOption) {
           alert(
-            "Veuillez choisir entre livraison à domicile ou retrait à Ixelles."
+            "Veuillez choisir entre livraison à domicile et retrait à Ixelles."
           );
           return;
         }
 
+        // On arrondit à 2 décimales (normalement ce sera toujours un montant entier)
+        const amountRounded = Math.round(lastTotal * 100) / 100;
+        const amountForUrl = amountRounded.toString().replace(",", ".").replace(/\.00$/, "");
+
+        if (!REVOLUT_USERNAME || REVOLUT_USERNAME === "VOTREPSEUDO") {
+          alert(
+            "Le lien Revolut n’est pas encore configuré (pseudonyme à modifier dans le code)."
+          );
+          return;
+        }
+
+        const revolutUrl =
+          "https://revolut.me/" +
+          encodeURIComponent(REVOLUT_USERNAME) +
+          "/eur" +
+          encodeURIComponent(amountForUrl) +
+          "/" +
+          encodeURIComponent(REVOLUT_NOTE);
+
         alert(
-          "Montant total à encoder sur Revolut : " +
-            formatEuro(lastTotal) +
-            " €.\n\nVous allez maintenant être redirigé vers Revolut."
+          "Montant total envoyé à Revolut : " +
+            formatEuro(amountRounded) +
+            " €.\n\nUne nouvelle fenêtre va s’ouvrir pour finaliser votre paiement."
         );
 
-        window.open(REVOLUT_LINK, "_blank");
+        window.open(revolutUrl, "_blank");
       });
 
       // Calcul initial
       recalculate();
     })();
   </script>
-</section>
+</body>
+</html>
