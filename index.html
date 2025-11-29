@@ -463,15 +463,16 @@
         </div>
       </section>
 
-      <!-- COMMANDER : FORMULAIRE + CALCUL + REVOLUT -->
+      <!-- COMMANDER -->
       <section id="commander">
         <div class="card">
           <h2 class="section-title">Composer votre commande & payer en ligne</h2>
           <p class="section-sub">
-            Choisissez le nombre de bouteilles souhaité, indiquez si vous préférez une
-            livraison ou un retrait à Ixelles. Le <strong>montant total</strong> est calculé
-            automatiquement, puis envoyé vers Revolut lorsque vous cliquez sur le bouton
-            de paiement.
+            Indiquez vos coordonnées, choisissez le nombre de bouteilles souhaité,
+            puis sélectionnez livraison ou retrait à Ixelles. Le <strong>montant total</strong>
+            est calculé automatiquement et envoyé à Revolut lorsque vous cliquez
+            sur le bouton de paiement. Les détails de votre commande sont inclus
+            dans la note du paiement.
           </p>
 
           <p class="section-sub" style="font-weight:600; background:#f3efe5; padding:10px 12px; border-radius:14px;">
@@ -482,6 +483,31 @@
             (contact par e-mail :
             <a href="mailto:arnaudvanderstraten@gmail.com">arnaudvanderstraten@gmail.com</a>).
           </p>
+
+          <!-- Coordonnées client -->
+          <div style="margin-top:18px; display:grid; gap:10px; grid-template-columns: minmax(0,1.1fr) minmax(0,1fr);">
+            <div>
+              <label for="customer-name" style="font-size:0.9rem; font-weight:600;">Nom &amp; prénom</label>
+              <input
+                id="customer-name"
+                type="text"
+                placeholder="Votre nom et prénom"
+                style="width:100%; padding:7px 9px; border-radius:10px; border:1px solid #c9c1ad;"
+              />
+            </div>
+            <div>
+              <label for="customer-email" style="font-size:0.9rem; font-weight:600;">Adresse e-mail</label>
+              <input
+                id="customer-email"
+                type="email"
+                placeholder="vous@example.com"
+                style="width:100%; padding:7px 9px; border-radius:10px; border:1px solid #c9c1ad;"
+              />
+              <div style="font-size:0.8rem; color:#666; margin-top:3px;">
+                Utile si nous devons vous confirmer la disponibilité ou fixer un rendez-vous.
+              </div>
+            </div>
+          </div>
 
           <!-- Choix des bouteilles -->
           <div style="margin-top:18px; display:grid; gap:10px;">
@@ -601,24 +627,36 @@
               style="margin-top:8px; font-size:0.8rem; color:#666; line-height:1.4;"
             >
               Le montant total ci-dessus sera envoyé à Revolut lorsque vous cliquerez
-              sur le bouton de paiement. Vous pourrez ensuite simplement valider le paiement.
+              sur le bouton de paiement. Nous recevrons votre nom, email et les
+              détails de la commande dans la note du paiement.
             </p>
           </div>
 
-          <!-- Bouton de paiement Revolut -->
-          <div style="margin-top:18px; display:flex; flex-wrap:wrap; gap:12px; align-items:center;">
-            <button
-              id="pay-button"
-              type="button"
-              class="btn-main"
-              style="border:none; cursor:pointer;"
+          <!-- Bouton de paiement Revolut + zone de test note -->
+          <div style="margin-top:18px; display:flex; flex-direction:column; gap:8px;">
+            <div style="display:flex; flex-wrap:wrap; gap:12px; align-items:center;">
+              <button
+                id="pay-button"
+                type="button"
+                class="btn-main"
+                style="border:none; cursor:pointer;"
+              >
+                💳 Payer via Revolut
+              </button>
+              <p style="font-size:0.85rem; color:#555; max-width:420px; margin:0;">
+                Vous serez redirigé·e vers une page Revolut sécurisée avec le montant
+                total déjà pré-rempli.
+              </p>
+            </div>
+
+            <!-- Zone de test pour afficher la note envoyée à Revolut -->
+            <div
+              id="revolut-note-test-wrapper"
+              style="margin-top:6px; font-size:0.8rem; color:#555; background:#f9f4e8; padding:8px 10px; border-radius:8px; display:none;"
             >
-              💳 Payer via Revolut
-            </button>
-            <p style="font-size:0.85rem; color:#555; max-width:420px; margin:0;">
-              Vous serez redirigé·e vers une page Revolut sécurisée avec le montant
-              total déjà pré-rempli. Il ne vous restera plus qu’à confirmer.
-            </p>
+              <strong>Note envoyée à Revolut (test) :</strong>
+              <div id="revolut-note-test" style="margin-top:4px; word-break:break-all;"></div>
+            </div>
           </div>
         </div>
       </section>
@@ -647,7 +685,7 @@
     </footer>
   </div>
 
-  <!-- SCRIPT CALCUL + REVOLUT -->
+  <!-- SCRIPT CALCUL + REVOLUT AVEC NOTE VISIBLE EN TEST -->
   <script>
     (function () {
       // ---- CONFIG À ADAPTER ----
@@ -655,9 +693,11 @@
       const PRICE_750 = 15; // prix bouteille 750 ml
       const DELIVERY_FEE = 5; // frais de livraison en €
       const REVOLUT_USERNAME = "VOTREPSEUDO"; // ⚠️ à remplacer par ton pseudo Revolut.me
-      const REVOLUT_NOTE = "huile_fany";
 
       // ---- ÉLÉMENTS DU FORMULAIRE ----
+      const nameInput = document.getElementById("customer-name");
+      const emailInput = document.getElementById("customer-email");
+
       const qty250Input = document.getElementById("qty-250");
       const qty750Input = document.getElementById("qty-750");
       const deliveryRadios = document.querySelectorAll('input[name="delivery-option"]');
@@ -667,11 +707,12 @@
       const totalSpan = document.getElementById("summary-total");
       const payButton = document.getElementById("pay-button");
 
+      const noteWrapper = document.getElementById("revolut-note-test-wrapper");
+      const noteText = document.getElementById("revolut-note-test");
+
       // mettre les prix dans le DOM (au cas où tu modifies les constantes)
       document.getElementById("price-250-label").textContent = PRICE_250.toString();
       document.getElementById("price-750-label").textContent = PRICE_750.toString();
-
-      let lastTotal = 0;
 
       function getSelectedDeliveryOption() {
         let value = null;
@@ -685,7 +726,7 @@
         return value.toFixed(2).replace(".", ",");
       }
 
-      function recalculate() {
+      function calculateTotals() {
         const qty250 = parseInt(qty250Input.value, 10) || 0;
         const qty750 = parseInt(qty750Input.value, 10) || 0;
 
@@ -699,11 +740,14 @@
         }
 
         const total = subtotal + delivery;
-        lastTotal = total;
+        return { qty250, qty750, subtotal, delivery, total, deliveryOption };
+      }
 
-        subtotalSpan.textContent = formatEuro(subtotal);
-        deliverySpan.textContent = formatEuro(delivery);
-        totalSpan.textContent = formatEuro(total);
+      function recalculate() {
+        const totals = calculateTotals();
+        subtotalSpan.textContent = formatEuro(totals.subtotal);
+        deliverySpan.textContent = formatEuro(totals.delivery);
+        totalSpan.textContent = formatEuro(totals.total);
       }
 
       // Écouteurs sur les champs
@@ -715,43 +759,69 @@
 
       // Bouton de paiement
       payButton.addEventListener("click", function () {
-        const deliveryOption = getSelectedDeliveryOption();
-        const subtotal = parseFloat(
-          subtotalSpan.textContent.replace(",", ".")
-        );
+        const name = (nameInput.value || "").trim();
+        const email = (emailInput.value || "").trim();
+        const totals = calculateTotals();
 
-        if (!subtotal || subtotal <= 0) {
-          alert(
-            "Veuillez sélectionner au moins une bouteille avant de procéder au paiement."
-          );
+        if (!name) {
+          alert("Veuillez indiquer votre nom et prénom avant de procéder au paiement.");
           return;
         }
 
-        if (!deliveryOption) {
-          alert(
-            "Veuillez choisir entre livraison à domicile et retrait à Ixelles."
-          );
+        if (!totals.subtotal || totals.subtotal <= 0) {
+          alert("Veuillez sélectionner au moins une bouteille avant de procéder au paiement.");
           return;
         }
 
-        // On arrondit à 2 décimales (normalement ce sera toujours un montant entier)
-        const amountRounded = Math.round(lastTotal * 100) / 100;
-        const amountForUrl = amountRounded.toString().replace(",", ".").replace(/\.00$/, "");
+        if (!totals.deliveryOption) {
+          alert("Veuillez choisir entre livraison à domicile et retrait à Ixelles.");
+          return;
+        }
+
+        const amountRounded = Math.round(totals.total * 100) / 100;
+        const amountForUrl = amountRounded
+          .toString()
+          .replace(",", ".")
+          .replace(/\.00$/, "");
 
         if (!REVOLUT_USERNAME || REVOLUT_USERNAME === "VOTREPSEUDO") {
-          alert(
-            "Le lien Revolut n’est pas encore configuré (pseudonyme à modifier dans le code)."
-          );
+          alert("Le lien Revolut n’est pas encore configuré (pseudonyme à modifier dans le code).");
           return;
         }
 
+        // Construire une note lisible qui résume la commande
+        const noteParts = [];
+        noteParts.push("Nom:" + name);
+        if (email) noteParts.push("Mail:" + email);
+        noteParts.push("250ml:" + totals.qty250);
+        noteParts.push("750ml:" + totals.qty750);
+        noteParts.push(
+          totals.deliveryOption === "livraison"
+            ? "Livraison+5EUR"
+            : "Retrait_Ixelles"
+        );
+        noteParts.push("Total:" + amountRounded.toFixed(2) + "EUR");
+
+        let note = noteParts.join(" | ");
+
+        // Optionnel : limite de longueur (sécurité)
+        const MAX_NOTE_LENGTH = 200;
+        if (note.length > MAX_NOTE_LENGTH) {
+          note = note.slice(0, MAX_NOTE_LENGTH - 3) + "...";
+        }
+
+        // Afficher la note sous le bouton (test visuel)
+        noteWrapper.style.display = "block";
+        noteText.textContent = note;
+
+        // Construire l'URL Revolut avec montant + note
         const revolutUrl =
           "https://revolut.me/" +
           encodeURIComponent(REVOLUT_USERNAME) +
           "/eur" +
           encodeURIComponent(amountForUrl) +
           "/" +
-          encodeURIComponent(REVOLUT_NOTE);
+          encodeURIComponent(note);
 
         alert(
           "Montant total envoyé à Revolut : " +
@@ -759,6 +829,7 @@
             " €.\n\nUne nouvelle fenêtre va s’ouvrir pour finaliser votre paiement."
         );
 
+        // Ouvrir Revolut dans un nouvel onglet avec montant + note
         window.open(revolutUrl, "_blank");
       });
 
