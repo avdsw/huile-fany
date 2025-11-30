@@ -33,7 +33,7 @@
     .page-bg {
       position: fixed;
       inset: 0;
-      background-image: url("https://images.pexels.com/photos/3892172/pexels-photo-3892172.jpeg?cs=srgb&dl=pexels-aliona-pasha-1687920-3892172.jpg&fm=jpg");
+      background-image: url("https://images.pexels.com/photos/3892172/pexels-photo-3892172.jpeg?auto=compress&cs=tinysrgb&w=1600");
       background-size: cover;
       background-position: center;
       filter: brightness(0.55) saturate(1.2);
@@ -236,8 +236,10 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transform: scale(1.03);
+      transform: scale(1.04);
       filter: contrast(1.1) saturate(1.15);
+      opacity: 1;
+      transition: opacity 0.7s ease-in-out, transform 0.7s ease-in-out;
     }
 
     .hero-gradient {
@@ -411,17 +413,19 @@
           </div>
         </div>
 
+        <!-- CARTE AVEC DIAPORAMA -->
         <aside class="hero-image-card">
           <div class="hero-img-wrap">
             <img
-              src="https://images.pexels.com/photos/1047312/pexels-photo-1047312.jpeg?cs=srgb&dl=pexels-juliasakelli-1047312.jpg&fm=jpg"
-              alt="Branches d’olivier avec olives vertes"
+              id="hero-slideshow"
+              src="https://images.pexels.com/photos/1047312/pexels-photo-1047312.jpeg?auto=compress&cs=tinysrgb&w=1600"
+              alt="Paysage d’oliveraies et huile d’olive"
             />
           </div>
           <div class="hero-gradient"></div>
           <div class="hero-caption">
             <div class="hero-caption-title">
-              🌿 Oliviers dans la campagne italienne
+              🌿 Oliviers & cuisine méditerranéenne
               <span class="hero-caption-badge">Récolte familiale</span>
             </div>
             Collines d’oliviers baignées de soleil, olives cueillies à la main,
@@ -517,11 +521,18 @@
               data-price="8"
               style="display:flex; flex-wrap:wrap; align-items:center; gap:10px; justify-content:space-between; border-bottom:1px solid #e2dfd4; padding-bottom:8px;"
             >
-              <div>
-                <strong>Bouteille 250&nbsp;ml</strong>
-                <div style="font-size:0.9rem; color:#555;">
-                  Idéale pour découvrir l’huile ou pour offrir.  
-                  <span><strong><span id="price-250-label">8</span>&nbsp;€</strong> / bouteille</span>
+              <div style="display:flex; align-items:center; gap:12px;">
+                <img
+                  src="https://images.pexels.com/photos/932577/pexels-photo-932577.jpeg?auto=compress&cs=tinysrgb&w=400"
+                  alt="Petite bouteille d’huile d’olive 250 ml"
+                  style="width:60px; height:90px; object-fit:cover; border-radius:14px; box-shadow:0 4px 10px rgba(0,0,0,0.35);"
+                />
+                <div>
+                  <strong>Bouteille 250&nbsp;ml</strong>
+                  <div style="font-size:0.9rem; color:#555;">
+                    Petit format pour découvrir l’huile ou l’offrir en cadeau.<br />
+                    <span><strong><span id="price-250-label">8</span>&nbsp;€</strong> / bouteille</span>
+                  </div>
                 </div>
               </div>
               <div>
@@ -542,11 +553,18 @@
               data-price="15"
               style="display:flex; flex-wrap:wrap; align-items:center; gap:10px; justify-content:space-between; border-bottom:1px solid #e2dfd4; padding-bottom:8px;"
             >
-              <div>
-                <strong>Bouteille 750&nbsp;ml</strong>
-                <div style="font-size:0.9rem; color:#555;">
-                  Format “famille” pour la cuisine du quotidien.  
-                  <span><strong><span id="price-750-label">15</span>&nbsp;€</strong> / bouteille</span>
+              <div style="display:flex; align-items:center; gap:12px;">
+                <img
+                  src="https://images.pexels.com/photos/1893555/pexels-photo-1893555.jpeg?auto=compress&cs=tinysrgb&w=400"
+                  alt="Grande bouteille d’huile d’olive 750 ml"
+                  style="width:70px; height:105px; object-fit:cover; border-radius:14px; box-shadow:0 4px 10px rgba(0,0,0,0.35);"
+                />
+                <div>
+                  <strong>Bouteille 750&nbsp;ml</strong>
+                  <div style="font-size:0.9rem; color:#555;">
+                    Grand format “famille” pour la cuisine du quotidien.<br />
+                    <span><strong><span id="price-750-label">15</span>&nbsp;€</strong> / bouteille</span>
+                  </div>
                 </div>
               </div>
               <div>
@@ -688,16 +706,45 @@
   <!-- EmailJS library -->
   <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 
-  <!-- SCRIPT CALCUL + REVOLUT + ENVOI EMAIL -->
+  <!-- SCRIPT CALCUL + REVOLUT + ENVOI EMAIL + DIAPORAMA -->
   <script>
     (function () {
-      // ---- CONFIG ----
-      const PRICE_250 = 8;          // € par bouteille 250 ml
-      const PRICE_750 = 15;         // € par bouteille 750 ml
-      const DELIVERY_FEE = 5;       // € livraison
+      /* --------- DIAPORAMA HERO --------- */
+      const SLIDESHOW_IMAGES = [
+        "https://images.pexels.com/photos/1047312/pexels-photo-1047312.jpeg?auto=compress&cs=tinysrgb&w=1600",
+        "https://images.pexels.com/photos/143133/pexels-photo-143133.jpeg?auto=compress&cs=tinysrgb&w=1600",
+        "https://images.pexels.com/photos/1459339/pexels-photo-1459339.jpeg?auto=compress&cs=tinysrgb&w=1600",
+        "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=1600",
+        "https://images.pexels.com/photos/1417945/pexels-photo-1417945.jpeg?auto=compress&cs=tinysrgb&w=1600",
+        "https://images.pexels.com/photos/209339/pexels-photo-209339.jpeg?auto=compress&cs=tinysrgb&w=1600"
+      ];
+
+      const heroImg = document.getElementById("hero-slideshow");
+      let slideIndex = 0;
+
+      function nextSlide() {
+        if (!heroImg || SLIDESHOW_IMAGES.length <= 1) return;
+        slideIndex = (slideIndex + 1) % SLIDESHOW_IMAGES.length;
+        heroImg.style.opacity = 0;
+        heroImg.style.transform = "scale(1.02)";
+        setTimeout(function () {
+          heroImg.src = SLIDESHOW_IMAGES[slideIndex];
+          heroImg.style.opacity = 1;
+          heroImg.style.transform = "scale(1.04)";
+        }, 500);
+      }
+
+      if (heroImg && SLIDESHOW_IMAGES.length > 1) {
+        heroImg.src = SLIDESHOW_IMAGES[0];
+        setInterval(nextSlide, 6000);
+      }
+
+      /* --------- CONFIG PAIEMENT / EMAIL --------- */
+      const PRICE_250 = 8;
+      const PRICE_750 = 15;
+      const DELIVERY_FEE = 5;
       const REVOLUT_URL = "https://revolut.me/avanderstratenwaillet";
 
-      // EmailJS
       const EMAILJS_PUBLIC_KEY  = "xtM2H9PprxWX1IWnr";
       const EMAILJS_SERVICE_ID  = "service_5yw7g4q";
       const EMAILJS_TEMPLATE_ID = "template_hyc543e";
@@ -726,7 +773,6 @@
       const noteWrapper = document.getElementById("revolut-note-test-wrapper");
       const noteText = document.getElementById("revolut-note-test");
 
-      // Mettre les prix dans le texte
       document.getElementById("price-250-label").textContent = PRICE_250.toString();
       document.getElementById("price-750-label").textContent = PRICE_750.toString();
 
@@ -766,14 +812,12 @@
         totalSpan.textContent = formatEuro(totals.total);
       }
 
-      // Écouteurs
       qty250Input.addEventListener("input", recalculate);
       qty750Input.addEventListener("input", recalculate);
       deliveryRadios.forEach((r) => {
         r.addEventListener("change", recalculate);
       });
 
-      // Bouton Payer
       payButton.addEventListener("click", function () {
         const name = (nameInput.value || "").trim();
         const email = (emailInput.value || "").trim();
@@ -817,11 +861,9 @@
 
         const recapText = recapLines.join("\n");
 
-        // Afficher sous le bouton (test visuel)
         noteWrapper.style.display = "block";
         noteText.textContent = recapText;
 
-        // Envoi email via EmailJS (utilise les champs par défaut du template Contact Us)
         if (typeof emailjs !== "undefined") {
           const templateParams = {
             from_name: name,
@@ -851,11 +893,9 @@
             " €.\n\nUne nouvelle fenêtre va s’ouvrir pour finaliser votre paiement sur Revolut."
         );
 
-        // Ouvrir Revolut (lien simple)
         window.open(REVOLUT_URL, "_blank");
       });
 
-      // Calcul initial
       recalculate();
     })();
   </script>
