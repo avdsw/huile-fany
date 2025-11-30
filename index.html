@@ -276,6 +276,39 @@
       letter-spacing: 0.09em;
     }
 
+    /* --- BOUTEILLES STYLISÉES --- */
+    .bottle-thumb {
+      width: 60px;
+      height: 90px;
+      border-radius: 22px;
+      background: linear-gradient(150deg, #305125, #6fa44a);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+      position: relative;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding-bottom: 6px;
+      overflow: hidden;
+    }
+    .bottle-thumb.large {
+      width: 70px;
+      height: 105px;
+    }
+    .bottle-glass {
+      width: 72%;
+      height: 86%;
+      border-radius: 18px;
+      background: linear-gradient(170deg, #faf4c8, #e0c95e);
+      box-shadow: inset 0 0 9px rgba(0,0,0,0.18);
+      opacity: 0.96;
+    }
+    .bottle-olive-icon {
+      position: absolute;
+      bottom: 4px;
+      font-size: 1rem;
+      text-shadow: 0 0 4px rgba(0,0,0,0.35);
+    }
+
     /* --- Sections --- */
     section {
       margin-bottom: 36px;
@@ -521,11 +554,10 @@
               style="display:flex; flex-wrap:wrap; align-items:center; gap:10px; justify-content:space-between; border-bottom:1px solid #e2dfd4; padding-bottom:8px;"
             >
               <div style="display:flex; align-items:center; gap:12px;">
-                <img
-                  src="https://images.pexels.com/photos/1417945/pexels-photo-1417945.jpeg?auto=compress&cs=tinysrgb&w=400"
-                  alt="Petite bouteille d’huile d’olive naturelle 250 ml"
-                  style="width:60px; height:90px; object-fit:cover; border-radius:14px; box-shadow:0 4px 10px rgba(0,0,0,0.35);"
-                />
+                <div class="bottle-thumb">
+                  <div class="bottle-glass"></div>
+                  <span class="bottle-olive-icon">🫒</span>
+                </div>
                 <div>
                   <strong>Bouteille 250&nbsp;ml</strong>
                   <div style="font-size:0.9rem; color:#555;">
@@ -553,11 +585,10 @@
               style="display:flex; flex-wrap:wrap; align-items:center; gap:10px; justify-content:space-between; border-bottom:1px solid #e2dfd4; padding-bottom:8px;"
             >
               <div style="display:flex; align-items:center; gap:12px;">
-                <img
-                  src="https://images.pexels.com/photos/209339/pexels-photo-209339.jpeg?auto=compress&cs=tinysrgb&w=400"
-                  alt="Grande bouteille d’huile d’olive avec olives vertes"
-                  style="width:70px; height:105px; object-fit:cover; border-radius:14px; box-shadow:0 4px 10px rgba(0,0,0,0.35);"
-                />
+                <div class="bottle-thumb large">
+                  <div class="bottle-glass"></div>
+                  <span class="bottle-olive-icon">🫒</span>
+                </div>
                 <div>
                   <strong>Bouteille 750&nbsp;ml</strong>
                   <div style="font-size:0.9rem; color:#555;">
@@ -710,14 +741,12 @@
     (function () {
       /* --------- DIAPORAMA HERO --------- */
       const SLIDESHOW_IMAGES = [
-        // Oliveraies & olives
+        // Oliveraies & huile d’olive / légumes
         "https://images.pexels.com/photos/1047312/pexels-photo-1047312.jpeg?auto=compress&cs=tinysrgb&w=1600",
         "https://images.pexels.com/photos/143133/pexels-photo-143133.jpeg?auto=compress&cs=tinysrgb&w=1600",
-        // Bouteilles d’huile d’olive naturelles
-        "https://images.pexels.com/photos/1417945/pexels-photo-1417945.jpeg?auto=compress&cs=tinysrgb&w=1600",
-        "https://images.pexels.com/photos/209339/pexels-photo-209339.jpeg?auto=compress&cs=tinysrgb&w=1600",
-        // Scène saine avec huile & légumes
-        "https://images.pexels.com/photos/1459339/pexels-photo-1459339.jpeg?auto=compress&cs=tinysrgb&w=1600"
+        "https://images.pexels.com/photos/1459339/pexels-photo-1459339.jpeg?auto=compress&cs=tinysrgb&w=1600",
+        "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=1600",
+        "https://images.pexels.com/photos/3892172/pexels-photo-3892172.jpeg?auto=compress&cs=tinysrgb&w=1600"
       ];
 
       const heroImg = document.getElementById("hero-slideshow");
