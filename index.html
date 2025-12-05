@@ -2,19 +2,30 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <title>Huile d'olive Monte Il Palombaio – Manziana</title>
+  <title>Huile d'olive Monte Il Palombaio – Manziana & Belgique</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Huile d'olive extra vierge Monte Il Palombaio, produite à Manziana (Lazio, Italie) et distribuée en Belgique (Ixelles). Bouteilles 25 cl, 75 cl et marronata de châtaignes." />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
   <style>
     :root {
-      --bg: #f6f2ea;
-      --bg-alt: #faf7f0;
-      --olive: #4b5f3b;
-      --olive-dark: #28331f;
-      --gold: #e2b43a;
-      --text: #2f2f2f;
-      --accent: #b87333;
-      --card-radius: 18px;
-      --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.12);
+      --olive: #556b2f;
+      --olive-dark: #38451f;
+      --gold: #d4a017;
+      --beige: #f5f1e8;
+      --light: #ffffff;
+      --text: #333333;
+      --accent: #b05727;
+      --shadow-soft: 0 12px 30px rgba(0,0,0,0.12);
+      --radius-lg: 18px;
+      --radius-md: 12px;
+      --radius-pill: 999px;
+      --transition-fast: 0.2s ease-out;
+      --max-width: 1100px;
     }
 
     * {
@@ -24,11 +35,11 @@
     }
 
     body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-family: "Montserrat", system-ui, -apple-system, BlinkMacSystemFont,
+        "Segoe UI", sans-serif;
       color: var(--text);
-      background: var(--bg);
-      line-height: 1.5;
-      scroll-behavior: smooth;
+      background-color: var(--beige);
+      line-height: 1.6;
     }
 
     img {
@@ -41,840 +52,931 @@
       text-decoration: none;
     }
 
-    /* NAVBAR */
+    .page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* HEADER / NAV */
 
     header {
-      position: fixed;
+      position: sticky;
       top: 0;
-      left: 0;
-      width: 100%;
-      z-index: 50;
+      z-index: 40;
+      background: rgba(245, 241, 232, 0.97);
       backdrop-filter: blur(10px);
-      background: linear-gradient(to bottom, rgba(0,0,0,0.5), transparent);
-      color: #fff;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
     }
 
     .nav-inner {
-      max-width: 1100px;
+      max-width: var(--max-width);
       margin: 0 auto;
-      padding: 14px 18px;
+      padding: 0.75rem 1.25rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      gap: 1rem;
     }
 
-    .logo {
-      font-weight: 600;
-      letter-spacing: 0.08em;
+    .brand {
+      display: flex;
+      align-items: baseline;
+      gap: 0.35rem;
+      font-family: "Playfair Display", serif;
+    }
+
+    .brand-main {
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      font-size: 1rem;
       text-transform: uppercase;
-      font-size: 0.9rem;
+      color: var(--olive-dark);
+    }
+
+    .brand-sub {
+      font-size: 0.8rem;
+      color: #666;
     }
 
     nav ul {
       list-style: none;
       display: flex;
-      gap: 18px;
+      gap: 1rem;
       font-size: 0.9rem;
+      flex-wrap: wrap;
     }
 
     nav a {
-      position: relative;
-      padding-bottom: 3px;
-    }
-    nav a::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      width: 0;
-      height: 2px;
-      background: var(--gold);
-      transition: width 0.25s ease;
-    }
-    nav a:hover::after {
-      width: 100%;
+      padding: 0.35rem 0.8rem;
+      border-radius: var(--radius-pill);
+      transition: background var(--transition-fast), color var(--transition-fast),
+        transform var(--transition-fast);
     }
 
-    /* HERO + DIAPORAMA */
+    nav a:hover {
+      background: var(--olive);
+      color: var(--light);
+      transform: translateY(-1px);
+    }
+
+    .btn-primary,
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      padding: 0.7rem 1.4rem;
+      border-radius: var(--radius-pill);
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast),
+        background var(--transition-fast), color var(--transition-fast);
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--olive), var(--olive-dark));
+      color: var(--light);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 16px 35px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn-ghost {
+      background: rgba(255, 255, 255, 0.9);
+      color: var(--olive-dark);
+      border: 1px solid rgba(85, 107, 47, 0.25);
+    }
+
+    .btn-ghost:hover {
+      background: var(--olive-dark);
+      color: var(--light);
+    }
+
+    /* HERO */
 
     .hero {
       position: relative;
-      height: 100vh;
-      color: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
       overflow: hidden;
+      color: var(--light);
     }
 
     .hero-bg {
       position: absolute;
       inset: 0;
+      background-image: linear-gradient(
+          to bottom,
+          rgba(0, 0, 0, 0.45),
+          rgba(0, 0, 0, 0.55)
+        ),
+        url("Drone001.JPG");
       background-size: cover;
       background-position: center;
-      filter: brightness(0.75);
       transform: scale(1.03);
-      transition: background-image 1s ease-in-out;
+      filter: saturate(1.2);
+      z-index: -1;
     }
 
-    .hero-overlay {
-      position: relative;
-      z-index: 1;
-      padding: 110px 20px 40px;
-    }
-
-    .hero-tag {
-      display: inline-block;
-      text-transform: uppercase;
-      letter-spacing: 0.2em;
-      font-size: 0.7rem;
-      padding: 6px 12px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.6);
-      margin-bottom: 16px;
-      backdrop-filter: blur(4px);
-    }
-
-    .hero h1 {
-      font-size: clamp(2.4rem, 4vw, 3.4rem);
-      margin-bottom: 12px;
-    }
-
-    .hero h1 span {
-      color: var(--gold);
-    }
-
-    .hero-sub {
-      max-width: 520px;
-      margin: 0 auto 26px;
-      font-size: 0.98rem;
-      opacity: 0.95;
-    }
-
-    .hero-cta {
-      display: inline-flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-
-    .btn-primary,
-    .btn-ghost {
-      border-radius: 999px;
-      padding: 11px 22px;
-      font-size: 0.9rem;
-      border: none;
-      cursor: pointer;
-      display: inline-flex;
+    .hero-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 3.3rem 1.25rem 3rem;
+      display: grid;
+      grid-template-columns: minmax(0, 2.1fr) minmax(0, 1.4fr);
+      gap: 2.5rem;
       align-items: center;
-      gap: 8px;
+    }
+
+    .hero-kicker {
+      font-size: 0.9rem;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
-      letter-spacing: 0.12em;
+      margin-bottom: 0.5rem;
+      opacity: 0.88;
     }
 
-    .btn-primary {
-      background: linear-gradient(135deg, var(--gold), #f5cf64);
-      color: #3f2b00;
-      box-shadow: 0 14px 30px rgba(0,0,0,0.35);
+    .hero-title {
+      font-family: "Playfair Display", serif;
+      font-size: clamp(2.1rem, 4vw, 2.8rem);
+      line-height: 1.1;
+      margin-bottom: 0.6rem;
     }
 
-    .btn-primary:hover {
-      filter: brightness(1.02);
-      transform: translateY(-1px);
+    .hero-subtitle {
+      font-size: 1rem;
+      max-width: 33rem;
+      opacity: 0.95;
+      margin-bottom: 1.5rem;
     }
 
-    .btn-ghost {
-      background: rgba(0,0,0,0.35);
-      color: #fff;
-      border: 1px solid rgba(255,255,255,0.45);
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+      font-size: 0.8rem;
     }
-    .btn-ghost:hover {
-      background: rgba(0,0,0,0.55);
+
+    .badge {
+      padding: 0.25rem 0.8rem;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(255, 255, 255, 0.55);
+      background: rgba(0, 0, 0, 0.18);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      margin-bottom: 1.2rem;
     }
 
     .hero-note {
-      margin-top: 18px;
-      font-size: 0.8rem;
+      font-size: 0.85rem;
       opacity: 0.9;
     }
 
-    /* SECTIONS GENERALES */
-
-    main {
-      background: linear-gradient(to bottom, #f9f5ec, #f4efe4);
+    .hero-card {
+      background: rgba(245, 241, 232, 0.95);
+      color: var(--text);
+      border-radius: var(--radius-lg);
+      padding: 1.4rem 1.3rem;
+      box-shadow: var(--shadow-soft);
+      backdrop-filter: blur(12px);
     }
 
-    section {
-      padding: 70px 18px;
-    }
-
-    .section-inner {
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-
-    .section-title {
-      font-size: 1.6rem;
-      margin-bottom: 10px;
+    .hero-card h2 {
+      font-family: "Playfair Display", serif;
+      font-size: 1.1rem;
+      margin-bottom: 0.4rem;
       color: var(--olive-dark);
     }
 
-    .section-subtitle {
-      font-size: 0.95rem;
-      color: #777;
-      margin-bottom: 32px;
-      max-width: 640px;
-    }
-
-    /* ORIGINE / DOMAINE */
-
-    .layout-two {
-      display: grid;
-      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
-      gap: 36px;
-      align-items: center;
-    }
-
-    .pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 0.78rem;
-      text-transform: uppercase;
-      letter-spacing: 0.18em;
-      color: var(--olive);
-      margin-bottom: 10px;
-    }
-
-    .pill::before {
-      content: "";
-      width: 30px;
-      height: 1px;
-      background: var(--olive);
-    }
-
-    .text-muted {
-      color: #777;
-      font-size: 0.93rem;
-    }
-
-    .list {
-      list-style: none;
-      margin-top: 14px;
-      display: grid;
-      gap: 8px;
+    .hero-card p {
       font-size: 0.9rem;
     }
 
-    .list li::before {
-      content: "•";
-      color: var(--gold);
-      margin-right: 6px;
+    .hero-card-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-top: 0.9rem;
+      font-size: 0.85rem;
     }
 
-    .photo-stack {
-      position: relative;
-      height: 330px;
+    .hero-mini {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
     }
 
-    .photo-main,
-    .photo-small {
-      position: absolute;
-      border-radius: 22px;
+    .hero-mini strong {
+      font-weight: 600;
+      color: var(--olive-dark);
+    }
+
+    .hero-thumb {
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      width: 110px;
+      flex-shrink: 0;
+    }
+
+    /* SECTIONS GENERIQUES */
+
+    main {
+      flex: 1;
+      background: radial-gradient(circle at top left, #fdfaf4 0, #f5f1e8 55%, #f1ebdf 100%);
+    }
+
+    section {
+      padding: 3rem 1.25rem;
+    }
+
+    .section-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+    }
+
+    .section-kicker {
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      font-size: 0.8rem;
+      color: var(--olive-dark);
+      margin-bottom: 0.5rem;
+    }
+
+    .section-title {
+      font-family: "Playfair Display", serif;
+      font-size: 1.7rem;
+      margin-bottom: 1rem;
+      color: var(--olive-dark);
+    }
+
+    .section-intro {
+      max-width: 40rem;
+      font-size: 0.95rem;
+      color: #555;
+      margin-bottom: 1.6rem;
+    }
+
+    /* DOMAINE */
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.3fr);
+      gap: 2rem;
+      align-items: start;
+    }
+
+    .domain-points {
+      list-style: none;
+      margin-top: 0.6rem;
+      font-size: 0.9rem;
+    }
+
+    .domain-points li {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .domain-points span {
+      color: var(--olive-dark);
+      font-size: 1.1rem;
+      line-height: 1.4;
+    }
+
+    .domain-photos {
+      display: grid;
+      grid-template-columns: 1.3fr 1fr;
+      gap: 0.8rem;
+    }
+
+    .domain-main-photo {
+      border-radius: var(--radius-lg);
       overflow: hidden;
       box-shadow: var(--shadow-soft);
     }
 
-    .photo-main {
-      inset: 0;
+    .domain-column {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
     }
 
-    .photo-small {
-      width: 45%;
-      right: -8%;
-      bottom: -4%;
-      transform: rotate(-2.5deg);
-      border: 4px solid #fff;
+    .domain-column img {
+      border-radius: var(--radius-md);
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
     }
 
     /* PRODUITS */
 
     .products-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 26px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.4rem;
+      margin-top: 1.5rem;
     }
 
     .product-card {
-      background: rgba(255,255,255,0.9);
-      border-radius: var(--card-radius);
+      background: #ffffff;
+      border-radius: var(--radius-lg);
       box-shadow: var(--shadow-soft);
-      padding: 18px 18px 20px;
+      overflow: hidden;
       display: flex;
       flex-direction: column;
+      height: 100%;
+      border: 1px solid rgba(0, 0, 0, 0.04);
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+    }
+
+    .product-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.16);
+    }
+
+    .product-image-wrap {
       position: relative;
       overflow: hidden;
+      max-height: 220px;
     }
 
-    .product-tag {
-      font-size: 0.72rem;
-      text-transform: uppercase;
-      letter-spacing: 0.18em;
-      color: var(--olive);
-      margin-bottom: 6px;
+    .product-image-wrap img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
     }
 
-    .product-card h3 {
+    .product-pill {
+      position: absolute;
+      left: 0.9rem;
+      top: 0.9rem;
+      padding: 0.25rem 0.7rem;
+      border-radius: var(--radius-pill);
+      background: rgba(0, 0, 0, 0.6);
+      color: #fff;
+      font-size: 0.75rem;
+    }
+
+    .product-body {
+      padding: 1rem 1.1rem 1.2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      flex: 1;
+    }
+
+    .product-title {
+      font-family: "Playfair Display", serif;
       font-size: 1.1rem;
-      margin-bottom: 4px;
       color: var(--olive-dark);
     }
 
     .product-sub {
-      font-size: 0.86rem;
+      font-size: 0.85rem;
       color: #777;
-      margin-bottom: 10px;
     }
 
-    .product-media {
-      margin: 8px -10px 10px;
-      border-radius: 16px;
-      overflow: hidden;
-    }
-
-    .chips {
+    .product-tags {
       display: flex;
       flex-wrap: wrap;
-      gap: 6px;
-      margin-bottom: 8px;
-      font-size: 0.75rem;
+      gap: 0.35rem;
+      font-size: 0.78rem;
+      margin-top: 0.1rem;
     }
 
-    .chip {
-      padding: 4px 8px;
-      border-radius: 999px;
-      background: #f1e5c7;
-      color: #614600;
-    }
-
-    .price-line {
-      margin-top: 4px;
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      font-size: 0.95rem;
-    }
-
-    .price {
-      font-weight: 600;
+    .product-tag {
+      background: rgba(213, 160, 23, 0.12);
       color: var(--olive-dark);
+      border-radius: var(--radius-pill);
+      padding: 0.15rem 0.55rem;
     }
 
-    .price span {
-      font-size: 0.8rem;
-      font-weight: normal;
+    .product-price {
+      font-weight: 600;
+      margin-top: 0.3rem;
+      font-size: 0.95rem;
+      color: var(--accent);
+    }
+
+    .product-price small {
+      font-weight: 400;
       color: #777;
-      margin-left: 4px;
-    }
-
-    .product-bottom {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      margin-top: 10px;
-    }
-
-    .qty-wrap {
+      margin-left: 0.25rem;
       font-size: 0.8rem;
-      color: #666;
-      display: flex;
-      align-items: center;
-      gap: 6px;
     }
 
-    .qty-wrap input {
-      width: 70px;
-      padding: 4px 8px;
-      border-radius: 999px;
-      border: 1px solid #d3c7b0;
+    .product-controls {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-top: 0.5rem;
       font-size: 0.85rem;
+    }
+
+    .qty-input {
+      width: 70px;
+      padding: 0.25rem 0.4rem;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(0, 0, 0, 0.18);
       text-align: center;
     }
 
     .btn-mini {
-      border-radius: 999px;
+      padding: 0.4rem 0.9rem;
+      font-size: 0.8rem;
+      border-radius: var(--radius-pill);
       border: none;
       background: var(--olive);
       color: #fff;
-      padding: 7px 14px;
-      font-size: 0.8rem;
       cursor: pointer;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
+      transition: background var(--transition-fast), transform var(--transition-fast);
+      white-space: nowrap;
     }
 
     .btn-mini:hover {
       background: var(--olive-dark);
+      transform: translateY(-1px);
     }
 
     .product-note {
-      margin-top: 8px;
-      font-size: 0.75rem;
-      color: #777;
+      margin-top: 0.4rem;
+      font-size: 0.8rem;
+      color: #666;
     }
 
-    .badge-belgium {
-      position: absolute;
-      top: 16px;
-      right: 16px;
-      font-size: 0.7rem;
-      padding: 4px 8px;
-      border-radius: 999px;
-      background: rgba(0,0,0,0.75);
-      color: #fff;
-      text-transform: uppercase;
-      letter-spacing: 0.14em;
-    }
-
-    /* RÉCAP & COMMANDE */
+    /* COMMANDE */
 
     .order-layout {
       display: grid;
-      gap: 28px;
-      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.1fr);
+      gap: 1.6rem;
+      margin-top: 1.3rem;
     }
 
-    .order-card {
-      background: rgba(255,255,255,0.9);
-      border-radius: var(--card-radius);
+    .card {
+      background: #ffffff;
+      border-radius: var(--radius-lg);
       box-shadow: var(--shadow-soft);
-      padding: 18px 18px 20px;
+      padding: 1.2rem 1.3rem;
+      border: 1px solid rgba(0, 0, 0, 0.03);
     }
 
-    .order-card h3 {
-      font-size: 1.15rem;
-      margin-bottom: 10px;
+    .card h3 {
+      font-family: "Playfair Display", serif;
+      font-size: 1.1rem;
+      margin-bottom: 0.4rem;
       color: var(--olive-dark);
     }
 
-    .order-card p {
-      font-size: 0.86rem;
-      color: #777;
-      margin-bottom: 12px;
-    }
-
-    table {
+    .order-table {
       width: 100%;
       border-collapse: collapse;
       font-size: 0.85rem;
-      margin-bottom: 8px;
+      margin-top: 0.6rem;
     }
 
-    th, td {
-      padding: 6px 4px;
+    .order-table th,
+    .order-table td {
+      padding: 0.35rem 0.25rem;
       text-align: left;
     }
 
-    th {
-      border-bottom: 1px solid #e0d6c3;
-      font-weight: 600;
+    .order-table thead {
+      border-bottom: 1px solid #eee;
     }
 
-    tbody tr:nth-child(odd) {
-      background-color: #faf6ee;
+    .order-table tbody tr:nth-child(even) {
+      background: #fafafa;
     }
 
-    .text-right {
-      text-align: right;
+    .order-totals {
+      margin-top: 0.7rem;
+      font-size: 0.9rem;
     }
 
-    .order-thumb {
-      width: 44px;
-      height: 44px;
-      object-fit: cover;
-      border-radius: 10px;
-      border: 1px solid #e0d6c3;
-      margin-right: 6px;
-    }
-
-    .order-product-cell {
+    .order-totals div {
       display: flex;
-      align-items: center;
-      gap: 6px;
+      justify-content: space-between;
+      margin-bottom: 0.25rem;
     }
 
-    .order-total {
-      margin-top: 4px;
-      font-weight: 600;
-      text-align: right;
-      font-size: 0.88rem;
+    .order-totals .grand {
+      font-weight: 700;
+      color: var(--accent);
+      border-top: 1px solid #eee;
+      padding-top: 0.3rem;
+      margin-top: 0.2rem;
     }
 
-    .order-total div {
-      margin-top: 2px;
+    .order-hint {
+      margin-top: 0.6rem;
+      font-size: 0.8rem;
+      color: #666;
     }
 
-    .order-empty {
-      font-size: 0.85rem;
-      color: #999;
-      font-style: italic;
-      margin-bottom: 4px;
-    }
-
-    .form-grid {
+    form {
       display: grid;
-      gap: 10px;
-    }
-
-    .form-row {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-      gap: 10px;
+      gap: 0.6rem;
+      font-size: 0.9rem;
     }
 
     label {
-      font-size: 0.8rem;
-      color: #555;
-      margin-bottom: 2px;
-      display: block;
+      font-weight: 500;
+      font-size: 0.85rem;
     }
 
     input[type="text"],
     input[type="email"],
-    textarea,
-    select {
+    input[type="tel"],
+    select,
+    textarea {
       width: 100%;
-      padding: 7px 9px;
-      border-radius: 9px;
-      border: 1px solid #d5c9b8;
-      font-size: 0.85rem;
-      background: #fdfaf5;
+      margin-top: 0.2rem;
+      padding: 0.45rem 0.6rem;
+      border-radius: 10px;
+      border: 1px solid rgba(0, 0, 0, 0.18);
+      font-size: 0.9rem;
+      font-family: inherit;
+      background: #faf9f5;
     }
 
     textarea {
-      min-height: 60px;
+      min-height: 80px;
       resize: vertical;
     }
 
-    .form-hint {
-      font-size: 0.75rem;
-      color: #888;
-      margin-top: 4px;
+    .form-row {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.7rem;
     }
 
-    .form-actions {
-      margin-top: 10px;
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 10px;
-      justify-content: flex-end;
-    }
-
-    .status {
+    .form-footnote {
       font-size: 0.8rem;
+      color: #777;
+      margin-top: 0.2rem;
     }
 
-    .status.ok {
-      color: #2e7d32;
+    .submit-row {
+      margin-top: 0.7rem;
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      flex-wrap: wrap;
     }
 
-    .status.err {
-      color: #b71c1c;
+    .submit-row small {
+      font-size: 0.8rem;
+      color: #666;
     }
 
-    /* PAIEMENT + QR */
+    /* PAIEMENT */
 
     .payment-grid {
       display: grid;
-      gap: 20px;
-      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-      align-items: flex-start;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.1fr);
+      gap: 1.4rem;
+      margin-top: 1.2rem;
     }
 
-    .pay-card {
-      background: rgba(255,255,255,0.9);
-      border-radius: var(--card-radius);
-      box-shadow: var(--shadow-soft);
-      padding: 16px 16px 18px;
-      font-size: 0.85rem;
-    }
-
-    .pay-card h3 {
-      font-size: 1rem;
-      margin-bottom: 6px;
-      color: var(--olive-dark);
-    }
-
-    .qr-wrap {
-      margin-top: 10px;
-      background: #f8f3e8;
-      border-radius: 14px;
-      padding: 10px 10px 12px;
+    .qr-row {
       display: flex;
-      flex-direction: column;
+      flex-wrap: wrap;
+      gap: 1.4rem;
       align-items: center;
-      gap: 6px;
+      margin-top: 0.8rem;
     }
 
-    .qr-wrap img {
-      width: 110px;
-      height: 110px;
-      object-fit: contain;
-    }
-
-    .qr-wrap span {
-      font-size: 0.78rem;
-      color: #555;
-    }
-
-    /* GALERIE */
-
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 10px;
-    }
-
-    .gallery-item {
-      border-radius: 16px;
-      overflow: hidden;
-      position: relative;
-      height: 150px;
-    }
-
-    .gallery-item img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transform: scale(1.03);
-      transition: transform 0.6s ease;
-    }
-
-    .gallery-item:hover img {
-      transform: scale(1.07);
-    }
-
-    /* LEGAL SECTION (conditions, confidentialité, cookies) */
-
-    .legal-section {
-      background: #fcfbf8;
-      padding: 60px 18px 50px;
-      border-top: 1px solid #e1d8c9;
-      border-bottom: 1px solid #e1d8c9;
-      font-size: 0.87rem;
-      color: #444;
-    }
-
-    .legal-inner {
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-
-    .legal-inner h3 {
-      font-size: 1.05rem;
-      margin-bottom: 10px;
-      color: #222;
-    }
-
-    .legal-inner h4 {
-      margin-top: 10px;
-      margin-bottom: 4px;
-      font-size: 0.9rem;
-      font-weight: 600;
-      color: #333;
-    }
-
-    .legal-inner p {
-      margin-bottom: 6px;
-    }
-
-    .legal-inner ul {
-      margin-left: 16px;
-      margin-bottom: 6px;
-    }
-
-    .legal-inner li {
-      margin-bottom: 4px;
-    }
-
-    .legal-columns {
-      display: grid;
-      gap: 26px;
-    }
-
-    /* Bandeau liens légaux comme sur ta capture */
-
-    .legal-footer-bar {
-      background: #f3efe6;
-      border-top: 1px solid #ddd2c2;
-      padding: 10px 18px;
+    .qr-card {
+      text-align: center;
       font-size: 0.8rem;
     }
 
-    .legal-footer-inner {
-      max-width: 1100px;
-      margin: 0 auto;
+    .qr-card img {
+      width: 150px;
+      height: 150px;
+      object-fit: contain;
+      border-radius: 12px;
+      background: #fff;
+      box-shadow: var(--shadow-soft);
+      padding: 0.4rem;
+    }
+
+    /* GALERIE – SLIDER */
+
+    .gallery-slider {
+      margin-top: 1.3rem;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      position: relative;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .gallery-slide {
+      display: none;
+    }
+
+    .gallery-slide.active {
+      display: block;
+    }
+
+    .gallery-slide img {
+      width: 100%;
+      height: 330px;
+      object-fit: cover;
+    }
+
+    .gallery-controls {
+      position: absolute;
+      inset: auto 0 0 0;
       display: flex;
-      align-items: center;
       justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .legal-links {
-      display: flex;
-      gap: 18px;
-      flex-wrap: wrap;
-    }
-
-    .legal-links a {
-      text-decoration: none;
-      color: #444;
-    }
-
-    .legal-links a:hover {
-      text-decoration: underline;
-    }
-
-    .legal-footer-note {
-      font-size: 0.78rem;
-      color: #777;
-    }
-
-    /* FOOTER */
-
-    footer {
-      background: #111;
-      color: #eee;
-      padding: 18px 18px 16px;
-      font-size: 0.78rem;
-    }
-
-    .footer-inner {
-      max-width: 1100px;
-      margin: 0 auto;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-
-    .footer-top {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      gap: 10px;
       align-items: center;
+      padding: 0.4rem 0.8rem;
+      background: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0.55),
+        transparent
+      );
+      color: #fff;
+      font-size: 0.8rem;
     }
 
-    .footer-top a {
-      color: #f3d37c;
-      text-decoration: underline;
-      text-decoration-thickness: 1px;
+    .gallery-buttons {
+      display: flex;
+      gap: 0.4rem;
     }
 
-    .footer-bottom {
-      color: #aaa;
+    .gallery-btn {
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(255, 255, 255, 0.75);
+      background: rgba(0, 0, 0, 0.4);
+      color: #fff;
+      padding: 0.15rem 0.5rem;
+      cursor: pointer;
       font-size: 0.75rem;
     }
 
-    @media (max-width: 780px) {
-      .layout-two,
-      .order-layout {
-        grid-template-columns: 1fr;
+    .gallery-dots {
+      display: flex;
+      gap: 0.25rem;
+    }
+
+    .gallery-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.4);
+    }
+
+    .gallery-dot.active {
+      background: #fff;
+    }
+
+    /* CONTACT & LEGAL */
+
+    .contact-block {
+      margin-top: 0.5rem;
+      font-size: 0.9rem;
+    }
+
+    .contact-block p + p {
+      margin-top: 0.2rem;
+    }
+
+    .legal-section {
+      background: #111;
+      color: #ddd;
+      font-size: 0.82rem;
+    }
+
+    .legal-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 2.5rem 1.25rem 1.5rem;
+    }
+
+    .legal-inner h3 {
+      font-family: "Playfair Display", serif;
+      font-size: 1.05rem;
+      margin-bottom: 0.6rem;
+      color: #fff;
+    }
+
+    .legal-inner h4 {
+      margin-top: 1.1rem;
+      margin-bottom: 0.3rem;
+      font-size: 0.9rem;
+      color: #fff;
+    }
+
+    .legal-inner p {
+      margin-bottom: 0.4rem;
+    }
+
+    .legal-links {
+      border-top: 1px solid rgba(255, 255, 255, 0.15);
+      margin-top: 1.4rem;
+      padding-top: 0.8rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 0.5rem;
+      font-size: 0.78rem;
+      color: #aaa;
+    }
+
+    .legal-links a {
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    footer {
+      background: #050505;
+      color: #aaa;
+      font-size: 0.78rem;
+      padding: 0.7rem 1.25rem 0.9rem;
+    }
+
+    footer .footer-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    /* RESPONSIVE */
+
+    @media (max-width: 880px) {
+      .hero-inner {
+        grid-template-columns: minmax(0, 1fr);
       }
-      .photo-stack {
-        height: 260px;
+
+      .hero-card {
+        margin-top: 1rem;
       }
-      header {
-        background: rgba(0,0,0,0.75);
+
+      .grid-2,
+      .order-layout,
+      .payment-grid {
+        grid-template-columns: minmax(0, 1fr);
       }
+
+      .products-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 640px) {
       .nav-inner {
         flex-direction: column;
         align-items: flex-start;
-        gap: 6px;
       }
+
       nav ul {
-        gap: 10px;
-        flex-wrap: wrap;
+        padding-bottom: 0.2rem;
+      }
+
+      .hero-inner {
+        padding-top: 2.4rem;
+        padding-bottom: 2.3rem;
+      }
+
+      .products-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .order-layout {
+        gap: 1rem;
+      }
+
+      section {
+        padding: 2.4rem 1.1rem;
+      }
+
+      .gallery-slide img {
+        height: 260px;
       }
     }
   </style>
 </head>
 <body>
+<div class="page">
   <header>
     <div class="nav-inner">
-      <div class="logo">Monte Il Palombaio · Manziana</div>
+      <div class="brand">
+        <span class="brand-main">Monte Il Palombaio</span>
+        <span class="brand-sub">Manziana · Italie · Belgique</span>
+      </div>
       <nav>
         <ul>
-          <li><a href="#origine">Le domaine</a></li>
+          <li><a href="#domaine">Le domaine</a></li>
           <li><a href="#produits">Nos produits</a></li>
           <li><a href="#commande">Commander</a></li>
           <li><a href="#galerie">Galerie</a></li>
           <li><a href="#contact">Contact</a></li>
+          <li><a href="#conditions">Conditions</a></li>
         </ul>
       </nav>
     </div>
   </header>
 
-  <!-- HERO / DIAPORAMA -->
-  <section class="hero" id="top">
-    <div class="hero-bg" id="heroBg"></div>
-    <div class="hero-overlay">
-      <div class="hero-tag">Huile d'olive extra vierge · Lazio · Italie</div>
-      <h1>
-        L'huile d'olive de <span>Monte Il Palombaio</span>
-      </h1>
-      <p class="hero-sub">
-        Un terroir d’exception entre Manziana et le lac de Bracciano,
-        des oliviers baignés de soleil, une huile extra vierge
-        récoltée et pressée en Italie, livrée chez vous en Belgique.
-      </p>
-      <div class="hero-cta">
-        <a href="#produits"><button class="btn-primary">Découvrir &amp; commander</button></a>
-        <a href="#origine"><button class="btn-ghost">Voir le domaine</button></a>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-inner">
+      <div>
+        <div class="hero-kicker">Huile d'olive extra vierge · Lazio · Italie</div>
+        <h1 class="hero-title">L'huile d'olive de Monte Il Palombaio</h1>
+        <p class="hero-subtitle">
+          Un terroir d’exception entre Manziana et le lac de Bracciano, des oliviers
+          baignés de soleil, une huile extra vierge récoltée et pressée en Italie,
+          livrée en Belgique.
+        </p>
+        <div class="hero-badges">
+          <span class="badge">Production familiale</span>
+          <span class="badge">Variétés Frantoio &amp; Canino</span>
+          <span class="badge">Pressée en Italie</span>
+          <span class="badge">Distribution à Ixelles</span>
+        </div>
+        <div class="hero-actions">
+          <a href="#produits" class="btn-primary">Découvrir &amp; commander</a>
+          <a href="#domaine" class="btn-ghost">Voir le domaine</a>
+        </div>
+        <p class="hero-note">
+          Livraison en Belgique uniquement · Production familiale en collaboration avec Fany
+        </p>
       </div>
-      <div class="hero-note">
-        Livraison en Belgique uniquement · Production familiale en collaboration avec Fany
-      </div>
+      <aside class="hero-card">
+        <h2>Monte Il Palombaio, Manziana</h2>
+        <p>
+          Sur les collines du Lazio, entre châtaigniers et oliviers, le domaine
+          surplombe le lac de Bracciano. Nous importons l’huile directement en
+          petites quantités pour la vente en circuit court en Belgique.
+        </p>
+        <div class="hero-card-row">
+          <div class="hero-mini">
+            <strong>Deux formats d’huile</strong>
+            <span>25 cl pour découvrir · 75 cl pour la cuisine du quotidien</span>
+            <strong>+ Marronata</strong>
+            <span>Crème de châtaignes du domaine, en édition limitée</span>
+          </div>
+          <div class="hero-thumb">
+            <img src="prodotti_007.jpeg" alt="Bouteilles d'huile d'olive Monte Il Palombaio" />
+          </div>
+        </div>
+      </aside>
     </div>
   </section>
 
   <main>
-    <!-- ORIGINE -->
-    <section id="origine">
-      <div class="section-inner layout-two">
-        <div>
-          <div class="pill">Le domaine</div>
-          <h2 class="section-title">Un domaine d’oliviers au cœur du Lazio</h2>
-          <p class="text-muted">
-            L’huile d’olive Monte Il Palombaio est produite sur les collines de
-            Manziana, à quelques kilomètres de Rome. Les oliviers de variétés
-            <strong>Frantoio, Moraiolo et Canino</strong> profitent d’un climat doux
-            et ventilé, entre forêts de châtaigniers et vue sur le lac de
-            Bracciano.
-          </p>
-          <ul class="list">
-            <li>Récolte manuelle avec aide mécanique, fruits pressés très rapidement.</li>
-            <li>Huile extra vierge 100% italienne, sans mélange, issue d’un seul domaine.</li>
-            <li>Pressée dans un moulin de qualité, à Colli Etruschi, près de Blera.</li>
-            <li>Arômes herbacés, notes d’artichaut et d’amande, un léger piquant en fin de bouche.</li>
-          </ul>
-          <p class="text-muted" style="margin-top:12px;">
-            Nous importons l’huile directement de Manziana, en petites quantités,
-            pour vous proposer un produit d’exception en circuit court, avec
-            distribution et retrait à Ixelles (Bruxelles).
-          </p>
-        </div>
-
-        <div class="photo-stack">
-          <div class="photo-main">
-            <img src="Drone016.JPG" alt="Vue aérienne des oliviers à Monte Il Palombaio">
+    <!-- DOMAINE -->
+    <section id="domaine">
+      <div class="section-inner">
+        <div class="section-kicker">Le domaine</div>
+        <h2 class="section-title">Un domaine d’oliviers au cœur du Lazio</h2>
+        <div class="grid-2">
+          <div>
+            <p class="section-intro">
+              L’huile d’olive Monte Il Palombaio est produite sur les collines de
+              Manziana, à quelques kilomètres de Rome. Les oliviers de variétés
+              Frantoio, Moraiolo et Canino profitent d’un climat doux et ventilé,
+              entre forêts de châtaigniers et vue sur le lac de Bracciano.
+            </p>
+            <ul class="domain-points">
+              <li><span>•</span> Récolte manuelle avec aide mécanique, fruits pressés très rapidement.</li>
+              <li><span>•</span> Huile extra vierge 100 % italienne, sans mélange, issue d’un seul domaine.</li>
+              <li><span>•</span> Pressée dans un moulin de qualité, à Colli Etruschi, près de Blera.</li>
+              <li><span>•</span> Arômes herbacés, notes d’artichaut et d’amande, léger piquant en fin de bouche.</li>
+            </ul>
+            <p style="font-size:0.9rem; margin-top:0.7rem; color:#555;">
+              Nous importons l’huile directement de Manziana, en petites quantités,
+              pour vous proposer un produit d’exception en circuit court, avec
+              distribution et retrait à Ixelles (Bruxelles).
+            </p>
           </div>
-          <div class="photo-small">
-            <img src="flavia_001.jpg" alt="Maison et oliviers du domaine Monte Il Palombaio">
+          <div class="domain-photos">
+            <div class="domain-main-photo">
+              <img src="Drone016.JPG" alt="Vue aérienne des oliviers à Monte Il Palombaio" />
+            </div>
+            <div class="domain-column">
+              <img src="azienda_natura.jpeg" alt="Maison et oliviers du domaine Monte Il Palombaio" />
+              <img src="Uliveto Ortaccio.jpeg" alt="Oliviers du domaine Il Palombaio" />
+            </div>
           </div>
         </div>
       </div>
@@ -883,143 +985,133 @@
     <!-- PRODUITS -->
     <section id="produits">
       <div class="section-inner">
-        <h2 class="section-title">Nos produits pour la Belgique</h2>
-        <p class="section-subtitle">
-          Une gamme courte, centrée sur l’essentiel : l’huile d’olive extra vierge Monte Il Palombaio
-          en deux formats, et la marronata, crème de châtaignes du domaine. Prix adaptés au marché belge.
+        <div class="section-kicker">Nos produits</div>
+        <h2 class="section-title">L’essentiel pour la Belgique</h2>
+        <p class="section-intro">
+          Une gamme courte, centrée sur l’essentiel : l’huile d’olive extra vierge Monte
+          Il Palombaio en deux formats, et la marronata, crème de châtaignes du domaine.
+          Prix adaptés au marché belge.
         </p>
 
         <div class="products-grid">
-          <!-- 25 cl -->
-          <article class="product-card">
-            <div class="badge-belgium">Belgique</div>
-            <div class="product-tag">Huile d'olive extra vierge</div>
-            <h3>Bouteille 25 cl</h3>
-            <p class="product-sub">Le format parfait pour découvrir l’huile ou offrir.</p>
-            <div class="product-media">
-              <img src="prodotti_001.jpg" alt="Bouteille 25 cl d'huile d'olive Monte Il Palombaio">
+          <!-- 25 CL -->
+          <article class="product-card" data-product="huile25">
+            <div class="product-image-wrap">
+              <span class="product-pill">Huile d'olive extra vierge</span>
+              <img src="prodotti_002.jpeg" alt="Bouteille 25 cl d'huile d'olive Monte Il Palombaio" />
             </div>
-            <div class="chips">
-              <span class="chip">Récolte italienne</span>
-              <span class="chip">Petit format</span>
-              <span class="chip">Idéal cadeau</span>
-            </div>
-            <div class="price-line">
-              <div class="price">16 € <span>TTC · bouteille 25 cl</span></div>
-              <div style="font-size:0.8rem;color:#777;">≈ 64 €/L</div>
-            </div>
-            <div class="product-bottom">
-              <div class="qty-wrap">
-                Quantité
+            <div class="product-body">
+              <h3 class="product-title">Bouteille 25 cl</h3>
+              <div class="product-sub">Le format parfait pour découvrir l’huile ou offrir.</div>
+              <div class="product-tags">
+                <span class="product-tag">Récolte italienne</span>
+                <span class="product-tag">Petit format</span>
+                <span class="product-tag">Idéal cadeau</span>
+              </div>
+              <div class="product-price">
+                16 € TTC · bouteille 25 cl
+                <small>≈ 64 €/L</small>
+              </div>
+              <div class="product-controls">
+                <label for="qty-huile25">Quantité</label>
                 <input
                   type="number"
+                  id="qty-huile25"
+                  class="qty-input"
                   min="0"
                   value="0"
                   data-product-id="huile25"
-                  class="qty-input"
+                  aria-label="Quantité de bouteilles 25 cl"
                 />
+                <button type="button" class="btn-mini" data-add-product="huile25">
+                  Ajouter au récap
+                </button>
               </div>
-              <button
-                type="button"
-                class="btn-mini"
-                onclick="scrollToCommande()"
-              >
-                Ajouter &amp; commander
-              </button>
+              <p class="product-note">
+                À déguster à cru : sur bruschetta, légumes grillés, salades, tomates, mozzarella…
+              </p>
             </div>
-            <p class="product-note">
-              À déguster à cru : sur bruschetta, légumes grillés, salades,
-              tomates, mozzarella...
-            </p>
           </article>
 
-          <!-- 75 cl -->
-          <article class="product-card">
-            <div class="badge-belgium">Belgique</div>
-            <div class="product-tag">Huile d'olive extra vierge</div>
-            <h3>Bouteille 75 cl</h3>
-            <p class="product-sub">La bouteille familiale pour la cuisine du quotidien.</p>
-            <div class="product-media">
-              <img src="prodotti_002.jpg" alt="Bouteille 75 cl d'huile d'olive Monte Il Palombaio">
+          <!-- 75 CL -->
+          <article class="product-card" data-product="huile75">
+            <div class="product-image-wrap">
+              <span class="product-pill">Huile d'olive extra vierge</span>
+              <img src="prodotti_004.jpeg" alt="Bouteille 75 cl d'huile d'olive Monte Il Palombaio" />
             </div>
-            <div class="chips">
-              <span class="chip">Grand format</span>
-              <span class="chip">Cuisine &amp; assaisonnement</span>
-              <span class="chip">Huile de domaine</span>
-            </div>
-            <div class="price-line">
-              <div class="price">24 € <span>TTC · bouteille 75 cl</span></div>
-              <div style="font-size:0.8rem;color:#777;">≈ 32 €/L</div>
-            </div>
-            <div class="product-bottom">
-              <div class="qty-wrap">
-                Quantité
+            <div class="product-body">
+              <h3 class="product-title">Bouteille 75 cl</h3>
+              <div class="product-sub">La bouteille familiale pour la cuisine du quotidien.</div>
+              <div class="product-tags">
+                <span class="product-tag">Grand format</span>
+                <span class="product-tag">Cuisine &amp; assaisonnement</span>
+                <span class="product-tag">Huile de domaine</span>
+              </div>
+              <div class="product-price">
+                24 € TTC · bouteille 75 cl
+                <small>≈ 32 €/L</small>
+              </div>
+              <div class="product-controls">
+                <label for="qty-huile75">Quantité</label>
                 <input
                   type="number"
+                  id="qty-huile75"
+                  class="qty-input"
                   min="0"
                   value="0"
                   data-product-id="huile75"
-                  class="qty-input"
+                  aria-label="Quantité de bouteilles 75 cl"
                 />
+                <button type="button" class="btn-mini" data-add-product="huile75">
+                  Ajouter au récap
+                </button>
               </div>
-              <button
-                type="button"
-                class="btn-mini"
-                onclick="scrollToCommande()"
-              >
-                Ajouter &amp; commander
-              </button>
+              <p class="product-note">
+                Idéale pour les familles qui cuisinent à l’huile d’olive : pâtes, poêlées de
+                légumes, plats mijotés, grillades…
+              </p>
             </div>
-            <p class="product-note">
-              Idéale pour les familles qui cuisinent à l’huile d’olive : pâtes,
-              poêlées de légumes, plats mijotés, grillades…
-            </p>
           </article>
 
-          <!-- Marronata -->
-          <article class="product-card">
-            <div class="badge-belgium">Édition limitée</div>
-            <div class="product-tag">Crème de châtaignes</div>
-            <h3>Marronata de Monte Il Palombaio</h3>
-            <p class="product-sub">
-              Crème de châtaignes réalisée avec les fruits du castagneto du
-              domaine.
-            </p>
-            <div class="product-media">
-              <img src="prodotti_014.jpg" alt="Pot de marronata Monte Il Palombaio">
+          <!-- MARRONATA -->
+          <article class="product-card" data-product="marronata">
+            <div class="product-image-wrap">
+              <span class="product-pill">Édition limitée</span>
+              <img src="prodotti_014.jpeg" alt="Pot de marronata Monte Il Palombaio" />
             </div>
-            <div class="chips">
-              <span class="chip">Châtaignes du domaine</span>
-              <span class="chip">Douce mais pas écœurante</span>
-              <span class="chip">Parfaite sur pain &amp; desserts</span>
-            </div>
-            <div class="price-line">
-              <div class="price">15 € <span>TTC · pot</span></div>
-              <div style="font-size:0.8rem;color:#777;">Production limitée</div>
-            </div>
-            <div class="product-bottom">
-              <div class="qty-wrap">
-                Quantité
+            <div class="product-body">
+              <h3 class="product-title">Marronata de Monte Il Palombaio</h3>
+              <div class="product-sub">
+                Crème de châtaignes réalisée avec les fruits du castagneto du domaine.
+              </div>
+              <div class="product-tags">
+                <span class="product-tag">Châtaignes du domaine</span>
+                <span class="product-tag">Douce mais pas écœurante</span>
+                <span class="product-tag">Desserts &amp; tartines</span>
+              </div>
+              <div class="product-price">
+                15 € TTC · pot
+                <small>Production limitée</small>
+              </div>
+              <div class="product-controls">
+                <label for="qty-marronata">Quantité</label>
                 <input
                   type="number"
+                  id="qty-marronata"
+                  class="qty-input"
                   min="0"
                   value="0"
                   data-product-id="marronata"
-                  class="qty-input"
+                  aria-label="Quantité de pots de marronata"
                 />
+                <button type="button" class="btn-mini" data-add-product="marronata">
+                  Ajouter au récap
+                </button>
               </div>
-              <button
-                type="button"
-                class="btn-mini"
-                onclick="scrollToCommande()"
-              >
-                Ajouter &amp; commander
-              </button>
+              <p class="product-note">
+                À tartiner sur du pain, des crêpes, avec du yaourt, ou en garniture de gâteaux roulés.
+              </p>
             </div>
-            <p class="product-note">
-              À tartiner sur du pain, des crêpes, avec du yaourt, ou en garniture
-              de gâteaux roulés.
-            </p>
           </article>
         </div>
       </div>
@@ -1028,118 +1120,119 @@
     <!-- COMMANDE -->
     <section id="commande">
       <div class="section-inner">
+        <div class="section-kicker">Commander</div>
         <h2 class="section-title">Votre commande</h2>
-        <p class="section-subtitle">
-          Choisissez les quantités directement dans les boxes produits ci-dessus,
-          puis complétez ce formulaire. Vous recevrez un e-mail de confirmation
-          avec le récapitulatif. Le paiement se fait par virement, Revolut ou
-          PayPal (QR code ci-dessous). Livraison à domicile en Belgique :
-          <strong>+5 €</strong>, ou retrait gratuit à Ixelles.
+        <p class="section-intro">
+          Choisissez les quantités directement dans les boxes produits ci-dessus, puis
+          complétez ce formulaire. Vous recevrez un e-mail de confirmation avec le
+          récapitulatif détaillé. Le paiement se fait ensuite par virement, Revolut ou
+          PayPal (QR codes ci-dessous). Livraison à domicile en Belgique : +5 €, ou
+          retrait gratuit à Ixelles.
         </p>
 
         <div class="order-layout">
-          <!-- Récap commande -->
-          <div class="order-card">
+          <!-- Récap -->
+          <div class="card">
             <h3>Récapitulatif</h3>
-            <p>
-              Le récapitulatif se met à jour automatiquement lorsque vous modifiez
-              les quantités dans les boxes produits et l’option de livraison.
+            <p style="font-size:0.85rem; color:#666;">
+              Le récapitulatif se met à jour lorsque vous modifiez les quantités dans les
+              boxes produits et l’option de livraison.
             </p>
 
-            <div id="orderEmpty" class="order-empty">
+            <div id="order-empty" style="margin-top:0.8rem; font-size:0.85rem; color:#777;">
               Aucune quantité sélectionnée pour l’instant.
             </div>
 
-            <table id="orderTable" style="display:none;">
+            <table class="order-table" id="order-table" style="display:none;">
               <thead>
-                <tr>
-                  <th>Produit</th>
-                  <th>Qté</th>
-                  <th class="text-right">Prix unitaire</th>
-                  <th class="text-right">Total</th>
-                </tr>
+              <tr>
+                <th>Produit</th>
+                <th>Qté</th>
+                <th>Prix unitaire</th>
+                <th>Total</th>
+              </tr>
               </thead>
-              <tbody id="orderBody"></tbody>
+              <tbody id="order-lines"></tbody>
             </table>
 
-            <div class="order-total" id="orderTotalWrap" style="display:none;">
+            <div class="order-totals">
               <div>
-                Total produits : <span id="orderTotalProducts">0 €</span>
-              </div>
-              <div id="orderShippingLine" style="display:none;">
-                Livraison à domicile : <span id="orderShippingValue">+5 €</span>
+                <span>Total produits</span>
+                <span id="total-products">0 €</span>
               </div>
               <div>
-                Total estimé : <span id="orderTotalValue">0 €</span>
+                <span>Livraison à domicile</span>
+                <span id="delivery-fee">+5 €</span>
+              </div>
+              <div class="grand">
+                <span>Total estimé</span>
+                <span id="grand-total">0 €</span>
               </div>
             </div>
-
-            <p class="form-hint" style="margin-top:10px;">
-              Livraison en Belgique uniquement. Livraison à domicile : +5 €.
-              Retrait possible gratuitement à Ixelles (Bruxelles).
+            <p class="order-hint">
+              Livraison en Belgique uniquement. Livraison à domicile : +5 €. Retrait
+              possible gratuitement à Ixelles (Bruxelles).
             </p>
           </div>
 
           <!-- Formulaire -->
-          <div class="order-card">
+          <div class="card">
             <h3>Formulaire de commande</h3>
-            <p>
-              Merci de compléter soigneusement vos coordonnées. Vous pouvez
-              indiquer en commentaire si vous souhaitez un créneau particulier
-              pour la livraison ou le retrait.
+            <p style="font-size:0.85rem; color:#666; margin-bottom:0.5rem;">
+              Merci de compléter soigneusement vos coordonnées. Vous pouvez indiquer en
+              commentaire si vous souhaitez un créneau particulier pour la livraison ou le
+              retrait.
             </p>
+            <form id="order-form">
+              <div>
+                <label for="name">Nom &amp; prénom</label>
+                <input type="text" id="name" name="name" required />
+              </div>
 
-            <form id="orderForm">
-              <div class="form-grid">
-                <div class="form-row">
-                  <div>
-                    <label for="name">Nom &amp; prénom</label>
-                    <input type="text" id="name" required />
-                  </div>
-                  <div>
-                    <label for="email">E-mail</label>
-                    <input type="email" id="email" required />
-                  </div>
-                </div>
-                <div class="form-row">
-                  <div>
-                    <label for="address">Adresse (rue &amp; numéro)</label>
-                    <input type="text" id="address" required />
-                  </div>
-                </div>
-                <div class="form-row">
-                  <div>
-                    <label for="postal">Code postal &amp; commune</label>
-                    <input type="text" id="postal" required />
-                  </div>
-                  <div>
-                    <label for="phone">Téléphone (optionnel)</label>
-                    <input type="text" id="phone" />
-                  </div>
+              <div>
+                <label for="email">E-mail</label>
+                <input type="email" id="email" name="email" required />
+              </div>
+
+              <div>
+                <label for="address">Adresse (rue &amp; numéro)</label>
+                <input type="text" id="address" name="address" />
+              </div>
+
+              <div class="form-row">
+                <div>
+                  <label for="postal">Code postal &amp; commune</label>
+                  <input type="text" id="postal" name="postal" />
                 </div>
                 <div>
-                  <label for="delivery">Livraison / retrait</label>
-                  <select id="delivery" required>
-                    <option value="">Choisir…</option>
-                    <option value="Livraison à domicile (Belgique)">
-                      Livraison à domicile (Belgique) (+5 €)
-                    </option>
-                    <option value="Retrait à Ixelles (Bruxelles)">
-                      Retrait à Ixelles (Bruxelles)
-                    </option>
-                  </select>
-                </div>
-                <div>
-                  <label for="message">Commentaire (optionnel)</label>
-                  <textarea id="message" placeholder="Ex : créneau préféré, cadeau, etc."></textarea>
+                  <label for="phone">Téléphone (optionnel)</label>
+                  <input type="tel" id="phone" name="phone" />
                 </div>
               </div>
 
-              <div class="form-actions">
-                <span id="formStatus" class="status"></span>
-                <button type="submit" class="btn-primary">
-                  Envoyer la commande
-                </button>
+              <div>
+                <label for="delivery">Livraison / retrait</label>
+                <select id="delivery" name="delivery" required>
+                  <option value="" selected disabled>Choisir…</option>
+                  <option value="livraison">Livraison à domicile (Belgique) (+5 €)</option>
+                  <option value="retrait">Retrait à Ixelles (Bruxelles)</option>
+                </select>
+                <div class="form-footnote">
+                  Le supplément de 5 € n’est appliqué que pour la livraison à domicile.
+                </div>
+              </div>
+
+              <div>
+                <label for="comment">Commentaire (optionnel)</label>
+                <textarea id="comment" name="comment" placeholder="Exemples : créneau préféré, digicode, infos supplémentaires…"></textarea>
+              </div>
+
+              <div class="submit-row">
+                <button type="submit" class="btn-primary">Envoyer la commande</button>
+                <small>
+                  Vous recevrez un e-mail récapitulatif de votre commande, puis un e-mail de
+                  confirmation une fois votre paiement reçu (virement, Revolut ou PayPal).
+                </small>
               </div>
             </form>
           </div>
@@ -1147,40 +1240,44 @@
       </div>
     </section>
 
-    <!-- PAIEMENT / QR -->
-    <section>
+    <!-- PAIEMENT -->
+    <section id="paiement">
       <div class="section-inner">
-        <h2 class="section-title">Paiement</h2>
-        <p class="section-subtitle">
-          Après validation de votre commande, nous vous confirmerons le montant
-          final (produits + livraison le cas échéant) par e-mail. Vous pourrez
-          alors payer par virement bancaire, Revolut ou PayPal.
+        <div class="section-kicker">Paiement</div>
+        <h2 class="section-title">Virement, Revolut ou PayPal</h2>
+        <p class="section-intro">
+          Après validation de votre commande, vous recevez par e-mail le montant final
+          (produits + livraison le cas échéant) ainsi que toutes les instructions de
+          paiement. Dès que votre paiement est reçu, vous recevez un e-mail de
+          confirmation définitive.
         </p>
 
         <div class="payment-grid">
-          <div class="pay-card">
+          <div class="card">
             <h3>Virement bancaire</h3>
-            <p>
-              Les coordonnées bancaires vous seront indiquées dans l’e-mail de
-              confirmation. Merci d’indiquer votre nom en communication.
+            <p style="font-size:0.9rem; color:#555;">
+              Les coordonnées bancaires complètes sont indiquées dans l’e-mail de
+              confirmation de commande. Merci d’indiquer votre nom en communication
+              structurée.
+            </p>
+            <p style="font-size:0.85rem; color:#777; margin-top:0.5rem;">
+              Si vous le souhaitez, vous pouvez également payer via Revolut ou PayPal
+              en scannant les QR codes ci-contre. Dans tous les cas, un e-mail vous
+              confirme la bonne réception du paiement.
             </p>
           </div>
 
-          <div class="pay-card">
-            <h3>Revolut</h3>
-            <p>Scannez le QR code Revolut ci-dessous :</p>
-            <div class="qr-wrap">
-              <img src="Rqrcode.png" alt="QR code Revolut">
-              <span>QR code Revolut</span>
-            </div>
-          </div>
-
-          <div class="pay-card">
-            <h3>PayPal</h3>
-            <p>Scannez le QR code PayPal ci-dessous :</p>
-            <div class="qr-wrap">
-              <img src="PPqrcode.png" alt="QR code PayPal">
-              <span>QR code PayPal</span>
+          <div class="card">
+            <h3>QR codes de paiement</h3>
+            <div class="qr-row">
+              <div class="qr-card">
+                <img src="Rqrcode.jpg" alt="QR code Revolut" />
+                <div>Revolut</div>
+              </div>
+              <div class="qr-card">
+                <img src="PPqrcode.png" alt="QR code PayPal" />
+                <div>PayPal / carte</div>
+              </div>
             </div>
           </div>
         </div>
@@ -1190,22 +1287,47 @@
     <!-- GALERIE -->
     <section id="galerie">
       <div class="section-inner">
-        <h2 class="section-title">Monte Il Palombaio en images</h2>
-        <p class="section-subtitle">
-          Un aperçu du domaine : oliviers, châtaigniers, vues sur Manziana et le
-          lac, et quelques tables dressées sous les pins parasols…
+        <div class="section-kicker">Monte Il Palombaio</div>
+        <h2 class="section-title">Le domaine en images</h2>
+        <p class="section-intro">
+          Un aperçu du domaine : oliviers, châtaigniers, vues sur Manziana et le lac, et
+          quelques tables dressées sous les pins parasols… pour sentir un peu l’Italie en
+          Belgique.
         </p>
 
-        <div class="gallery-grid">
-          <div class="gallery-item"><img src="A001_azienda.jpg" alt=""></div>
-          <div class="gallery-item"><img src="azienda_natura.jpg" alt=""></div>
-          <div class="gallery-item"><img src="Drone001.JPG" alt=""></div>
-          <div class="gallery-item"><img src="Drone016.JPG" alt=""></div>
-          <div class="gallery-item"><img src="Uliveto Ortaccio.jpg" alt=""></div>
-          <div class="gallery-item"><img src="flavia_024.jpg" alt=""></div>
-          <div class="gallery-item"><img src="Attività_007_prodotti.jpg" alt=""></div>
-          <div class="gallery-item"><img src="prodotti_004.jpg" alt=""></div>
-          <div class="gallery-item"><img src="prodotti_002.jpg" alt=""></div>
+        <div class="gallery-slider" id="gallery-slider">
+          <div class="gallery-slide active">
+            <img src="A001_azienda.jpeg" alt="Allée d’arbres menant au domaine Il Palombaio" />
+          </div>
+          <div class="gallery-slide">
+            <img src="Drone019.JPG" alt="Vue aérienne sur les oliviers et le lac" />
+          </div>
+          <div class="gallery-slide">
+            <img src="Drone027.JPG" alt="Oliviers au coucher du soleil près de Manziana" />
+          </div>
+          <div class="gallery-slide">
+            <img src="flavia_001.jpeg" alt="Table dressée avec huile d’olive Il Palombaio" />
+          </div>
+          <div class="gallery-slide">
+            <img src="Attività_005_Prodotti.jpeg" alt="Huile et produits du domaine Il Palombaio" />
+          </div>
+          <div class="gallery-slide">
+            <img src="Attività_008_prodotti_natura.jpeg" alt="Châtaignes et marronata du domaine" />
+          </div>
+          <div class="gallery-slide">
+            <img src="prodotti_005.jpeg" alt="Bouteille d’huile d’olive sur fond d’oliviers" />
+          </div>
+          <div class="gallery-slide">
+            <img src="pomodoro_026.jpeg" alt="Passata de tomate Il Palombaio sur une rambarde" />
+          </div>
+
+          <div class="gallery-controls">
+            <div class="gallery-buttons">
+              <button class="gallery-btn" type="button" id="prev-slide">← Précédent</button>
+              <button class="gallery-btn" type="button" id="next-slide">Suivant →</button>
+            </div>
+            <div class="gallery-dots" id="gallery-dots"></div>
+          </div>
         </div>
       </div>
     </section>
@@ -1213,403 +1335,413 @@
     <!-- CONTACT -->
     <section id="contact">
       <div class="section-inner">
-        <h2 class="section-title">Contact</h2>
-        <p class="section-subtitle">
-          Une question sur l’huile, la marronata ou la livraison ? N’hésitez pas
-          à nous écrire, nous répondons aussi vite que possible.
+        <div class="section-kicker">Contact</div>
+        <h2 class="section-title">Nous écrire</h2>
+        <p class="section-intro">
+          Une question sur l’huile, la marronata ou la livraison ? N’hésitez pas à nous
+          écrire, nous répondons aussi vite que possible.
         </p>
-
-        <p style="font-size:0.95rem;">
-          Contact principal : <strong>Arnaud Van der Straten</strong><br>
-          E-mail :
-          <a href="mailto:arnaudvanderstraten@gmail.com">
-            arnaudvanderstraten@gmail.com
-          </a><br>
-          Basé à Ixelles (Bruxelles, Belgique) – retrait possible à Ixelles.
-        </p>
+        <div class="card contact-block">
+          <p><strong>Contact principal :</strong> Arnaud Van der Straten</p>
+          <p><strong>E-mail :</strong> <a href="mailto:arnaudvanderstraten@gmail.com">arnaudvanderstraten@gmail.com</a></p>
+          <p>Basé à Ixelles (Bruxelles, Belgique) – retrait possible à Ixelles.</p>
+        </div>
       </div>
     </section>
-  </main>
 
-  <!-- CONDITIONS / CONFIDENTIALITÉ / COOKIES -->
-  <section class="legal-section" id="conditions">
-    <div class="legal-inner legal-columns">
-      <div>
+    <!-- CONDITIONS / LEGAL -->
+    <section id="conditions" class="legal-section">
+      <div class="legal-inner">
         <h3>Conditions générales d’utilisation et de vente</h3>
         <p>
           L’utilisation de ce site et l’achat de produits Monte Il Palombaio impliquent
-          l’acceptation des présentes conditions générales. Nous pouvons mettre à jour
-          ces conditions à tout moment ; le fait de continuer à utiliser le site
-          et de passer commande vaut acceptation des nouvelles conditions.
+          l’acceptation des présentes conditions générales. Nous pouvons mettre à jour ces
+          conditions à tout moment ; le fait de continuer à utiliser le site et de passer
+          commande vaut acceptation des nouvelles conditions.
         </p>
         <p>
-          Le contrat de vente est conclu entre vous (le client) et le distributeur
-          belge de Monte Il Palombaio à partir du moment où nous confirmons et
-          acceptons votre commande (par e-mail ou lors de la préparation de celle-ci).
-          En passant commande, vous certifiez être majeur(e) et disposer de la
-          capacité juridique pour contracter, et que les informations fournies
-          (nom, e-mail, coordonnées) sont exactes.
+          Le contrat de vente est conclu entre vous (le client) et le distributeur belge de
+          Monte Il Palombaio à partir du moment où nous confirmons et acceptons votre
+          commande (par e-mail ou lors de la préparation de celle-ci). En passant
+          commande, vous certifiez être majeur(e) et disposer de la capacité juridique pour
+          contracter, et que les informations fournies (nom, e-mail, coordonnées) sont
+          exactes.
         </p>
 
         <h4>Passation et annulation de commande</h4>
         <p>
-          En validant votre commande, vous confirmez avoir pris connaissance des
-          présentes conditions. Vous disposez d’un délai de rétractation de 14 jours
-          calendriers à compter de la réception des produits. Le remboursement est
-          effectué sur le moyen de paiement utilisé lors de la commande, après retour
-          des produits en bon état.
+          En validant votre commande, vous confirmez avoir pris connaissance des présentes
+          conditions. Vous disposez d’un délai de rétractation de 14 jours calendriers à
+          compter de la réception des produits. Le remboursement est effectué sur le moyen
+          de paiement utilisé lors de la commande, après retour des produits en bon état.
         </p>
 
         <h4>Livraison &amp; retrait</h4>
         <p>
-          Vous pouvez choisir entre un retrait à Ixelles (Bruxelles) ou une livraison
-          à domicile en Belgique lorsque celle-ci est proposée. Nous mettons tout en
-          œuvre pour respecter les délais annoncés, mais nous ne pourrons être tenus
-          responsables des retards ou dommages causés par le transporteur ou par tout
-          événement extérieur.
+          Vous pouvez choisir entre un retrait à Ixelles (Bruxelles) ou une livraison à
+          domicile en Belgique lorsque celle-ci est proposée. Nous mettons tout en œuvre
+          pour respecter les délais annoncés, mais nous ne pourrons être tenus responsables
+          des retards ou dommages causés par le transporteur ou par tout événement
+          extérieur.
         </p>
 
         <h4>Retours</h4>
         <p>
-          Les produits peuvent être retournés dans les 14 jours, à condition qu’ils
-          n’aient pas été utilisés, ouverts, modifiés ou détériorés, et qu’ils soient
-          dans leur emballage d’origine. Aucun retour ne peut être effectué sans
-          accord préalable. Les frais de retour restent à charge du client, sauf
-          erreur de notre part.
+          Les produits peuvent être retournés dans les 14 jours, à condition qu’ils n’aient
+          pas été utilisés, ouverts, modifiés ou détériorés, et qu’ils soient dans leur
+          emballage d’origine. Aucun retour ne peut être effectué sans accord préalable.
+          Les frais de retour restent à charge du client, sauf erreur de notre part.
         </p>
 
         <h4>Responsabilité</h4>
         <p>
-          Nous veillons à ce que les informations figurant sur ce site soient aussi
-          exactes et à jour que possible, mais aucune garantie absolue ne peut être
-          donnée. Le client reste responsable de la protection de ses appareils et
-          de ses données (virus, etc.). Les photos ne sont pas contractuelles et les
-          produits étant artisanaux, de légères variations de couleur, de texture ou
-          de présentation peuvent apparaître.
+          Nous veillons à ce que les informations figurant sur ce site soient aussi exactes
+          et à jour que possible, mais aucune garantie absolue ne peut être donnée. Le
+          client reste responsable de la protection de ses appareils et de ses données
+          (virus, etc.). Les photos ne sont pas contractuelles et les produits étant
+          artisanaux, de légères variations de couleur, de texture ou de présentation
+          peuvent apparaître.
         </p>
         <p>
-          Rien dans ces conditions ne limite les droits impératifs du consommateur
-          prévus par la législation applicable en Belgique. Si une clause des
-          présentes devait être jugée nulle ou inapplicable, les autres clauses
-          resteraient pleinement en vigueur.
+          Rien dans ces conditions ne limite les droits impératifs du consommateur prévus
+          par la législation applicable en Belgique. Si une clause des présentes devait
+          être jugée nulle ou inapplicable, les autres clauses resteraient pleinement en
+          vigueur.
         </p>
-      </div>
 
-      <div id="confidentialite">
-        <h3>Politique de confidentialité</h3>
+        <h4>Politique de confidentialité</h4>
         <p>
           Les données que vous nous transmettez (nom, e-mail, message, contenu de la
-          commande) sont utilisées uniquement pour traiter vos commandes, vous
-          répondre et, le cas échéant, assurer la livraison. Elles ne sont ni
-          vendues, ni cédées à des tiers, sauf obligation légale ou prestataires
-          techniques intervenant dans le traitement de la commande
-          (par exemple, EmailJS pour l’envoi des e-mails).
+          commande) sont utilisées uniquement pour traiter vos commandes, vous répondre et,
+          le cas échéant, assurer la livraison. Elles ne sont ni vendues, ni cédées à des
+          tiers, sauf obligation légale ou prestataires techniques intervenant dans le
+          traitement de la commande (par exemple, EmailJS pour l’envoi des e-mails).
         </p>
         <p>
-          Vous pouvez demander l’accès, la rectification ou la suppression de vos
-          données en nous contactant par e-mail. Nous conservons vos données
-          uniquement pour la durée nécessaire au traitement des commandes et aux
-          obligations légales (comptabilité, facturation…).
+          Vous pouvez demander l’accès, la rectification ou la suppression de vos données
+          en nous contactant par e-mail. Nous conservons vos données uniquement pour la
+          durée nécessaire au traitement des commandes et aux obligations légales
+          (comptabilité, facturation…).
         </p>
 
-        <h3 id="cookies">Politique de cookies</h3>
+        <h4>Politique de cookies</h4>
         <p>
-          Ce site statique ne dépose pas volontairement de cookies de suivi à des
-          fins publicitaires. Certains services externes éventuellement intégrés
-          (par exemple : hébergeur, liens de paiement, EmailJS) peuvent toutefois
-          utiliser leurs propres cookies techniques. Vous pouvez gérer vos
-          préférences de cookies via les paramètres de votre navigateur.
+          Ce site statique ne dépose pas volontairement de cookies de suivi à des fins
+          publicitaires. Certains services externes éventuellement intégrés (par exemple :
+          hébergeur, liens de paiement, EmailJS) peuvent toutefois utiliser leurs propres
+          cookies techniques. Vous pouvez gérer vos préférences de cookies via les
+          paramètres de votre navigateur.
         </p>
-      </div>
-    </div>
-  </section>
 
-  <!-- BANDEAU LIENS LÉGAUX -->
-  <div class="legal-footer-bar">
-    <div class="legal-footer-inner">
-      <div class="legal-links">
-        <a href="#contact">Contactez-nous</a>
-        <a href="#conditions">Conditions</a>
-        <a href="#confidentialite">Politique de confidentialité</a>
-        <a href="#cookies">Politique de cookies</a>
+        <div class="legal-links">
+          <div>
+            <a href="#contact">Contactez-nous</a> ·
+            <a href="#conditions">Conditions</a> ·
+            <a href="#conditions">Politique de confidentialité</a> ·
+            <a href="#conditions">Politique de cookies</a>
+          </div>
+          <div>
+            Monte Il Palombaio – Production artisanale en Italie · Distribution en Belgique (Ixelles)
+          </div>
+        </div>
       </div>
-      <div class="legal-footer-note">
-        Monte Il Palombaio – Production artisanale en Italie · Distribution en Belgique (Ixelles)
-      </div>
-    </div>
-  </div>
+    </section>
+  </main>
 
-  <!-- FOOTER -->
   <footer>
     <div class="footer-inner">
-      <div class="footer-top">
-        <div>
-          Contactez-nous :
-          <a href="mailto:arnaudvanderstraten@gmail.com">
-            arnaudvanderstraten@gmail.com
-          </a>
-        </div>
-        <div>
-          Site dédié à la vente directe de l’huile d’olive Monte Il Palombaio et de
-          produits du domaine en Belgique.
-        </div>
-      </div>
-      <div class="footer-bottom">
-        Vente en petites quantités, circuit court, sans certification biologique
-        mais avec une attention particulière à la qualité, à la traçabilité et au
-        respect du produit. Les prix sont indiqués TVA comprise. Les photos ne sont
-        pas contractuelles.
-      </div>
+      <span>
+        © Monte Il Palombaio · Site dédié à la vente directe de l’huile d’olive Monte
+        Il Palombaio et de produits du domaine en Belgique.
+      </span>
+      <span>
+        Vente en petites quantités, circuit court, sans certification biologique mais avec
+        une attention particulière à la qualité, à la traçabilité et au respect du produit.
+      </span>
     </div>
   </footer>
+</div>
 
-  <!-- EMAILJS -->
-  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-  <script>
-    // Initialisation EmailJS
-    (function() {
-      emailjs.init({
-        publicKey: "xtM2H9PprxWX1IWnr"
-      });
-    })();
+<!-- EmailJS -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+  // INITIALISATION EMAILJS
+  (function () {
+    emailjs.init({
+      publicKey: "xtM2H9PprxWX1IWnr",
+    });
+  })();
 
-    // Données produits
-    const PRODUCTS = {
-      huile25: {
-        name: "Huile d'olive extra vierge 25 cl",
-        price: 16,
-        image: "prodotti_001.jpg"
-      },
-      huile75: {
-        name: "Huile d'olive extra vierge 75 cl",
-        price: 24,
-        image: "prodotti_002.jpg"
-      },
-      marronata: {
-        name: "Marronata (crème de châtaignes)",
-        price: 15,
-        image: "prodotti_014.jpg"
+  // CONFIG PRODUITS
+  const PRODUCTS = {
+    huile25: {
+      label: "Bouteille 25 cl – huile d'olive",
+      price: 16,
+    },
+    huile75: {
+      label: "Bouteille 75 cl – huile d'olive",
+      price: 24,
+    },
+    marronata: {
+      label: "Marronata – crème de châtaignes",
+      price: 15,
+    },
+  };
+
+  // ÉTAT COMMANDE
+  const state = {
+    quantities: {
+      huile25: 0,
+      huile75: 0,
+      marronata: 0,
+    },
+    delivery: null, // "livraison" ou "retrait"
+  };
+
+  const qtyInputs = document.querySelectorAll(".qty-input");
+  const addButtons = document.querySelectorAll("[data-add-product]");
+  const deliverySelect = document.getElementById("delivery");
+
+  const orderEmpty = document.getElementById("order-empty");
+  const orderTable = document.getElementById("order-table");
+  const orderLines = document.getElementById("order-lines");
+  const totalProductsEl = document.getElementById("total-products");
+  const deliveryFeeEl = document.getElementById("delivery-fee");
+  const grandTotalEl = document.getElementById("grand-total");
+
+  const orderForm = document.getElementById("order-form");
+
+  function updateSummary() {
+    // Construire les lignes
+    orderLines.innerHTML = "";
+    let totalProducts = 0;
+    let hasProduct = false;
+
+    Object.keys(PRODUCTS).forEach((id) => {
+      const qty = state.quantities[id] || 0;
+      const product = PRODUCTS[id];
+      if (qty > 0) {
+        hasProduct = true;
+        const lineTotal = qty * product.price;
+        totalProducts += lineTotal;
+
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td>${product.label}</td>
+          <td>${qty}</td>
+          <td>${product.price.toFixed(2)} €</td>
+          <td>${lineTotal.toFixed(2)} €</td>
+        `;
+        orderLines.appendChild(tr);
       }
-    };
+    });
 
-    function scrollToCommande() {
-      document.getElementById("commande").scrollIntoView({ behavior: "smooth" });
-    }
-
-    // Diaporama hero
-    const heroImages = [
-      "Drone001.JPG",
-      "Drone016.JPG",
-      "A001_azienda.jpg",
-      "azienda_natura.jpg",
-      "flavia_024.jpg",
-      "Uliveto Ortaccio.jpg"
-    ];
-    let heroIndex = 0;
-    const heroBg = document.getElementById("heroBg");
-
-    function setHeroBackground() {
-      heroBg.style.backgroundImage = "url('" + heroImages[heroIndex] + "')";
-    }
-    setHeroBackground();
-    setInterval(() => {
-      heroIndex = (heroIndex + 1) % heroImages.length;
-      setHeroBackground();
-    }, 6000);
-
-    // Récap commande + livraison
-    const qtyInputs = document.querySelectorAll(".qty-input");
-    const orderBody = document.getElementById("orderBody");
-    const orderTable = document.getElementById("orderTable");
-    const orderTotalWrap = document.getElementById("orderTotalWrap");
-    const orderTotalProductsEl = document.getElementById("orderTotalProducts");
-    const orderTotalValue = document.getElementById("orderTotalValue");
-    const orderEmpty = document.getElementById("orderEmpty");
-    const orderShippingLine = document.getElementById("orderShippingLine");
-    const orderShippingValue = document.getElementById("orderShippingValue");
-    const deliverySelect = document.getElementById("delivery");
-
-    let productsTotal = 0;
-
-    function updateTotalsWithShipping() {
-      if (productsTotal <= 0) {
-        orderTotalWrap.style.display = "none";
-        return;
-      }
-
-      orderTotalWrap.style.display = "block";
-      orderTotalProductsEl.textContent = productsTotal.toFixed(2) + " €";
-
-      let shipping = 0;
-      if (deliverySelect && deliverySelect.value === "Livraison à domicile (Belgique)") {
-        shipping = 5;
-        orderShippingLine.style.display = "block";
-        orderShippingValue.textContent = "+5,00 €";
-      } else {
-        orderShippingLine.style.display = "none";
-      }
-
-      const totalWithShipping = productsTotal + shipping;
-      orderTotalValue.textContent = totalWithShipping.toFixed(2) + " €";
-    }
-
-    function updateOrder() {
-      let items = [];
-      qtyInputs.forEach(input => {
-        const id = input.dataset.productId;
-        const qty = parseInt(input.value, 10) || 0;
-        if (qty > 0 && PRODUCTS[id]) {
-          const p = PRODUCTS[id];
-          items.push({
-            id,
-            qty,
-            name: p.name,
-            price: p.price,
-            image: p.image,
-            lineTotal: p.price * qty
-          });
-        }
-      });
-
-      orderBody.innerHTML = "";
-      if (items.length === 0) {
-        orderTable.style.display = "none";
-        orderEmpty.style.display = "block";
-        productsTotal = 0;
-        updateTotalsWithShipping();
-        return;
-      }
-
+    if (!hasProduct) {
+      orderEmpty.style.display = "block";
+      orderTable.style.display = "none";
+    } else {
       orderEmpty.style.display = "none";
       orderTable.style.display = "table";
-
-      let total = 0;
-      items.forEach(item => {
-        total += item.lineTotal;
-        const tr = document.createElement("tr");
-
-        const tdProd = document.createElement("td");
-        tdProd.className = "order-product-cell";
-        const img = document.createElement("img");
-        img.src = item.image;
-        img.alt = item.name;
-        img.className = "order-thumb";
-        const spanName = document.createElement("span");
-        spanName.textContent = item.name;
-        tdProd.appendChild(img);
-        tdProd.appendChild(spanName);
-
-        const tdQty = document.createElement("td");
-        tdQty.textContent = item.qty;
-
-        const tdPU = document.createElement("td");
-        tdPU.className = "text-right";
-        tdPU.textContent = item.price.toFixed(2) + " €";
-
-        const tdLine = document.createElement("td");
-        tdLine.className = "text-right";
-        tdLine.textContent = item.lineTotal.toFixed(2) + " €";
-
-        tr.appendChild(tdProd);
-        tr.appendChild(tdQty);
-        tr.appendChild(tdPU);
-        tr.appendChild(tdLine);
-        orderBody.appendChild(tr);
-      });
-
-      productsTotal = total;
-      updateTotalsWithShipping();
     }
 
-    qtyInputs.forEach(input => {
-      input.addEventListener("input", updateOrder);
-    });
+    // Frais de livraison
+    const deliveryFee = state.delivery === "livraison" ? 5 : 0;
 
-    if (deliverySelect) {
-      deliverySelect.addEventListener("change", updateTotalsWithShipping);
+    totalProductsEl.textContent = totalProducts.toFixed(2) + " €";
+    deliveryFeeEl.textContent =
+      deliveryFee > 0 ? "+" + deliveryFee.toFixed(2) + " €" : "0 €";
+
+    const grandTotal = totalProducts + deliveryFee;
+    grandTotalEl.textContent = grandTotal.toFixed(2) + " €";
+  }
+
+  // Gestion des inputs quantité
+  qtyInputs.forEach((input) => {
+    input.addEventListener("change", (e) => {
+      const id = e.target.dataset.productId;
+      const value = Math.max(0, parseInt(e.target.value || "0", 10));
+      state.quantities[id] = value;
+      e.target.value = value;
+      updateSummary();
+    });
+  });
+
+  // Bouton "Ajouter au récap"
+  addButtons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const id = btn.dataset.addProduct;
+      const input = document.querySelector(`.qty-input[data-product-id="${id}"]`);
+      if (!input) return;
+      const value = Math.max(0, parseInt(input.value || "0", 10));
+      state.quantities[id] = value;
+      input.value = value;
+      updateSummary();
+    });
+  });
+
+  // Livraison / retrait
+  deliverySelect.addEventListener("change", (e) => {
+    state.delivery = e.target.value || null;
+    updateSummary();
+  });
+
+  // Construire le texte de récapitulatif pour l'e-mail
+  function buildOrderSummaryText() {
+    let lines = [];
+    Object.keys(PRODUCTS).forEach((id) => {
+      const qty = state.quantities[id] || 0;
+      if (qty > 0) {
+        const product = PRODUCTS[id];
+        lines.push(
+          `- ${product.label} : ${qty} x ${product.price.toFixed(2)} € = ${(qty *
+            product.price).toFixed(2)} €`
+        );
+      }
+    });
+    if (lines.length === 0) {
+      return "Aucun produit sélectionné.";
+    }
+    return lines.join("\n");
+  }
+
+  function computeTotals() {
+    let totalProducts = 0;
+    Object.keys(PRODUCTS).forEach((id) => {
+      const qty = state.quantities[id] || 0;
+      totalProducts += qty * PRODUCTS[id].price;
+    });
+    const deliveryFee = state.delivery === "livraison" ? 5 : 0;
+    return {
+      products: totalProducts,
+      delivery: deliveryFee,
+      grand: totalProducts + deliveryFee,
+    };
+  }
+
+  // ENVOI DU FORMULAIRE
+  orderForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const totals = computeTotals();
+    if (totals.products <= 0) {
+      alert("Merci de choisir au moins un produit avant d’envoyer la commande.");
+      return;
     }
 
-    // Formulaire & EmailJS
-    const form = document.getElementById("orderForm");
-    const statusEl = document.getElementById("formStatus");
+    if (!state.delivery) {
+      alert("Merci de choisir livraison à domicile ou retrait à Ixelles.");
+      return;
+    }
 
-    form.addEventListener("submit", function(e) {
-      e.preventDefault();
-      statusEl.textContent = "";
-      statusEl.className = "status";
+    const name = document.getElementById("name").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const address = document.getElementById("address").value.trim();
+    const postal = document.getElementById("postal").value.trim();
+    const phone = document.getElementById("phone").value.trim();
+    const comment = document.getElementById("comment").value.trim();
 
-      // Construire les items depuis l'état actuel
-      let lines = [];
-      let totalProducts = 0;
-      qtyInputs.forEach(input => {
-        const id = input.dataset.productId;
-        const qty = parseInt(input.value, 10) || 0;
-        if (qty > 0 && PRODUCTS[id]) {
-          const p = PRODUCTS[id];
-          const lineTotal = p.price * qty;
-          totalProducts += lineTotal;
-          lines.push(
-            p.name + " – " + qty + " x " + p.price.toFixed(2) +
-            " € = " + lineTotal.toFixed(2) + " €"
-          );
-        }
+    const orderSummary = buildOrderSummaryText();
+    const deliveryLabel =
+      state.delivery === "livraison"
+        ? "Livraison à domicile en Belgique (+5 €)"
+        : "Retrait à Ixelles (Bruxelles)";
+
+    const templateParams = {
+      client_name: name,
+      client_email: email,
+      client_address: address,
+      client_postal: postal,
+      client_phone: phone,
+      delivery_option: deliveryLabel,
+      order_summary: orderSummary,
+      total_products: totals.products.toFixed(2) + " €",
+      delivery_fee: totals.delivery.toFixed(2) + " €",
+      grand_total: totals.grand.toFixed(2) + " €",
+      client_comment: comment,
+    };
+
+    // IMPORTANT : vérifier dans EmailJS que les noms de variables du template
+    // (client_name, order_summary, grand_total, etc.) correspondent bien.
+
+    emailjs
+      .send("service_5yw7g4q", "template_hyc543e", templateParams)
+      .then(() => {
+        alert(
+          "Merci ! Votre commande a bien été envoyée. Vous allez recevoir un e-mail de récapitulatif. Nous vous confirmerons ensuite la commande dès réception du paiement."
+        );
+        orderForm.reset();
+        deliverySelect.value = "";
+        state.quantities = { huile25: 0, huile75: 0, marronata: 0 };
+        state.delivery = null;
+        qtyInputs.forEach((input) => (input.value = 0));
+        updateSummary();
+      })
+      .catch((error) => {
+        console.error("EmailJS error", error);
+        alert(
+          "Une erreur est survenue lors de l’envoi de la commande. Vous pouvez réessayer ou nous écrire directement à arnaudvanderstraten@gmail.com."
+        );
       });
+  });
 
-      if (lines.length === 0) {
-        statusEl.textContent = "Merci de choisir au moins un produit avant d’envoyer.";
-        statusEl.classList.add("err");
-        return;
-      }
+  // GALERIE SLIDER
+  const slides = document.querySelectorAll(".gallery-slide");
+  const dotsContainer = document.getElementById("gallery-dots");
+  const prevBtn = document.getElementById("prev-slide");
+  const nextBtn = document.getElementById("next-slide");
 
-      const deliveryVal = document.getElementById("delivery").value;
-      let shipping = 0;
-      if (deliveryVal === "Livraison à domicile (Belgique)") {
-        shipping = 5;
-      }
-      const totalWithShipping = totalProducts + shipping;
+  let currentSlide = 0;
+  let autoTimer = null;
 
-      let orderText = lines.join("\n");
-      orderText += "\n---\nTotal produits : " + totalProducts.toFixed(2) + " €";
-      if (shipping > 0) {
-        orderText += "\nLivraison domicile : +5,00 €";
-      } else {
-        orderText += "\nLivraison : retrait à Ixelles (0 €)";
-      }
-      orderText += "\nTotal à payer : " + totalWithShipping.toFixed(2) + " €";
-
-      const templateParams = {
-        from_name: document.getElementById("name").value,
-        reply_to: document.getElementById("email").value,
-        address: document.getElementById("address").value,
-        postal: document.getElementById("postal").value,
-        phone: document.getElementById("phone").value,
-        delivery_option: deliveryVal,
-        message: document.getElementById("message").value,
-        order_details: orderText,
-        order_total: totalWithShipping.toFixed(2) + " €",
-        order_products_total: totalProducts.toFixed(2) + " €",
-        shipping_fee: shipping > 0 ? "5,00 €" : "0 €"
-      };
-
-      statusEl.textContent = "Envoi en cours...";
-      emailjs
-        .send("service_5yw7g4q", "template_hyc543e", templateParams)
-        .then(() => {
-          statusEl.textContent = "Merci ! Votre commande a été envoyée. Vous recevrez un e-mail de confirmation rapidement.";
-          statusEl.classList.add("ok");
-          form.reset();
-          productsTotal = 0;
-          updateOrder();
-        })
-        .catch(err => {
-          console.error(err);
-          statusEl.textContent = "Oups, une erreur est survenue. Vous pouvez aussi commander par e-mail : arnaudvanderstraten@gmail.com";
-          statusEl.classList.add("err");
-        });
+  function renderDots() {
+    dotsContainer.innerHTML = "";
+    slides.forEach((_, index) => {
+      const dot = document.createElement("div");
+      dot.className = "gallery-dot" + (index === currentSlide ? " active" : "");
+      dotsContainer.appendChild(dot);
     });
+  }
 
-    // Mise à jour initiale
-    updateOrder();
-  </script>
+  function showSlide(index) {
+    slides.forEach((slide, i) => {
+      slide.classList.toggle("active", i === index);
+    });
+    currentSlide = index;
+    renderDots();
+  }
+
+  function nextSlide() {
+    const next = (currentSlide + 1) % slides.length;
+    showSlide(next);
+  }
+
+  function prevSlideFn() {
+    const prev = (currentSlide - 1 + slides.length) % slides.length;
+    showSlide(prev);
+  }
+
+  prevBtn.addEventListener("click", () => {
+    prevSlideFn();
+    restartAuto();
+  });
+
+  nextBtn.addEventListener("click", () => {
+    nextSlide();
+    restartAuto();
+  });
+
+  function startAuto() {
+    autoTimer = setInterval(nextSlide, 6000);
+  }
+
+  function restartAuto() {
+    if (autoTimer) clearInterval(autoTimer);
+    startAuto();
+  }
+
+  // Initialisation
+  showSlide(0);
+  startAuto();
+</script>
 </body>
 </html>
