@@ -175,7 +175,7 @@
           rgba(0, 0, 0, 0.45),
           rgba(0, 0, 0, 0.55)
         ),
-        url("Drone001.JPG");
+        url("Drone001.jpeg");
       background-size: cover;
       background-position: center;
       transform: scale(1.03);
@@ -920,7 +920,7 @@
             <span>Crème de châtaignes du domaine, en édition limitée</span>
           </div>
           <div class="hero-thumb">
-            <img src="prodotti_007.jpg" alt="Bouteilles d'huile d'olive Monte Il Palombaio" />
+            <img src="prodotti_002.jpeg" alt="Bouteilles d'huile d'olive Monte Il Palombaio" />
           </div>
         </div>
       </aside>
@@ -955,11 +955,11 @@
           </div>
           <div class="domain-photos">
             <div class="domain-main-photo">
-              <img src="Drone016.JPG" alt="Vue aérienne des oliviers à Monte Il Palombaio" />
+              <img src="Drone016.jpeg" alt="Vue aérienne des oliviers à Monte Il Palombaio" />
             </div>
             <div class="domain-column">
-              <img src="azienda_natura.jpg" alt="Maison et oliviers du domaine Monte Il Palombaio" />
-              <img src="Uliveto Ortaccio.jpg" alt="Oliviers du domaine Il Palombaio" />
+              <img src="azienda_natura.jpeg" alt="Maison et oliviers du domaine Monte Il Palombaio" />
+              <img src="Uliveto Ortaccio.jpeg" alt="Oliviers du domaine Il Palombaio" />
             </div>
           </div>
         </div>
@@ -982,7 +982,7 @@
           <article class="product-card" data-product="huile25">
             <div class="product-image-wrap">
               <span class="product-pill">Huile d'olive extra vierge</span>
-              <img src="prodotti_002.jpg" alt="Bouteille 25 cl d'huile d'olive Monte Il Palombaio" />
+              <img src="prodotti_002.jpeg" alt="Bouteille 25 cl d'huile d'olive Monte Il Palombaio" />
             </div>
             <div class="product-body">
               <h3 class="product-title">Bouteille 25 cl</h3>
@@ -1018,7 +1018,7 @@
           <article class="product-card" data-product="huile75">
             <div class="product-image-wrap">
               <span class="product-pill">Huile d'olive extra vierge</span>
-              <img src="prodotti_004.jpg" alt="Bouteille 75 cl d'huile d'olive Monte Il Palombaio" />
+              <img src="prodotti_004.jpeg" alt="Bouteille 75 cl d'huile d'olive Monte Il Palombaio" />
             </div>
             <div class="product-body">
               <h3 class="product-title">Bouteille 75 cl</h3>
@@ -1055,7 +1055,7 @@
           <article class="product-card" data-product="marronata">
             <div class="product-image-wrap">
               <span class="product-pill">Édition limitée</span>
-              <img src="prodotti_014.jpg" alt="Pot de marronata Monte Il Palombaio" />
+              <img src="prodotti_014.jpeg" alt="Pot de marronata Monte Il Palombaio" />
             </div>
             <div class="product-body">
               <h3 class="product-title">Marronata de Monte Il Palombaio</h3>
@@ -1246,7 +1246,7 @@
             <h3>QR codes de paiement</h3>
             <div class="qr-row">
               <div class="qr-card">
-                <img src="Rqrcode.png" alt="QR code Revolut" />
+                <img src="Rqrcode.jpg" alt="QR code Revolut" />
                 <div>Revolut</div>
               </div>
               <div class="qr-card">
@@ -1272,28 +1272,28 @@
 
         <div class="gallery-slider" id="gallery-slider">
           <div class="gallery-slide active">
-            <img src="A001_azienda.jpg" alt="Allée d’arbres menant au domaine Il Palombaio" />
+            <img src="A001_azienda.jpeg" alt="Allée d’arbres menant au domaine Il Palombaio" />
           </div>
           <div class="gallery-slide">
-            <img src="A010_azienda.jpg" alt="Vue sur le domaine et les collines" />
+            <img src="Drone001.jpeg" alt="Vue aérienne du domaine" />
           </div>
           <div class="gallery-slide">
-            <img src="Drone019.JPG" alt="Vue aérienne sur les oliviers et le lac" />
+            <img src="Drone016.jpeg" alt="Oliviers et collines au soleil" />
           </div>
           <div class="gallery-slide">
-            <img src="Drone027.JPG" alt="Oliviers au coucher du soleil près de Manziana" />
+            <img src="azienda_natura.jpeg" alt="Maison du domaine avec les oliviers" />
           </div>
           <div class="gallery-slide">
-            <img src="flavia_001.jpg" alt="Table dressée avec huile d’olive Il Palombaio" />
+            <img src="Uliveto Ortaccio.jpeg" alt="Oliviers du domaine Uliveto Ortaccio" />
           </div>
           <div class="gallery-slide">
-            <img src="flavia_024.jpg" alt="Vue de la maison rouge et des oliviers" />
+            <img src="flavia_001.jpeg" alt="Table dressée avec huile d’olive Il Palombaio" />
           </div>
           <div class="gallery-slide">
-            <img src="prodotti_005.jpg" alt="Bouteille d’huile d’olive sur fond d’oliviers" />
+            <img src="flavia_024.jpeg" alt="Vue de la maison rouge et du jardin" />
           </div>
           <div class="gallery-slide">
-            <img src="pomodoro_026.jpg" alt="Passata de tomate Il Palombaio sur une rambarde" />
+            <img src="prodotti_001.jpeg" alt="Présentations de produits Il Palombaio" />
           </div>
 
           <div class="gallery-controls">
@@ -1486,7 +1486,6 @@
   const orderForm = document.getElementById("order-form");
 
   function updateSummary() {
-    // Construire les lignes
     orderLines.innerHTML = "";
     let totalProducts = 0;
     let hasProduct = false;
@@ -1518,7 +1517,6 @@
       orderTable.style.display = "table";
     }
 
-    // Frais de livraison
     const deliveryFee = state.delivery === "livraison" ? 5 : 0;
 
     totalProductsEl.textContent = totalProducts.toFixed(2) + " €";
@@ -1546,7 +1544,6 @@
     updateSummary();
   });
 
-  // Construire le texte de récapitulatif pour l'e-mail
   function buildOrderSummaryText() {
     let lines = [];
     Object.keys(PRODUCTS).forEach((id) => {
@@ -1699,7 +1696,7 @@
 
   // HERO DIAPORAMA (bandeau du haut)
   const heroBg = document.querySelector(".hero-bg");
-  const heroImages = ["Drone001.JPG", "Drone016.JPG", "A001_azienda.jpg", "Drone027.JPG"];
+  const heroImages = ["Drone001.jpeg", "Drone016.jpeg", "A001_azienda.jpeg", "azienda_natura.jpeg"];
   let heroIndex = 0;
 
   function setHeroBackground(index) {
