@@ -509,11 +509,11 @@
       margin-top: 4px;
       font-weight: 600;
       text-align: right;
+      font-size: 0.88rem;
     }
 
-    .order-total span {
-      font-size: 0.9rem;
-      color: #555;
+    .order-total div {
+      margin-top: 2px;
     }
 
     .order-empty {
@@ -777,8 +777,8 @@
           </ul>
           <p class="text-muted" style="margin-top:12px;">
             Nous importons l’huile directement de Manziana, en petites quantités,
-            pour vous proposer un produit d’exception en circuit court, au
-            <strong>Jardin des Saveurs – Rebecq</strong> et en livraison en Belgique.
+            pour vous proposer un produit d’exception en circuit court, avec
+            distribution et retrait à Ixelles (Bruxelles).
           </p>
         </div>
 
@@ -907,7 +907,7 @@
               <span class="chip">Parfaite sur pain &amp; desserts</span>
             </div>
             <div class="price-line">
-              <div class="price">16 € <span>TTC · pot</span></div>
+              <div class="price">15 € <span>TTC · pot</span></div>
               <div style="font-size:0.8rem;color:#777;">Production limitée</div>
             </div>
             <div class="product-bottom">
@@ -946,7 +946,8 @@
           Choisissez les quantités directement dans les boxes produits ci-dessus,
           puis complétez ce formulaire. Vous recevrez un e-mail de confirmation
           avec le récapitulatif. Le paiement se fait par virement, Revolut ou
-          PayPal (QR code ci-dessous).
+          PayPal (QR code ci-dessous). Livraison à domicile en Belgique :
+          <strong>+5 €</strong>, ou retrait gratuit à Ixelles.
         </p>
 
         <div class="order-layout">
@@ -955,7 +956,7 @@
             <h3>Récapitulatif</h3>
             <p>
               Le récapitulatif se met à jour automatiquement lorsque vous modifiez
-              les quantités dans les boxes produits.
+              les quantités dans les boxes produits et l’option de livraison.
             </p>
 
             <div id="orderEmpty" class="order-empty">
@@ -975,13 +976,20 @@
             </table>
 
             <div class="order-total" id="orderTotalWrap" style="display:none;">
-              Total produits : <span id="orderTotalValue">0 €</span>
+              <div>
+                Total produits : <span id="orderTotalProducts">0 €</span>
+              </div>
+              <div id="orderShippingLine" style="display:none;">
+                Livraison à domicile : <span id="orderShippingValue">+5 €</span>
+              </div>
+              <div>
+                Total estimé : <span id="orderTotalValue">0 €</span>
+              </div>
             </div>
 
             <p class="form-hint" style="margin-top:10px;">
-              Livraison en Belgique uniquement. Frais de livraison précisés dans
-              l’e-mail de confirmation (ou retrait possible à Rebecq, au Jardin
-              des Saveurs).
+              Livraison en Belgique uniquement. Livraison à domicile : +5 €.
+              Retrait possible gratuitement à Ixelles (Bruxelles).
             </p>
           </div>
 
@@ -990,8 +998,8 @@
             <h3>Formulaire de commande</h3>
             <p>
               Merci de compléter soigneusement vos coordonnées. Vous pouvez
-              indiquer en commentaire si vous souhaitez un retrait sur place ou
-              une livraison.
+              indiquer en commentaire si vous souhaitez un créneau particulier
+              pour la livraison ou le retrait.
             </p>
 
             <form id="orderForm">
@@ -1027,10 +1035,10 @@
                   <select id="delivery" required>
                     <option value="">Choisir…</option>
                     <option value="Livraison à domicile (Belgique)">
-                      Livraison à domicile (Belgique)
+                      Livraison à domicile (Belgique) (+5 €)
                     </option>
-                    <option value="Retrait au Jardin des Saveurs (Rebecq)">
-                      Retrait au Jardin des Saveurs (Rebecq)
+                    <option value="Retrait à Ixelles (Bruxelles)">
+                      Retrait à Ixelles (Bruxelles)
                     </option>
                   </select>
                 </div>
@@ -1075,7 +1083,7 @@
             <h3>Revolut</h3>
             <p>Scannez le QR code Revolut ci-dessous :</p>
             <div class="qr-wrap">
-              <img src="Rqrcode.jpg" alt="QR code Revolut">
+              <img src="Rqrcode.png" alt="QR code Revolut">
               <span>QR code Revolut</span>
             </div>
           </div>
@@ -1130,8 +1138,7 @@
           <a href="mailto:arnaudvanderstraten@gmail.com">
             arnaudvanderstraten@gmail.com
           </a><br>
-          Basé à Rebecq (Belgique) – distribution et retrait au
-          <strong>Jardin des Saveurs</strong>.
+          Basé à Ixelles (Bruxelles, Belgique) – retrait possible à Ixelles.
         </p>
       </div>
     </section>
@@ -1187,7 +1194,7 @@
       },
       marronata: {
         name: "Marronata (crème de châtaignes)",
-        price: 16,
+        price: 15,
         image: "prodotti_014.jpeg"
       }
     };
@@ -1217,13 +1224,41 @@
       setHeroBackground();
     }, 6000);
 
-    // Récap commande
+    // Récap commande + livraison
     const qtyInputs = document.querySelectorAll(".qty-input");
     const orderBody = document.getElementById("orderBody");
     const orderTable = document.getElementById("orderTable");
     const orderTotalWrap = document.getElementById("orderTotalWrap");
+    const orderTotalProductsEl = document.getElementById("orderTotalProducts");
     const orderTotalValue = document.getElementById("orderTotalValue");
     const orderEmpty = document.getElementById("orderEmpty");
+    const orderShippingLine = document.getElementById("orderShippingLine");
+    const orderShippingValue = document.getElementById("orderShippingValue");
+    const deliverySelect = document.getElementById("delivery");
+
+    let productsTotal = 0;
+
+    function updateTotalsWithShipping() {
+      if (productsTotal <= 0) {
+        orderTotalWrap.style.display = "none";
+        return;
+      }
+
+      orderTotalWrap.style.display = "block";
+      orderTotalProductsEl.textContent = productsTotal.toFixed(2) + " €";
+
+      let shipping = 0;
+      if (deliverySelect && deliverySelect.value === "Livraison à domicile (Belgique)") {
+        shipping = 5;
+        orderShippingLine.style.display = "block";
+        orderShippingValue.textContent = "+5,00 €";
+      } else {
+        orderShippingLine.style.display = "none";
+      }
+
+      const totalWithShipping = productsTotal + shipping;
+      orderTotalValue.textContent = totalWithShipping.toFixed(2) + " €";
+    }
 
     function updateOrder() {
       let items = [];
@@ -1246,9 +1281,9 @@
       orderBody.innerHTML = "";
       if (items.length === 0) {
         orderTable.style.display = "none";
-        orderTotalWrap.style.display = "none";
         orderEmpty.style.display = "block";
-        orderTotalValue.textContent = "0 €";
+        productsTotal = 0;
+        updateTotalsWithShipping();
         return;
       }
 
@@ -1289,13 +1324,17 @@
         orderBody.appendChild(tr);
       });
 
-      orderTotalWrap.style.display = "block";
-      orderTotalValue.textContent = total.toFixed(2) + " €";
+      productsTotal = total;
+      updateTotalsWithShipping();
     }
 
     qtyInputs.forEach(input => {
       input.addEventListener("input", updateOrder);
     });
+
+    if (deliverySelect) {
+      deliverySelect.addEventListener("change", updateTotalsWithShipping);
+    }
 
     // Formulaire & EmailJS
     const form = document.getElementById("orderForm");
@@ -1308,14 +1347,14 @@
 
       // Construire les items depuis l'état actuel
       let lines = [];
-      let total = 0;
+      let totalProducts = 0;
       qtyInputs.forEach(input => {
         const id = input.dataset.productId;
         const qty = parseInt(input.value, 10) || 0;
         if (qty > 0 && PRODUCTS[id]) {
           const p = PRODUCTS[id];
           const lineTotal = p.price * qty;
-          total += lineTotal;
+          totalProducts += lineTotal;
           lines.push(
             p.name + " – " + qty + " x " + p.price.toFixed(2) +
             " € = " + lineTotal.toFixed(2) + " €"
@@ -1329,17 +1368,34 @@
         return;
       }
 
-      const orderText = lines.join("\n");
+      const deliveryVal = document.getElementById("delivery").value;
+      let shipping = 0;
+      if (deliveryVal === "Livraison à domicile (Belgique)") {
+        shipping = 5;
+      }
+      const totalWithShipping = totalProducts + shipping;
+
+      let orderText = lines.join("\n");
+      orderText += "\n---\nTotal produits : " + totalProducts.toFixed(2) + " €";
+      if (shipping > 0) {
+        orderText += "\nLivraison domicile : +5,00 €";
+      } else {
+        orderText += "\nLivraison : retrait à Ixelles (0 €)";
+      }
+      orderText += "\nTotal à payer : " + totalWithShipping.toFixed(2) + " €";
+
       const templateParams = {
         from_name: document.getElementById("name").value,
         reply_to: document.getElementById("email").value,
         address: document.getElementById("address").value,
         postal: document.getElementById("postal").value,
         phone: document.getElementById("phone").value,
-        delivery_option: document.getElementById("delivery").value,
+        delivery_option: deliveryVal,
         message: document.getElementById("message").value,
         order_details: orderText,
-        order_total: total.toFixed(2) + " €"
+        order_total: totalWithShipping.toFixed(2) + " €",
+        order_products_total: totalProducts.toFixed(2) + " €",
+        shipping_fee: shipping > 0 ? "5,00 €" : "0 €"
       };
 
       statusEl.textContent = "Envoi en cours...";
@@ -1349,6 +1405,8 @@
           statusEl.textContent = "Merci ! Votre commande a été envoyée. Vous recevrez un e-mail de confirmation rapidement.";
           statusEl.classList.add("ok");
           form.reset();
+          productsTotal = 0;
+          updateOrder();
         })
         .catch(err => {
           console.error(err);
