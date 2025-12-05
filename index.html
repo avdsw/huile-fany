@@ -657,12 +657,99 @@
       transform: scale(1.07);
     }
 
+    /* LEGAL SECTION (conditions, confidentialité, cookies) */
+
+    .legal-section {
+      background: #fcfbf8;
+      padding: 60px 18px 50px;
+      border-top: 1px solid #e1d8c9;
+      border-bottom: 1px solid #e1d8c9;
+      font-size: 0.87rem;
+      color: #444;
+    }
+
+    .legal-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .legal-inner h3 {
+      font-size: 1.05rem;
+      margin-bottom: 10px;
+      color: #222;
+    }
+
+    .legal-inner h4 {
+      margin-top: 10px;
+      margin-bottom: 4px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #333;
+    }
+
+    .legal-inner p {
+      margin-bottom: 6px;
+    }
+
+    .legal-inner ul {
+      margin-left: 16px;
+      margin-bottom: 6px;
+    }
+
+    .legal-inner li {
+      margin-bottom: 4px;
+    }
+
+    .legal-columns {
+      display: grid;
+      gap: 26px;
+    }
+
+    /* Bandeau liens légaux comme sur ta capture */
+
+    .legal-footer-bar {
+      background: #f3efe6;
+      border-top: 1px solid #ddd2c2;
+      padding: 10px 18px;
+      font-size: 0.8rem;
+    }
+
+    .legal-footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .legal-links {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .legal-links a {
+      text-decoration: none;
+      color: #444;
+    }
+
+    .legal-links a:hover {
+      text-decoration: underline;
+    }
+
+    .legal-footer-note {
+      font-size: 0.78rem;
+      color: #777;
+    }
+
     /* FOOTER */
 
     footer {
       background: #111;
       color: #eee;
-      padding: 22px 18px 18px;
+      padding: 18px 18px 16px;
       font-size: 0.78rem;
     }
 
@@ -688,7 +775,7 @@
       text-decoration-thickness: 1px;
     }
 
-    .legal {
+    .footer-bottom {
       color: #aaa;
       font-size: 0.75rem;
     }
@@ -784,10 +871,10 @@
 
         <div class="photo-stack">
           <div class="photo-main">
-            <img src="Drone016.jpeg" alt="Vue aérienne des oliviers à Monte Il Palombaio">
+            <img src="Drone016.JPG" alt="Vue aérienne des oliviers à Monte Il Palombaio">
           </div>
           <div class="photo-small">
-            <img src="flavia_001.jpeg" alt="Maison et oliviers du domaine Monte Il Palombaio">
+            <img src="flavia_001.jpg" alt="Maison et oliviers du domaine Monte Il Palombaio">
           </div>
         </div>
       </div>
@@ -810,7 +897,7 @@
             <h3>Bouteille 25 cl</h3>
             <p class="product-sub">Le format parfait pour découvrir l’huile ou offrir.</p>
             <div class="product-media">
-              <img src="prodotti_001.jpeg" alt="Bouteille 25 cl d'huile d'olive Monte Il Palombaio">
+              <img src="prodotti_001.jpg" alt="Bouteille 25 cl d'huile d'olive Monte Il Palombaio">
             </div>
             <div class="chips">
               <span class="chip">Récolte italienne</span>
@@ -853,7 +940,7 @@
             <h3>Bouteille 75 cl</h3>
             <p class="product-sub">La bouteille familiale pour la cuisine du quotidien.</p>
             <div class="product-media">
-              <img src="prodotti_002.jpeg" alt="Bouteille 75 cl d'huile d'olive Monte Il Palombaio">
+              <img src="prodotti_002.jpg" alt="Bouteille 75 cl d'huile d'olive Monte Il Palombaio">
             </div>
             <div class="chips">
               <span class="chip">Grand format</span>
@@ -899,7 +986,7 @@
               domaine.
             </p>
             <div class="product-media">
-              <img src="prodotti_014.jpeg" alt="Pot de marronata Monte Il Palombaio">
+              <img src="prodotti_014.jpg" alt="Pot de marronata Monte Il Palombaio">
             </div>
             <div class="chips">
               <span class="chip">Châtaignes du domaine</span>
@@ -1110,15 +1197,15 @@
         </p>
 
         <div class="gallery-grid">
-          <div class="gallery-item"><img src="A001_azienda.jpeg" alt=""></div>
-          <div class="gallery-item"><img src="azienda_natura.jpeg" alt=""></div>
-          <div class="gallery-item"><img src="Drone001.jpeg" alt=""></div>
-          <div class="gallery-item"><img src="Drone016.jpeg" alt=""></div>
-          <div class="gallery-item"><img src="Uliveto Ortaccio.jpeg" alt=""></div>
-          <div class="gallery-item"><img src="flavia_024.jpeg" alt=""></div>
-          <div class="gallery-item"><img src="Attività_007_prodotti.jpeg" alt=""></div>
-          <div class="gallery-item"><img src="prodotti_004.jpeg" alt=""></div>
-          <div class="gallery-item"><img src="prodotti_002.jpeg" alt=""></div>
+          <div class="gallery-item"><img src="A001_azienda.jpg" alt=""></div>
+          <div class="gallery-item"><img src="azienda_natura.jpg" alt=""></div>
+          <div class="gallery-item"><img src="Drone001.JPG" alt=""></div>
+          <div class="gallery-item"><img src="Drone016.JPG" alt=""></div>
+          <div class="gallery-item"><img src="Uliveto Ortaccio.jpg" alt=""></div>
+          <div class="gallery-item"><img src="flavia_024.jpg" alt=""></div>
+          <div class="gallery-item"><img src="Attività_007_prodotti.jpg" alt=""></div>
+          <div class="gallery-item"><img src="prodotti_004.jpg" alt=""></div>
+          <div class="gallery-item"><img src="prodotti_002.jpg" alt=""></div>
         </div>
       </div>
     </section>
@@ -1144,7 +1231,115 @@
     </section>
   </main>
 
-  <!-- BANDEAU / MENTIONS LÉGALES -->
+  <!-- CONDITIONS / CONFIDENTIALITÉ / COOKIES -->
+  <section class="legal-section" id="conditions">
+    <div class="legal-inner legal-columns">
+      <div>
+        <h3>Conditions générales d’utilisation et de vente</h3>
+        <p>
+          L’utilisation de ce site et l’achat de produits Monte Il Palombaio impliquent
+          l’acceptation des présentes conditions générales. Nous pouvons mettre à jour
+          ces conditions à tout moment ; le fait de continuer à utiliser le site
+          et de passer commande vaut acceptation des nouvelles conditions.
+        </p>
+        <p>
+          Le contrat de vente est conclu entre vous (le client) et le distributeur
+          belge de Monte Il Palombaio à partir du moment où nous confirmons et
+          acceptons votre commande (par e-mail ou lors de la préparation de celle-ci).
+          En passant commande, vous certifiez être majeur(e) et disposer de la
+          capacité juridique pour contracter, et que les informations fournies
+          (nom, e-mail, coordonnées) sont exactes.
+        </p>
+
+        <h4>Passation et annulation de commande</h4>
+        <p>
+          En validant votre commande, vous confirmez avoir pris connaissance des
+          présentes conditions. Vous disposez d’un délai de rétractation de 14 jours
+          calendriers à compter de la réception des produits. Le remboursement est
+          effectué sur le moyen de paiement utilisé lors de la commande, après retour
+          des produits en bon état.
+        </p>
+
+        <h4>Livraison &amp; retrait</h4>
+        <p>
+          Vous pouvez choisir entre un retrait à Ixelles (Bruxelles) ou une livraison
+          à domicile en Belgique lorsque celle-ci est proposée. Nous mettons tout en
+          œuvre pour respecter les délais annoncés, mais nous ne pourrons être tenus
+          responsables des retards ou dommages causés par le transporteur ou par tout
+          événement extérieur.
+        </p>
+
+        <h4>Retours</h4>
+        <p>
+          Les produits peuvent être retournés dans les 14 jours, à condition qu’ils
+          n’aient pas été utilisés, ouverts, modifiés ou détériorés, et qu’ils soient
+          dans leur emballage d’origine. Aucun retour ne peut être effectué sans
+          accord préalable. Les frais de retour restent à charge du client, sauf
+          erreur de notre part.
+        </p>
+
+        <h4>Responsabilité</h4>
+        <p>
+          Nous veillons à ce que les informations figurant sur ce site soient aussi
+          exactes et à jour que possible, mais aucune garantie absolue ne peut être
+          donnée. Le client reste responsable de la protection de ses appareils et
+          de ses données (virus, etc.). Les photos ne sont pas contractuelles et les
+          produits étant artisanaux, de légères variations de couleur, de texture ou
+          de présentation peuvent apparaître.
+        </p>
+        <p>
+          Rien dans ces conditions ne limite les droits impératifs du consommateur
+          prévus par la législation applicable en Belgique. Si une clause des
+          présentes devait être jugée nulle ou inapplicable, les autres clauses
+          resteraient pleinement en vigueur.
+        </p>
+      </div>
+
+      <div id="confidentialite">
+        <h3>Politique de confidentialité</h3>
+        <p>
+          Les données que vous nous transmettez (nom, e-mail, message, contenu de la
+          commande) sont utilisées uniquement pour traiter vos commandes, vous
+          répondre et, le cas échéant, assurer la livraison. Elles ne sont ni
+          vendues, ni cédées à des tiers, sauf obligation légale ou prestataires
+          techniques intervenant dans le traitement de la commande
+          (par exemple, EmailJS pour l’envoi des e-mails).
+        </p>
+        <p>
+          Vous pouvez demander l’accès, la rectification ou la suppression de vos
+          données en nous contactant par e-mail. Nous conservons vos données
+          uniquement pour la durée nécessaire au traitement des commandes et aux
+          obligations légales (comptabilité, facturation…).
+        </p>
+
+        <h3 id="cookies">Politique de cookies</h3>
+        <p>
+          Ce site statique ne dépose pas volontairement de cookies de suivi à des
+          fins publicitaires. Certains services externes éventuellement intégrés
+          (par exemple : hébergeur, liens de paiement, EmailJS) peuvent toutefois
+          utiliser leurs propres cookies techniques. Vous pouvez gérer vos
+          préférences de cookies via les paramètres de votre navigateur.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- BANDEAU LIENS LÉGAUX -->
+  <div class="legal-footer-bar">
+    <div class="legal-footer-inner">
+      <div class="legal-links">
+        <a href="#contact">Contactez-nous</a>
+        <a href="#conditions">Conditions</a>
+        <a href="#confidentialite">Politique de confidentialité</a>
+        <a href="#cookies">Politique de cookies</a>
+      </div>
+      <div class="legal-footer-note">
+        Monte Il Palombaio – Production artisanale en Italie · Distribution en Belgique (Ixelles)
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
   <footer>
     <div class="footer-inner">
       <div class="footer-top">
@@ -1155,17 +1350,15 @@
           </a>
         </div>
         <div>
-          Site réalisé pour la vente directe de l’huile d’olive Monte Il
-          Palombaio en Belgique.
+          Site dédié à la vente directe de l’huile d’olive Monte Il Palombaio et de
+          produits du domaine en Belgique.
         </div>
       </div>
-      <div class="legal">
-        Mentions légales inspirées du site « Le Jardin des Saveurs » : vente de
-        produits alimentaires artisanaux en circuit court, sans certification
-        biologique mais avec une attention particulière à la qualité, à la
-        traçabilité et au respect du produit. Les prix sont indiqués TVA
-        comprise. Les photos ne sont pas contractuelles. Toute commande implique
-        l’acceptation de nos conditions générales (livraison, paiement, délais).
+      <div class="footer-bottom">
+        Vente en petites quantités, circuit court, sans certification biologique
+        mais avec une attention particulière à la qualité, à la traçabilité et au
+        respect du produit. Les prix sont indiqués TVA comprise. Les photos ne sont
+        pas contractuelles.
       </div>
     </div>
   </footer>
@@ -1185,17 +1378,17 @@
       huile25: {
         name: "Huile d'olive extra vierge 25 cl",
         price: 16,
-        image: "prodotti_001.jpeg"
+        image: "prodotti_001.jpg"
       },
       huile75: {
         name: "Huile d'olive extra vierge 75 cl",
         price: 24,
-        image: "prodotti_002.jpeg"
+        image: "prodotti_002.jpg"
       },
       marronata: {
         name: "Marronata (crème de châtaignes)",
         price: 15,
-        image: "prodotti_014.jpeg"
+        image: "prodotti_014.jpg"
       }
     };
 
@@ -1205,12 +1398,12 @@
 
     // Diaporama hero
     const heroImages = [
-      "Drone001.jpeg",
-      "Drone016.jpeg",
-      "A001_azienda.jpeg",
-      "azienda_natura.jpeg",
-      "flavia_024.jpeg",
-      "Uliveto Ortaccio.jpeg"
+      "Drone001.JPG",
+      "Drone016.JPG",
+      "A001_azienda.jpg",
+      "azienda_natura.jpg",
+      "flavia_024.jpg",
+      "Uliveto Ortaccio.jpg"
     ];
     let heroIndex = 0;
     const heroBg = document.getElementById("heroBg");
