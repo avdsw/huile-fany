@@ -1642,7 +1642,11 @@
       "Nous vous enverrons un e-mail de confirmation dès que votre paiement aura été reçu.\n\n" +
       "Bien à vous,\nMonte Il Palombaio";
 
+    // Destinataires : toi + le client
+    const toEmail = "arnaudvanderstraten@gmail.com, " + email;
+
     const templateParams = {
+      to_email: toEmail,          // utilisé dans EmailJS comme {{to_email}}
       client_name: name,
       client_email: email,
       client_address: address,
@@ -1654,8 +1658,7 @@
       delivery_fee: totalsTextDelivery,
       grand_total: totalsTextGrand,
       client_comment: comment,
-      // texte complet pour le corps du mail
-      message: messageText,
+      message: messageText,       // corps complet du mail
     };
 
     emailjs
